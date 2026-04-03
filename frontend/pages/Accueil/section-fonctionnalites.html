@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fonctionnalités - MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/fonctionnalites.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../Trajets/liste-trajets.html" class="nav-link">Trajets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../Reservations/historique.html" class="nav-link">Mes réservations</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement -->
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="fonctionnalites-main">
+        <!-- Hero Section -->
+        <section class="features-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Fonctionnalités Intelligentes</h1>
+                    <p class="hero-subtitle">Découvrez toutes les fonctionnalités conçues pour simplifier vos voyages</p>
+                    <div class="hero-illustration">
+                        <div class="illustration-item" data-feature="recherche">
+                            <div class="icon">🔍</div>
+                            <span>Recherche Avancée</span>
+                        </div>
+                        <div class="illustration-item" data-feature="reservation">
+                            <div class="icon">🎫</div>
+                            <span>Réservation Rapide</span>
+                        </div>
+                        <div class="illustration-item" data-feature="suivi">
+                            <div class="icon">📍</div>
+                            <span>Suivi Temps Réel</span>
+                        </div>
+                        <div class="illustration-item" data-feature="paiement">
+                            <div class="icon">💳</div>
+                            <span>Paiement Sécurisé</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation des fonctionnalités -->
+        <section class="features-nav-section">
+            <div class="container">
+                <div class="features-nav">
+                    <button class="nav-btn active" data-category="recherche">Recherche & Réservation</button>
+                    <button class="nav-btn" data-category="gestion">Gestion de Voyage</button>
+                    <button class="nav-btn" data-category="securite">Sécurité & Support</button>
+                    <button class="nav-btn" data-category="mobile">Application Mobile</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Recherche & Réservation -->
+        <section class="features-category active" id="recherche">
+            <div class="container">
+                <div class="category-header">
+                    <h2>Recherche & Réservation Intelligente</h2>
+                    <p>Trouvez et réservez votre trajet en quelques clics</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Recherche Multi-critères</h3>
+                        <p>Recherchez des trajets par ville, date, prix, compagnie et type de véhicule avec notre moteur de recherche avancé.</p>
+                        <ul class="feature-list">
+                            <li>Filtres dynamiques en temps réel</li>
+                            <li>Suggestions automatiques</li>
+                            <li>Historique des recherches</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Réservation Express</h3>
+                        <p>Réservez votre place en moins de 2 minutes avec notre processus de réservation optimisé.</p>
+                        <ul class="feature-list">
+                            <li>Processus en 3 étapes</li>
+                            <li>Sauvegarde automatique</li>
+                            <li>Confirmation immédiate</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h3>Comparaison de Prix</h3>
+                        <p>Comparez les prix de différentes compagnies et choisissez l'option qui correspond à votre budget.</p>
+                        <ul class="feature-list">
+                            <li>Tableau comparatif clair</li>
+                            <li>Alertes prix avantageux</li>
+                            <li>Options flexibles</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📅</div>
+                        <h3>Planification Avancée</h3>
+                        <p>Planifiez vos voyages à l'avance et recevez des rappels automatiques avant votre départ.</p>
+                        <ul class="feature-list">
+                            <li>Calendrier intégré</li>
+                            <li>Rappels intelligents</li>
+                            <li>Modification flexible</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="feature-demo">
+                    <div class="demo-content">
+                        <h3>Voyez comment ça marche</h3>
+                        <div class="demo-steps">
+                            <div class="demo-step active">
+                                <span class="step-number">1</span>
+                                <p>Saisissez votre trajet</p>
+                            </div>
+                            <div class="demo-step">
+                                <span class="step-number">2</span>
+                                <p>Choisissez votre option</p>
+                            </div>
+                            <div class="demo-step">
+                                <span class="step-number">3</span>
+                                <p>Confirmez la réservation</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-visual">
+                        <div class="phone-mockup">
+                            <div class="phone-screen">
+                                <img src="../../assets/images/demo-recherche.jpg" alt="Démonstration recherche" class="demo-image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Gestion de Voyage -->
+        <section class="features-category" id="gestion">
+            <div class="container">
+                <div class="category-header">
+                    <h2>Gestion Complète de Voyage</h2>
+                    <p>Contrôlez tous les aspects de votre voyage depuis un seul endroit</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📍</div>
+                        <h3>Suivi en Temps Réel</h3>
+                        <p>Suivez la position de votre véhicule en temps réel et recevez des estimations d'arrivée précises.</p>
+                        <ul class="feature-list">
+                            <li>GPS live tracking</li>
+                            <li>Notifications de progression</li>
+                            <li>Alertes de retard</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>E-billet Mobile</h3>
+                        <p>Votre billet électronique accessible sur votre mobile, sans impression nécessaire.</p>
+                        <ul class="feature-list">
+                            <li>QR code sécurisé</li>
+                            <li>Accès hors ligne</li>
+                            <li>Partage facile</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <h3>Modification Flexible</h3>
+                        <p>Modifiez ou annulez votre réservation facilement selon nos conditions flexibles.</p>
+                        <ul class="feature-list">
+                            <li>Modification en un clic</li>
+                            <li>Remboursement simplifié</li>
+                            <li>Historique des changements</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Historique Détaillé</h3>
+                        <p>Consultez l'historique complet de tous vos voyages et téléchargez vos reçus.</p>
+                        <ul class="feature-list">
+                            <li>Archivage automatique</li>
+                            <li>Export PDF</li>
+                            <li>Statistiques personnelles</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Sécurité & Support -->
+        <section class="features-category" id="securite">
+            <div class="container">
+                <div class="category-header">
+                    <h2>Sécurité & Support 24/7</h2>
+                    <p>Votre sécurité et satisfaction sont notre priorité absolue</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Paiements Sécurisés</h3>
+                        <p>Transactions cryptées avec les normes de sécurité les plus strictes du marché.</p>
+                        <ul class="feature-list">
+                            <li>Cryptage SSL 256-bit</li>
+                            <li>Support multi-paiements</li>
+                            <li>Protection contre la fraude</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">👨‍✈️</div>
+                        <h3>Chauffeurs Vérifiés</h3>
+                        <p>Tous nos chauffeurs sont rigoureusement sélectionnés et régulièrement formés.</p>
+                        <ul class="feature-list">
+                            <li>Vérification d'antécédents</li>
+                            <li>Formation continue</li>
+                            <li>Évaluations clients</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🆘</div>
+                        <h3>Assistance 24h/24</h3>
+                        <p>Notre équipe support est disponible à tout moment pour vous aider.</p>
+                        <ul class="feature-list">
+                            <li>Chat en direct</li>
+                            <li>Support téléphonique</li>
+                            <li>Résolution rapide</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📞</div>
+                        <h3>Alertes Proactives</h3>
+                        <p>Recevez des alertes automatiques pour les retards, annulations ou changements.</p>
+                        <ul class="feature-list">
+                            <li>SMS et notifications push</li>
+                            <li>Alertes météo</li>
+                            <li>Conseils de voyage</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Application Mobile -->
+        <section class="features-category" id="mobile">
+            <div class="container">
+                <div class="category-header">
+                    <h2>Application Mobile</h2>
+                    <p>Emportez MiabeTrans partout avec vous</p>
+                </div>
+
+                <div class="app-showcase">
+                    <div class="app-features">
+                        <div class="app-feature">
+                            <div class="app-icon">📱</div>
+                            <div class="app-text">
+                                <h4>Interface Intuitive</h4>
+                                <p>Design optimisé pour une utilisation mobile fluide</p>
+                            </div>
+                        </div>
+                        <div class="app-feature">
+                            <div class="app-icon">⚡</div>
+                            <div class="app-text">
+                                <h4>Performance Optimale</h4>
+                                <p>Chargement rapide même en réseau limité</p>
+                            </div>
+                        </div>
+                        <div class="app-feature">
+                            <div class="app-icon">🔔</div>
+                            <div class="app-text">
+                                <h4>Notifications Push</h4>
+                                <p>Restez informé en temps réel</p>
+                            </div>
+                        </div>
+                        <div class="app-feature">
+                            <div class="app-icon">💾</div>
+                            <div class="app-text">
+                                <h4>Mode Hors-ligne</h4>
+                                <p>Accédez à vos billets sans connexion</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="app-download">
+                        <div class="download-buttons">
+                            <a href="#" class="download-btn app-store">
+                                <span>Téléchargez sur l'App Store</span>
+                            </a>
+                            <a href="#" class="download-btn google-play">
+                                <span>Disponible sur Google Play</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="features-cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Prêt à essayer ces fonctionnalités ?</h2>
+                    <p>Rejoignez MiabeTrans et découvrez une nouvelle façon de voyager</p>
+                    <div class="cta-buttons">
+                        <a href="../Utilisateurs/inscription.html" class="btn btn-primary btn-lg">
+                            Créer un compte gratuit
+                        </a>
+                        <a href="../Trajets/liste-trajets.html" class="btn btn-outline btn-lg">
+                            Voir les trajets
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MiabeTrans</h3>
+                    <p>Redéfinissant l'expérience du voyage interurbain en Afrique.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Fonctionnalités</h4>
+                    <ul>
+                        <li><a href="#recherche">Recherche & Réservation</a></li>
+                        <li><a href="#gestion">Gestion de voyage</a></li>
+                        <li><a href="#securite">Sécurité</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="../Aide/faq.html">Centre d'aide</a></li>
+                        <li><a href="../Aide/contact.html">Nous contacter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MiabeTrans. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../../js/main.js"></script>
+    <script src="../../js/fonctionnalites.js"></script>
+</body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Publicités - Admin MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/gestion.css">
+</head>
+<body class="admin-dashboard">
+    <!-- Navigation Admin -->
+    <nav class="navbar admin-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../../pages/Accueil/index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                    <span class="admin-badge">Admin</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestion-trajets.html" class="nav-link">🚌 Trajets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestion-utilisateurs.html" class="nav-link">👥 Utilisateurs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestion-chauffeurs.html" class="nav-link">👨‍✈️ Chauffeurs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="publicites.html" class="nav-link active">📢 Publicités</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement -->
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="gestion-main">
+        <div class="container-fluid">
+            <!-- En-tête -->
+            <header class="gestion-header">
+                <div class="header-content">
+                    <h1>Gestion des Publicités</h1>
+                    <p>Créez et gérez vos campagnes publicitaires</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="addPubliciteBtn">
+                        ➕ Nouvelle campagne
+                    </button>
+                    <button class="btn btn-outline" id="exportStats">
+                        📊 Exporter statistiques
+                    </button>
+                </div>
+            </header>
+
+            <!-- Vue d'ensemble des campagnes -->
+            <section class="campaigns-overview">
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <div class="overview-icon">👁️</div>
+                        <div class="overview-content">
+                            <h3 id="totalImpressions">0</h3>
+                            <p>Impressions totales</p>
+                        </div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-icon">👆</div>
+                        <div class="overview-content">
+                            <h3 id="totalClicks">0</h3>
+                            <p>Clicks totaux</p>
+                        </div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-icon">💰</div>
+                        <div class="overview-content">
+                            <h3 id="ctr">0%</h3>
+                            <p>Taux de clic (CTR)</p>
+                        </div>
+                    </div>
+                    <div class="overview-card">
+                        <div class="overview-icon">🎯</div>
+                        <div class="overview-content">
+                            <h3 id="activeCampaigns">0</h3>
+                            <p>Campagnes actives</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filtres et recherche -->
+            <section class="filters-section">
+                <div class="filters-card">
+                    <div class="filters-header">
+                        <h3>🔍 Filtres et recherche</h3>
+                        <button class="btn-toggle-filters" id="toggleFilters">
+                            Masquer les filtres
+                        </button>
+                    </div>
+                    
+                    <div class="filters-content" id="filtersContent">
+                        <div class="filters-grid">
+                            <div class="filter-group">
+                                <label for="filter-statut" class="filter-label">Statut</label>
+                                <select id="filter-statut" class="filter-select">
+                                    <option value="">Tous les statuts</option>
+                                    <option value="active">Active</option>
+                                    <option value="paused">En pause</option>
+                                    <option value="completed">Terminée</option>
+                                    <option value="draft">Brouillon</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="filter-type" class="filter-label">Type de publicité</label>
+                                <select id="filter-type" class="filter-select">
+                                    <option value="">Tous les types</option>
+                                    <option value="banner">Bannière</option>
+                                    <option value="popup">Popup</option>
+                                    <option value="email">Email</option>
+                                    <option value="social">Réseaux sociaux</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="filter-position" class="filter-label">Position</label>
+                                <select id="filter-position" class="filter-select">
+                                    <option value="">Toutes les positions</option>
+                                    <option value="header">En-tête</option>
+                                    <option value="sidebar">Barre latérale</option>
+                                    <option value="footer">Pied de page</option>
+                                    <option value="popup">Fenêtre popup</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="filter-date" class="filter-label">Date de création</label>
+                                <input type="date" id="filter-date" class="filter-input">
+                            </div>
+                        </div>
+                        
+                        <div class="search-group">
+                            <input type="text" id="searchPublicites" class="search-input" 
+                                   placeholder="Rechercher une campagne par nom, publicité...">
+                            <button class="btn btn-primary" id="searchBtn">
+                                🔍 Rechercher
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Liste des campagnes -->
+            <section class="campaigns-section">
+                <div class="campaigns-grid" id="campaignsGrid">
+                    <!-- Chargé dynamiquement -->
+                </div>
+            </section>
+
+            <!-- Tableau détaillé -->
+            <section class="table-section">
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Détail des campagnes publicitaires</h3>
+                        <div class="table-actions">
+                            <button class="btn btn-outline btn-sm" id="refreshTable">
+                                🔄 Actualiser
+                            </button>
+                            <div class="pagination-info">
+                                Affichage de <span id="startIndex">1</span> à <span id="endIndex">10</span> sur <span id="totalItems">0</span> campagnes
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="data-table" id="publicitesTable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="selectAll">
+                                    </th>
+                                    <th>Campagne</th>
+                                    <th>Type</th>
+                                    <th>Position</th>
+                                    <th>Statut</th>
+                                    <th>Budget</th>
+                                    <th>Performance</th>
+                                    <th>Dates</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="publicitesTableBody">
+                                <!-- Chargé dynamiquement -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="table-footer">
+                        <div class="pagination-controls">
+                            <button class="btn-pagination" id="prevPage" disabled>
+                                ◀ Précédent
+                            </button>
+                            <div class="pagination-numbers" id="paginationNumbers">
+                                <!-- Généré dynamiquement -->
+                            </div>
+                            <button class="btn-pagination" id="nextPage" disabled>
+                                Suivant ▶
+                            </button>
+                        </div>
+                        
+                        <div class="rows-per-page">
+                            <label for="rowsPerPage">Lignes par page:</label>
+                            <select id="rowsPerPage" class="form-select">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal Création/Modification Publicité -->
+    <div class="modal" id="publiciteModal">
+        <div class="modal-content modal-xl">
+            <div class="modal-header">
+                <h3 id="modalTitle">Nouvelle campagne publicitaire</h3>
+                <button class="modal-close" id="closePubliciteModal">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="publiciteForm" class="modal-form">
+                    <div class="form-tabs">
+                        <button type="button" class="tab-btn active" data-tab="general">Général</button>
+                        <button type="button" class="tab-btn" data-tab="content">Contenu</button>
+                        <button type="button" class="tab-btn" data-tab="targeting">Ciblage</button>
+                        <button type="button" class="tab-btn" data-tab="budget">Budget</button>
+                    </div>
+
+                    <div class="tab-content">
+                        <!-- Onglet Général -->
+                        <div class="tab-pane active" id="tab-general">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="modal-nom" class="form-label">Nom de la campagne *</label>
+                                    <input type="text" id="modal-nom" name="nom" class="form-input" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="modal-type" class="form-label">Type de publicité *</label>
+                                    <select id="modal-type" name="type" class="form-input" required>
+                                        <option value="">Sélectionnez un type</option>
+                                        <option value="banner">Bannière</option>
+                                        <option value="popup">Popup</option>
+                                        <option value="email">Email</option>
+                                        <option value="social">Réseaux sociaux</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="modal-position" class="form-label">Position *</label>
+                                    <select id="modal-position" name="position" class="form-input" required>
+                                        <option value="">Sélectionnez une position</option>
+                                        <option value="header">En-tête</option>
+                                        <option value="sidebar">Barre latérale</option>
+                                        <option value="footer">Pied de page</option>
+                                        <option value="popup">Fenêtre popup</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="modal-statut" class="form-label">Statut *</label>
+                                    <select id="modal-statut" name="statut" class="form-input" required>
+                                        <option value="draft">Brouillon</option>
+                                        <option value="active">Active</option>
+                                        <option value="paused">En pause</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="modal-date-debut" class="form-label">Date de début *</label>
+                                    <input type="datetime-local" id="modal-date-debut" name="date_debut" class="form-input" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="modal-date-fin" class="form-label">Date de fin *</label>
+                                    <input type="datetime-local" id="modal-date-fin" name="date_fin" class="form-input" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Onglet Contenu -->
+                        <div class="tab-pane" id="tab-content">
+                            <div class="form-group">
+                                <label for="modal-titre" class="form-label">Titre *</label>
+                                <input type="text" id="modal-titre" name="titre" class="form-input" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="modal-description" class="form-label">Description</label>
+                                <textarea id="modal-description" name="description" class="form-input" rows="3"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="modal-image" class="form-label">Image</label>
+                                <input type="file" id="modal-image" name="image" class="form-input" accept="image/*">
+                                <div class="file-preview" id="imagePreview"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="modal-lien" class="form-label">Lien de destination *</label>
+                                <input type="url" id="modal-lien" name="lien" class="form-input" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="modal-texte-bouton" class="form-label">Texte du bouton</label>
+                                <input type="text" id="modal-texte-bouton" name="texte_bouton" class="form-input" value="Voir plus">
+                            </div>
+                        </div>
+
+                        <!-- Onglet Ciblage -->
+                        <div class="tab-pane" id="tab-targeting">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="modal-public-cible" class="form-label">Public cible</label>
+                                    <select id="modal-public-cible" name="public_cible" class="form-input">
+                                        <option value="all">Tous les utilisateurs</option>
+                                        <option value="new">Nouveaux utilisateurs</option>
+                                        <option value="returning">Utilisateurs récurrents</option>
+                                        <option value="premium">Clients premium</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="modal-villes" class="form-label">Villes cibles</label>
+                                    <select id="modal-villes" name="villes" class="form-input" multiple>
+                                        <option value="Lomé">Lomé</option>
+                                        <option value="Kpalimé">Kpalimé</option>
+                                        <option value="Sokodé">Sokodé</option>
+                                        <option value="Kara">Kara</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Pages d'affichage</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="pages[]" value="accueil" checked>
+                                        <span class="checkmark"></span>
+                                        Page d'accueil
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="pages[]" value="trajets">
+                                        <span class="checkmark"></span>
+                                        Page des trajets
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="pages[]" value="reservations">
+                                        <span class="checkmark"></span>
+                                        Page des réservations
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="pages[]" value="profil">
+                                        <span class="checkmark"></span>
+                                        Page de profil
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Onglet Budget -->
+                        <div class="tab-pane" id="tab-budget">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="modal-budget-total" class="form-label">Budget total (FCFA) *</label>
+                                    <input type="number" id="modal-budget-total" name="budget_total" class="form-input" required min="0">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="modal-budget-quotidien" class="form-label">Budget quotidien (FCFA)</label>
+                                    <input type="number" id="modal-budget-quotidien" name="budget_quotidien" class="form-input" min="0">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="modal-type-cout" class="form-label">Type de coût</label>
+                                <select id="modal-type-cout" name="type_cout" class="form-input">
+                                    <option value="cpc">Coût par clic (CPC)</option>
+                                    <option value="cpm">Coût par mille (CPM)</option>
+                                    <option value="cpa">Coût par acquisition (CPA)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="budget-preview">
+                                <h4>Estimation du budget</h4>
+                                <div class="budget-details">
+                                    <div class="budget-item">
+                                        <span>Budget total:</span>
+                                        <span id="preview-budget-total">0 FCFA</span>
+                                    </div>
+                                    <div class="budget-item">
+                                        <span>Budget quotidien:</span>
+                                        <span id="preview-budget-quotidien">0 FCFA</span>
+                                    </div>
+                                    <div class="budget-item">
+                                        <span>Durée estimée:</span>
+                                        <span id="preview-duree">0 jours</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="cancelPubliciteForm">
+                            Annuler
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            💾 Enregistrer la campagne
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmation -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content modal-sm">
+            <div class="modal-header">
+                <h3>Confirmation</h3>
+                <button class="modal-close" id="closeConfirmModal">×</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Êtes-vous sûr de vouloir effectuer cette action ?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelConfirm">Annuler</button>
+                <button class="btn btn-primary" id="confirmAction">Confirmer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/app.js"></script>
+    <script src="../../js/gestion-publicites.js"></script>
+</body>
+</html>

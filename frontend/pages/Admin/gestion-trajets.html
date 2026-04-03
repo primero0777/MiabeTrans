@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Trajets - Admin MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/gestion.css">
+</head>
+<body class="admin-dashboard">
+    <!-- Navigation Admin -->
+    <nav class="navbar admin-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../../pages/Accueil/index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                    <span class="admin-badge">Admin</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestion-trajets.html" class="nav-link active">🚌 Trajets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestion-utilisateurs.html" class="nav-link">👥 Utilisateurs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestion-chauffeurs.html" class="nav-link">👨‍✈️ Chauffeurs</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement -->
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="gestion-main">
+        <div class="container-fluid">
+            <!-- En-tête -->
+            <header class="gestion-header">
+                <div class="header-content">
+                    <h1>Gestion des Trajets</h1>
+                    <p>Créez, modifiez et gérez les trajets de MiabeTrans</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="addTrajetBtn">
+                        ➕ Ajouter un trajet
+                    </button>
+                    <button class="btn btn-outline" id="exportTrajets">
+                        📊 Exporter
+                    </button>
+                </div>
+            </header>
+
+            <!-- Filtres et recherche -->
+            <section class="filters-section">
+                <div class="filters-card">
+                    <div class="filters-header">
+                        <h3>🔍 Filtres et recherche</h3>
+                        <button class="btn-toggle-filters" id="toggleFilters">
+                            Masquer les filtres
+                        </button>
+                    </div>
+                    
+                    <div class="filters-content" id="filtersContent">
+                        <div class="filters-grid">
+                            <div class="filter-group">
+                                <label for="filter-ville-depart" class="filter-label">Ville de départ</label>
+                                <select id="filter-ville-depart" class="filter-select">
+                                    <option value="">Toutes les villes</option>
+                                    <option value="Lomé">Lomé</option>
+                                    <option value="Kpalimé">Kpalimé</option>
+                                    <option value="Sokodé">Sokodé</option>
+                                    <option value="Kara">Kara</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="filter-ville-arrivee" class="filter-label">Ville d'arrivée</label>
+                                <select id="filter-ville-arrivee" class="filter-select">
+                                    <option value="">Toutes les villes</option>
+                                    <option value="Lomé">Lomé</option>
+                                    <option value="Kpalimé">Kpalimé</option>
+                                    <option value="Sokodé">Sokodé</option>
+                                    <option value="Kara">Kara</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="filter-date" class="filter-label">Date</label>
+                                <input type="date" id="filter-date" class="filter-input">
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="filter-statut" class="filter-label">Statut</label>
+                                <select id="filter-statut" class="filter-select">
+                                    <option value="">Tous les statuts</option>
+                                    <option value="actif">Actif</option>
+                                    <option value="inactif">Inactif</option>
+                                    <option value="complet">Complet</option>
+                                    <option value="annule">Annulé</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="search-group">
+                            <input type="text" id="searchTrajets" class="search-input" 
+                                   placeholder="Rechercher un trajet, chauffeur, véhicule...">
+                            <button class="btn btn-primary" id="searchBtn">
+                                🔍 Rechercher
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistiques rapides -->
+            <section class="quick-stats">
+                <div class="stats-grid">
+                    <div class="quick-stat">
+                        <div class="stat-value" id="totalTrajets">0</div>
+                        <div class="stat-label">Total trajets</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="stat-value" id="trajetsActifs">0</div>
+                        <div class="stat-label">Trajets actifs</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="stat-value" id="tauxOccupation">0%</div>
+                        <div class="stat-label">Taux d'occupation</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="stat-value" id="revenuTotal">0 FCFA</div>
+                        <div class="stat-label">Revenu total</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableau des trajets -->
+            <section class="table-section">
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Liste des trajets</h3>
+                        <div class="table-actions">
+                            <button class="btn btn-outline btn-sm" id="refreshTable">
+                                🔄 Actualiser
+                            </button>
+                            <div class="pagination-info">
+                                Affichage de <span id="startIndex">1</span> à <span id="endIndex">10</span> sur <span id="totalItems">0</span> trajets
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="data-table" id="trajetsTable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="selectAll">
+                                    </th>
+                                    <th>ID</th>
+                                    <th>Itinéraire</th>
+                                    <th>Date/Heure</th>
+                                    <th>Chauffeur</th>
+                                    <th>Véhicule</th>
+                                    <th>Places</th>
+                                    <th>Prix</th>
+                                    <th>Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="trajetsTableBody">
+                                <!-- Chargé dynamiquement -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="table-footer">
+                        <div class="pagination-controls">
+                            <button class="btn-pagination" id="prevPage" disabled>
+                                ◀ Précédent
+                            </button>
+                            <div class="pagination-numbers" id="paginationNumbers">
+                                <!-- Généré dynamiquement -->
+                            </div>
+                            <button class="btn-pagination" id="nextPage" disabled>
+                                Suivant ▶
+                            </button>
+                        </div>
+                        
+                        <div class="rows-per-page">
+                            <label for="rowsPerPage">Lignes par page:</label>
+                            <select id="rowsPerPage" class="form-select">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Actions groupées -->
+            <section class="bulk-actions" id="bulkActions" style="display: none;">
+                <div class="bulk-actions-card">
+                    <div class="bulk-info">
+                        <span id="selectedCount">0</span> trajet(s) sélectionné(s)
+                    </div>
+                    <div class="bulk-buttons">
+                        <button class="btn btn-outline btn-sm" id="bulkActivate">
+                            ✅ Activer
+                        </button>
+                        <button class="btn btn-outline btn-sm" id="bulkDeactivate">
+                            ⏸️ Désactiver
+                        </button>
+                        <button class="btn btn-outline btn-sm btn-danger" id="bulkDelete">
+                            🗑️ Supprimer
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal Ajout/Modification Trajet -->
+    <div class="modal" id="trajetModal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3 id="modalTitle">Ajouter un trajet</h3>
+                <button class="modal-close" id="closeTrajetModal">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="trajetForm" class="modal-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="modal-ville-depart" class="form-label">Ville de départ *</label>
+                            <select id="modal-ville-depart" name="ville_depart" class="form-input" required>
+                                <option value="">Sélectionnez une ville</option>
+                                <option value="Lomé">Lomé</option>
+                                <option value="Kpalimé">Kpalimé</option>
+                                <option value="Sokodé">Sokodé</option>
+                                <option value="Kara">Kara</option>
+                                <option value="Atakpamé">Atakpamé</option>
+                                <option value="Dapaong">Dapaong</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-ville-arrivee" class="form-label">Ville d'arrivée *</label>
+                            <select id="modal-ville-arrivee" name="ville_arrivee" class="form-input" required>
+                                <option value="">Sélectionnez une ville</option>
+                                <option value="Lomé">Lomé</option>
+                                <option value="Kpalimé">Kpalimé</option>
+                                <option value="Sokodé">Sokodé</option>
+                                <option value="Kara">Kara</option>
+                                <option value="Atakpamé">Atakpamé</option>
+                                <option value="Dapaong">Dapaong</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-date-depart" class="form-label">Date de départ *</label>
+                            <input type="date" id="modal-date-depart" name="date_depart" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-heure-depart" class="form-label">Heure de départ *</label>
+                            <input type="time" id="modal-heure-depart" name="heure_depart" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-duree" class="form-label">Durée estimée *</label>
+                            <input type="text" id="modal-duree" name="duree_estimee" class="form-input" 
+                                   placeholder="Ex: 3h30" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-prix" class="form-label">Prix (FCFA) *</label>
+                            <input type="number" id="modal-prix" name="prix" class="form-input" 
+                                   min="1000" step="500" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-places" class="form-label">Nombre de places *</label>
+                            <input type="number" id="modal-places" name="nombre_places" class="form-input" 
+                                   min="1" max="50" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-chauffeur" class="form-label">Chauffeur *</label>
+                            <select id="modal-chauffeur" name="chauffeur_id" class="form-input" required>
+                                <option value="">Sélectionnez un chauffeur</option>
+                                <!-- Chargé dynamiquement -->
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-vehicule" class="form-label">Véhicule *</label>
+                            <select id="modal-vehicule" name="vehicule_id" class="form-input" required>
+                                <option value="">Sélectionnez un véhicule</option>
+                                <!-- Chargé dynamiquement -->
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="modal-description" class="form-label">Description</label>
+                        <textarea id="modal-description" name="description" class="form-input" 
+                                  rows="3" placeholder="Informations supplémentaires..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="cancelTrajetForm">
+                            Annuler
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            💾 Enregistrer le trajet
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmation -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content modal-sm">
+            <div class="modal-header">
+                <h3>Confirmation</h3>
+                <button class="modal-close" id="closeConfirmModal">×</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Êtes-vous sûr de vouloir effectuer cette action ?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelConfirm">Annuler</button>
+                <button class="btn btn-primary" id="confirmAction">Confirmer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/app.js"></script>
+    <script src="../../js/gestion-trajets.js"></script>
+</body>
+</html>

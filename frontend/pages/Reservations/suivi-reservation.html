@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi Réservation - MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/suivi-reservation.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../Accueil/index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../Accueil/index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../Trajets/liste-trajets.html" class="nav-link">Trajets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="historique.html" class="nav-link">Mes réservations</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement -->
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="suivi-main">
+        <div class="container">
+            <!-- En-tête -->
+            <header class="suivi-header">
+                <div class="header-content">
+                    <h1>Suivi de Réservation</h1>
+                    <p>Suivez votre trajet en temps réel</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-outline" id="refreshBtn">
+                        🔄 Actualiser
+                    </button>
+                    <button class="btn btn-primary" id="shareBtn">
+                        📤 Partager
+                    </button>
+                </div>
+            </header>
+
+            <!-- Carte de réservation -->
+            <section class="reservation-card-section">
+                <div class="reservation-overview">
+                    <div class="reservation-info">
+                        <div class="reservation-id">
+                            <h2>Réservation #<span id="reservationNumber">TR-001234</span></h2>
+                            <div class="status-badge" id="statusBadge">
+                                <span class="status-dot"></span>
+                                <span class="status-text">En cours</span>
+                            </div>
+                        </div>
+                        
+                        <div class="route-info">
+                            <div class="route-point departure">
+                                <div class="point-marker"></div>
+                                <div class="point-details">
+                                    <h3 id="departureCity">Lomé</h3>
+                                    <p id="departureAddress">Gare de Lomé</p>
+                                    <p class="time" id="departureTime">14:30</p>
+                                </div>
+                            </div>
+                            
+                            <div class="route-line">
+                                <div class="duration" id="journeyDuration">2h 30min</div>
+                                <div class="distance" id="journeyDistance">150 km</div>
+                            </div>
+                            
+                            <div class="route-point arrival">
+                                <div class="point-marker"></div>
+                                <div class="point-details">
+                                    <h3 id="arrivalCity">Kpalimé</h3>
+                                    <p id="arrivalAddress">Gare de Kpalimé</p>
+                                    <p class="time" id="arrivalTime">17:00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="reservation-meta">
+                        <div class="meta-item">
+                            <span class="label">Date du voyage:</span>
+                            <span class="value" id="travelDate">15 Déc 2024</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="label">Passagers:</span>
+                            <span class="value" id="passengerCount">2 adultes</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="label">Véhicule:</span>
+                            <span class="value" id="vehicleType">Toyota Hiace (15 places)</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="label">Prix:</span>
+                            <span class="value price" id="reservationPrice">12,500 FCFA</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Carte interactive -->
+            <section class="map-section">
+                <div class="section-header">
+                    <h2>Suivi en Temps Réel</h2>
+                    <div class="map-actions">
+                        <button class="btn btn-outline btn-sm" id="zoomInBtn">
+                            🔍 Zoom +
+                        </button>
+                        <button class="btn btn-outline btn-sm" id="zoomOutBtn">
+                            🔍 Zoom -
+                        </button>
+                        <button class="btn btn-outline btn-sm" id="centerMapBtn">
+                            🎯 Recentrer
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="map-container" id="mapContainer">
+                    <div class="map-placeholder" id="mapPlaceholder">
+                        <div class="map-mockup">
+                            <div class="vehicle-marker" id="vehicleMarker">
+                                <div class="vehicle-icon">🚗</div>
+                                <div class="vehicle-info">
+                                    <strong>Véhicule #VH-789</strong>
+                                    <div>Vitesse: 65 km/h</div>
+                                </div>
+                            </div>
+                            <div class="route-path">
+                                <div class="start-point" id="startPoint">
+                                    <div class="point-label">Départ</div>
+                                </div>
+                                <div class="end-point" id="endPoint">
+                                    <div class="point-label">Arrivée</div>
+                                </div>
+                                <div class="progress-line">
+                                    <div class="progress-fill" id="progressFill"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-real" id="mapReal" style="display: none;">
+                        <!-- Intégration carte réelle (Google Maps/OpenStreetMap) -->
+                    </div>
+                </div>
+                
+                <div class="map-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="distanceTraveled">45 km</div>
+                        <div class="stat-label">Distance parcourue</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="distanceRemaining">105 km</div>
+                        <div class="stat-label">Distance restante</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="estimatedArrival">16:45</div>
+                        <div class="stat-label">Arrivée estimée</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="currentSpeed">65 km/h</div>
+                        <div class="stat-label">Vitesse actuelle</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timeline du trajet -->
+            <section class="timeline-section">
+                <div class="section-header">
+                    <h2>Progression du Trajet</h2>
+                </div>
+                
+                <div class="timeline-container">
+                    <div class="timeline">
+                        <div class="timeline-progress" id="timelineProgress"></div>
+                        
+                        <div class="timeline-step completed" data-step="confirmation">
+                            <div class="step-marker"></div>
+                            <div class="step-content">
+                                <h4>Réservation confirmée</h4>
+                                <p>14:00 - Votre réservation a été confirmée</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-step completed" data-step="vehicle_assigned">
+                            <div class="step-marker"></div>
+                            <div class="step-content">
+                                <h4>Véhicule assigné</h4>
+                                <p>14:15 - Véhicule #VH-789 assigné</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-step completed" data-step="departure">
+                            <div class="step-marker"></div>
+                            <div class="step-content">
+                                <h4>Départ</h4>
+                                <p>14:30 - Le véhicule a quitté la gare</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-step active" data-step="en_route">
+                            <div class="step-marker"></div>
+                            <div class="step-content">
+                                <h4>En route</h4>
+                                <p>En cours - Trajet vers Kpalimé</p>
+                                <div class="step-details">
+                                    <span class="detail-item">📍 Position actuelle: <span id="currentLocation">Sortie de Lomé</span></span>
+                                    <span class="detail-item">⏱️ Temps écoulé: <span id="elapsedTime">45 min</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-step upcoming" data-step="arrival">
+                            <div class="step-marker"></div>
+                            <div class="step-content">
+                                <h4>Arrivée estimée</h4>
+                                <p>17:00 - Arrivée à Kpalimé</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Informations chauffeur -->
+            <section class="driver-section">
+                <div class="section-header">
+                    <h2>Votre Chauffeur</h2>
+                </div>
+                
+                <div class="driver-card">
+                    <div class="driver-profile">
+                        <div class="driver-avatar">
+                            <img src="../../assets/images/driver-avatar.jpg" alt="Chauffeur" id="driverAvatar">
+                            <div class="online-status" id="driverStatus"></div>
+                        </div>
+                        <div class="driver-info">
+                            <h3 id="driverName">Koffi Mensah</h3>
+                            <div class="driver-rating">
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-value">4.8</span>
+                                <span class="review-count">(127 avis)</span>
+                            </div>
+                            <div class="driver-contact">
+                                <button class="btn btn-outline btn-sm" id="callDriver">
+                                    📞 Appeler
+                                </button>
+                                <button class="btn btn-outline btn-sm" id="messageDriver">
+                                    💬 Message
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vehicle-info">
+                        <h4>Véhicule</h4>
+                        <div class="vehicle-details">
+                            <div class="vehicle-image">
+                                <img src="../../assets/images/toyota-hiace.jpg" alt="Toyota Hiace" id="vehicleImage">
+                            </div>
+                            <div class="vehicle-specs">
+                                <div class="spec-item">
+                                    <strong id="vehicleModel">Toyota Hiace 2022</strong>
+                                </div>
+                                <div class="spec-item">
+                                    <span>Immatriculation: </span>
+                                    <span id="vehiclePlate">TG-789-AB-23</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span>Couleur: </span>
+                                    <span id="vehicleColor">Blanc</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span>Confort: </span>
+                                    <span id="vehicleComfort">Climatisé, Wi-Fi</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Alertes et notifications -->
+            <section class="alerts-section">
+                <div class="section-header">
+                    <h2>Alertes</h2>
+                    <button class="btn btn-text btn-sm" id="toggleAlerts">
+                        Masquer
+                    </button>
+                </div>
+                
+                <div class="alerts-container" id="alertsContainer">
+                    <div class="alert-item info">
+                        <div class="alert-icon">ℹ️</div>
+                        <div class="alert-content">
+                            <h4>Trajet en cours</h4>
+                            <p>Votre véhicule est en route vers Kpalimé. Arrivée estimée à 17:00.</p>
+                            <span class="alert-time">Il y a 2 min</span>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-item warning">
+                        <div class="alert-icon">⚠️</div>
+                        <div class="alert-content">
+                            <h4>Trafic modéré</h4>
+                            <p>Ralentissement sur la RN5. Retard estimé: 10 minutes.</p>
+                            <span class="alert-time">Il y a 15 min</span>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-item success">
+                        <div class="alert-icon">✅</div>
+                        <div class="alert-content">
+                            <h4>Départ confirmé</h4>
+                            <p>Le véhicule a quitté la gare de Lomé à l'heure.</p>
+                            <span class="alert-time">Il y a 45 min</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Actions rapides -->
+            <section class="actions-section">
+                <div class="actions-grid">
+                    <button class="action-btn" id="modifyReservation">
+                        <div class="action-icon">✏️</div>
+                        <span>Modifier</span>
+                    </button>
+                    
+                    <button class="action-btn" id="cancelReservation">
+                        <div class="action-icon">❌</div>
+                        <span>Annuler</span>
+                    </button>
+                    
+                    <button class="action-btn" id="downloadTicket">
+                        <div class="action-icon">🎫</div>
+                        <span>E-billet</span>
+                    </button>
+                    
+                    <button class="action-btn" id="getHelp">
+                        <div class="action-icon">🆘</div>
+                        <span>Aide</span>
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal Contact Chauffeur -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Contacter le Chauffeur</h3>
+                <button class="modal-close" id="closeContactModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="contact-options">
+                    <button class="contact-option" id="callOption">
+                        <div class="option-icon">📞</div>
+                        <div class="option-text">
+                            <strong>Appeler</strong>
+                            <span id="driverPhone">+228 90 12 34 56</span>
+                        </div>
+                    </button>
+                    
+                    <button class="contact-option" id="smsOption">
+                        <div class="option-icon">💬</div>
+                        <div class="option-text">
+                            <strong>Envoyer SMS</strong>
+                            <span>Message direct</span>
+                        </div>
+                    </button>
+                    
+                    <button class="contact-option" id="whatsappOption">
+                        <div class="option-icon">💚</div>
+                        <div class="option-text">
+                            <strong>WhatsApp</strong>
+                            <span>Chat instantané</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../js/main.js"></script>
+    <script src="../../js/suivi-reservation.js"></script>
+</body>
+</html>

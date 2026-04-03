@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/contact.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../../pages/Accueil/index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../../pages/Accueil/index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../Trajets/liste-trajets.html" class="nav-link">Trajets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link active">Contact</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement -->
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="contact-main">
+        <div class="container">
+            <header class="contact-header">
+                <h1>Contactez-nous</h1>
+                <p>Nous sommes là pour vous aider. N'hésitez pas à nous contacter pour toute question.</p>
+            </header>
+
+            <div class="contact-layout">
+                <!-- Informations de contact -->
+                <aside class="contact-info">
+                    <div class="info-card">
+                        <h3>📞 Contact direct</h3>
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="method-icon">📱</div>
+                                <div class="method-details">
+                                    <div class="method-label">Téléphone</div>
+                                    <a href="tel:+22890123456" class="method-value">+228 90 12 34 56</a>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="method-icon">✉️</div>
+                                <div class="method-details">
+                                    <div class="method-label">Email</div>
+                                    <a href="mailto:contact@miabetrans.tg" class="method-value">contact@miabetrans.tg</a>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="method-icon">💬</div>
+                                <div class="method-details">
+                                    <div class="method-label">WhatsApp</div>
+                                    <a href="https://wa.me/22890123456" target="_blank" class="method-value">+228 90 12 34 56</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>🕒 Horaires d'ouverture</h3>
+                        <div class="opening-hours">
+                            <div class="hour-item">
+                                <span class="day">Lundi - Vendredi</span>
+                                <span class="time">7h00 - 22h00</span>
+                            </div>
+                            <div class="hour-item">
+                                <span class="day">Samedi</span>
+                                <span class="time">8h00 - 20h00</span>
+                            </div>
+                            <div class="hour-item">
+                                <span class="day">Dimanche</span>
+                                <span class="time">9h00 - 18h00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>📍 Notre adresse</h3>
+                        <div class="address">
+                            <p>Rue du Commerce, Immeuble MiabeTrans<br>
+                               Lomé, Togo<br>
+                               BP 12345 Lomé</p>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>🚨 Urgences</h3>
+                        <div class="emergency-info">
+                            <p>Pour les urgences liées aux voyages en cours :</p>
+                            <a href="tel:+22870123456" class="emergency-number">+228 70 12 34 56</a>
+                            <p class="emergency-note">Disponible 24h/24, 7j/7</p>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Formulaire de contact -->
+                <section class="contact-form-section">
+                    <div class="form-card">
+                        <h2>Envoyez-nous un message</h2>
+                        <p>Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais.</p>
+                        
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-group">
+                                <label for="contact-nom" class="form-label">Nom complet *</label>
+                                <input type="text" id="contact-nom" name="nom" 
+                                       class="form-input" required
+                                       placeholder="Votre nom complet">
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="contact-email" class="form-label">Adresse email *</label>
+                                    <input type="email" id="contact-email" name="email" 
+                                           class="form-input" required
+                                           placeholder="votre@email.com">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="contact-telephone" class="form-label">Téléphone</label>
+                                    <input type="tel" id="contact-telephone" name="telephone" 
+                                           class="form-input"
+                                           placeholder="+228 XX XX XX XX">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-sujet" class="form-label">Sujet *</label>
+                                <select id="contact-sujet" name="sujet" class="form-input" required>
+                                    <option value="">Choisissez un sujet</option>
+                                    <option value="reservation">Problème de réservation</option>
+                                    <option value="paiement">Question sur le paiement</option>
+                                    <option value="annulation">Demande d'annulation</option>
+                                    <option value="retard">Retard ou problème de trajet</option>
+                                    <option value="compte">Problème de compte</option>
+                                    <option value="suggestion">Suggestion ou feedback</option>
+                                    <option value="autre">Autre</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-reference" class="form-label">Référence de réservation (si applicable)</label>
+                                <input type="text" id="contact-reference" name="reference" 
+                                       class="form-input"
+                                       placeholder="Ex: RES20250001">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-message" class="form-label">Message *</label>
+                                <textarea id="contact-message" name="message" 
+                                          class="form-input" rows="6" required
+                                          placeholder="Décrivez votre problème ou votre question en détail..."></textarea>
+                                <div class="form-help">
+                                    Minimum 20 caractères
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="urgence" id="contact-urgence">
+                                    <span class="checkmark"></span>
+                                    Il s'agit d'une urgence nécessitant une réponse immédiate
+                                </label>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary btn-send">
+                                    <span class="btn-text">📤 Envoyer le message</span>
+                                    <span class="btn-loading" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+
+            <!-- FAQ Rapide -->
+            <section class="quick-faq">
+                <h2>Questions fréquentes</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>Comment annuler une réservation?</h4>
+                        <p>Connectez-vous à votre compte, allez dans "Mes réservations" et suivez les instructions d'annulation.</p>
+                        <a href="faq.html#annulations" class="faq-link">En savoir plus →</a>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Quels moyens de paiement acceptez-vous?</h4>
+                        <p>Nous acceptons les paiements en espèces, Flooz Money et T-Money.</p>
+                        <a href="faq.html#paiements" class="faq-link">En savoir plus →</a>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Que faire si mon chauffeur est en retard?</h4>
+                        <p>Contactez immédiatement notre service urgence au +228 70 12 34 56.</p>
+                        <a href="faq.html#reservations" class="faq-link">En savoir plus →</a>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Puis-je modifier ma réservation?</h4>
+                        <p>Les modifications sont possibles jusqu'à 2 heures avant le départ, sous réserve de disponibilité.</p>
+                        <a href="faq.html#reservations" class="faq-link">En savoir plus →</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MiabeTrans</h4>
+                    <p>Votre partenaire de confiance pour les voyages interurbains au Togo</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="../Trajets/liste-trajets.html">Tous les trajets</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Légal</h4>
+                    <ul>
+                        <li><a href="politique-confidentialite.html">Confidentialité</a></li>
+                        <li><a href="#">Conditions d'utilisation</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 MiabeTrans. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/app.js"></script>
+    <script src="../../js/contact.js"></script>
+</body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signaler Incident - MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/signaler-trajet.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../Accueil/index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../Chauffeurs/dashboard.html" class="nav-link">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="trajets-assignes.html" class="nav-link">Mes Trajets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="signaler-trajet.html" class="nav-link active">Signaler</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement -->
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="signaler-main">
+        <div class="container">
+            <!-- En-tête -->
+            <header class="signaler-header">
+                <div class="header-content">
+                    <h1>Signaler un Incident</h1>
+                    <p>Déclarez rapidement tout problème rencontré pendant votre service</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-outline" id="emergencyBtn">
+                        🚨 Urgence
+                    </button>
+                    <button class="btn btn-primary" id="quickReportBtn">
+                        📝 Rapport Rapide
+                    </button>
+                </div>
+            </header>
+
+            <!-- Sélection du trajet -->
+            <section class="trip-selection-section">
+                <div class="section-card">
+                    <h2>Sélectionnez le Trajet</h2>
+                    <div class="trip-selection">
+                        <div class="form-group">
+                            <label for="tripSelect" class="form-label">Trajet concerné *</label>
+                            <select id="tripSelect" class="form-select" required>
+                                <option value="">Choisir un trajet...</option>
+                                <!-- Rempli dynamiquement -->
+                            </select>
+                        </div>
+                        
+                        <div class="selected-trip-info" id="selectedTripInfo" style="display: none;">
+                            <div class="trip-preview">
+                                <div class="trip-route">
+                                    <span class="from" id="tripFrom">Lomé</span>
+                                    <span class="arrow">→</span>
+                                    <span class="to" id="tripTo">Kpalimé</span>
+                                </div>
+                                <div class="trip-details">
+                                    <span class="detail" id="tripDate">15 Déc 2024</span>
+                                    <span class="detail" id="tripTime">14:30 - 17:00</span>
+                                    <span class="detail" id="tripPassengers">12 passagers</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Type d'incident -->
+            <section class="incident-type-section">
+                <div class="section-card">
+                    <h2>Type d'Incident</h2>
+                    <p class="section-subtitle">Sélectionnez la catégorie correspondante</p>
+                    
+                    <div class="incident-categories">
+                        <div class="category-grid">
+                            <div class="category-card" data-category="retard">
+                                <div class="category-icon">⏱️</div>
+                                <h3>Retard</h3>
+                                <p>Problème de ponctualité</p>
+                            </div>
+                            
+                            <div class="category-card" data-category="vehicule">
+                                <div class="category-icon">🚗</div>
+                                <h3>Problème Véhicule</h3>
+                                <p>Panne mécanique ou technique</p>
+                            </div>
+                            
+                            <div class="category-card" data-category="trafic">
+                                <div class="category-icon">🚦</div>
+                                <h3>Conditions Route</h3>
+                                <p>Trafic, travaux, intempéries</p>
+                            </div>
+                            
+                            <div class="category-card" data-category="passager">
+                                <div class="category-icon">👤</div>
+                                <h3>Incident Passager</h3>
+                                <p>Problème avec un passager</p>
+                            </div>
+                            
+                            <div class="category-card" data-category="sante">
+                                <div class="category-icon">🏥</div>
+                                <h3>Problème Santé</h3>
+                                <p>Maladie ou blessure</p>
+                            </div>
+                            
+                            <div class="category-card" data-category="autre">
+                                <div class="category-icon">❓</div>
+                                <h3>Autre Incident</h3>
+                                <p>Autre type de problème</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Formulaire de signalement -->
+            <section class="report-form-section" id="reportForm" style="display: none;">
+                <div class="section-card">
+                    <h2>Détails du Signalement</h2>
+                    
+                    <form id="incidentForm">
+                        <!-- Section dynamique basée sur la catégorie -->
+                        <div class="form-section" id="dynamicFields">
+                            <!-- Rempli dynamiquement selon la catégorie -->
+                        </div>
+
+                        <!-- Description détaillée -->
+                        <div class="form-section">
+                            <div class="form-group">
+                                <label for="incidentDescription" class="form-label">
+                                    Description détaillée *
+                                </label>
+                                <textarea 
+                                    id="incidentDescription" 
+                                    class="form-textarea" 
+                                    rows="5" 
+                                    placeholder="Décrivez l'incident en détail, incluant l'heure, le lieu, et les actions entreprises..."
+                                    required
+                                ></textarea>
+                                <div class="char-count">
+                                    <span id="charCount">0</span>/500 caractères
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Impact sur le trajet -->
+                        <div class="form-section">
+                            <h3>Impact sur le Trajet</h3>
+                            <div class="impact-grid">
+                                <div class="form-group">
+                                    <label for="delayMinutes" class="form-label">
+                                        Retard estimé (minutes)
+                                    </label>
+                                    <input 
+                                        type="number" 
+                                        id="delayMinutes" 
+                                        class="form-input"
+                                        min="0"
+                                        max="480"
+                                        placeholder="0"
+                                    >
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="affectedPassengers" class="form-label">
+                                        Passagers affectés
+                                    </label>
+                                    <input 
+                                        type="number" 
+                                        id="affectedPassengers" 
+                                        class="form-input"
+                                        min="0"
+                                        placeholder="0"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions entreprises -->
+                        <div class="form-section">
+                            <h3>Actions Entreprises</h3>
+                            <div class="actions-checkbox">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="actions" value="informed_passengers">
+                                    <span class="checkmark"></span>
+                                    Passagers informés
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="actions" value="contacted_support">
+                                    <span class="checkmark"></span>
+                                    Support contacté
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="actions" value="alternative_arranged">
+                                    <span class="checkmark"></span>
+                                    Solution alternative
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="actions" value="authorities_informed">
+                                    <span class="checkmark"></span>
+                                    Autorités prévenues
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Pièces jointes -->
+                        <div class="form-section">
+                            <h3>Preuves et Documents</h3>
+                            <div class="upload-section">
+                                <div class="upload-area" id="uploadArea">
+                                    <div class="upload-icon">📎</div>
+                                    <p>Glissez-déposez des fichiers ici ou</p>
+                                    <button type="button" class="btn btn-outline" id="browseFiles">
+                                        Parcourir
+                                    </button>
+                                    <input type="file" id="fileInput" multiple style="display: none;" 
+                                           accept="image/*,.pdf,.doc,.docx">
+                                </div>
+                                <div class="file-list" id="fileList"></div>
+                                <p class="upload-hint">
+                                    Formats acceptés: JPG, PNG, PDF, DOC (max. 5MB par fichier)
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Localisation -->
+                        <div class="form-section">
+                            <h3>Localisation</h3>
+                            <div class="location-section">
+                                <div class="form-group">
+                                    <label for="incidentLocation" class="form-label">
+                                        Lieu de l'incident
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="incidentLocation" 
+                                        class="form-input"
+                                        placeholder="Saisissez l'adresse ou le lieu"
+                                    >
+                                </div>
+                                <button type="button" class="btn btn-outline btn-sm" id="getLocationBtn">
+                                    📍 Utiliser ma position
+                                </button>
+                                <div class="location-coords" id="locationCoords" style="display: none;">
+                                    <span>Coordonnées: </span>
+                                    <span id="coordinatesText"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gravité -->
+                        <div class="form-section">
+                            <h3>Niveau de Gravité</h3>
+                            <div class="severity-levels">
+                                <label class="severity-option">
+                                    <input type="radio" name="severity" value="faible" required>
+                                    <span class="severity-dot low"></span>
+                                    <span class="severity-text">
+                                        <strong>Faible</strong>
+                                        <span>Retard mineur, problème léger</span>
+                                    </span>
+                                </label>
+                                
+                                <label class="severity-option">
+                                    <input type="radio" name="severity" value="moyen">
+                                    <span class="severity-dot medium"></span>
+                                    <span class="severity-text">
+                                        <strong>Moyen</strong>
+                                        <span>Impact significatif sur le trajet</span>
+                                    </span>
+                                </label>
+                                
+                                <label class="severity-option">
+                                    <input type="radio" name="severity" value="eleve">
+                                    <span class="severity-dot high"></span>
+                                    <span class="severity-text">
+                                        <strong>Élevé</strong>
+                                        <span>Incident majeur, assistance requise</span>
+                                    </span>
+                                </label>
+                                
+                                <label class="severity-option">
+                                    <input type="radio" name="severity" value="critique">
+                                    <span class="severity-dot critical"></span>
+                                    <span class="severity-text">
+                                        <strong>Critique</strong>
+                                        <span>Urgence, sécurité compromise</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Actions du formulaire -->
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-outline" id="saveDraftBtn">
+                                💾 Sauvegarder brouillon
+                            </button>
+                            <button type="submit" class="btn btn-primary" id="submitReportBtn">
+                                📤 Envoyer le signalement
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Aide et assistance -->
+            <section class="assistance-section">
+                <div class="section-card">
+                    <h2>Assistance Immédiate</h2>
+                    <div class="assistance-options">
+                        <div class="assistance-card emergency">
+                            <div class="assistance-icon">🚨</div>
+                            <div class="assistance-content">
+                                <h3>Urgence</h3>
+                                <p>Contactez immédiatement les services d'urgence si la sécurité est compromise</p>
+                                <div class="emergency-contacts">
+                                    <button class="btn btn-emergency" id="callEmergency">
+                                        🚨 Appeler Urgences
+                                    </button>
+                                    <button class="btn btn-outline" id="callSupport">
+                                        📞 Support MiabeTrans
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="assistance-card support">
+                            <div class="assistance-icon">🛟</div>
+                            <div class="assistance-content">
+                                <h3>Support 24/7</h3>
+                                <p>Notre équipe est disponible à tout moment pour vous assister</p>
+                                <div class="support-contacts">
+                                    <div class="contact-item">
+                                        <span class="contact-label">Téléphone:</span>
+                                        <span class="contact-value">+228 90 00 00 00</span>
+                                    </div>
+                                    <div class="contact-item">
+                                        <span class="contact-label">WhatsApp:</span>
+                                        <span class="contact-value">+228 91 00 00 00</span>
+                                    </div>
+                                    <div class="contact-item">
+                                        <span class="contact-label">Email:</span>
+                                        <span class="contact-value">support@miabetrans.tg</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Historique des signalements récents -->
+            <section class="recent-reports-section">
+                <div class="section-card">
+                    <div class="section-header">
+                        <h2>Signalements Récents</h2>
+                        <button class="btn btn-outline btn-sm" id="viewAllReports">
+                            Voir tout
+                        </button>
+                    </div>
+                    
+                    <div class="reports-list" id="reportsList">
+                        <!-- Chargé dynamiquement -->
+                    </div>
+                    
+                    <div class="empty-state" id="noReportsState" style="display: none;">
+                        <div class="empty-icon">📝</div>
+                        <h3>Aucun signalement récent</h3>
+                        <p>Vous n'avez effectué aucun signalement ces derniers jours.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal Confirmation -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Signalement Envoyé</h3>
+                <button class="modal-close" id="closeConfirmationModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="confirmation-icon">✅</div>
+                <h4>Votre signalement a été envoyé avec succès</h4>
+                <p>Notre équipe a été notifiée et vous contactera si nécessaire.</p>
+                <div class="report-summary" id="reportSummary">
+                    <!-- Rempli dynamiquement -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="newReportBtn">
+                    Nouveau signalement
+                </button>
+                <button class="btn btn-primary" id="viewReportBtn">
+                    Voir le détail
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Urgence -->
+    <div class="modal" id="emergencyModal">
+        <div class="modal-content emergency">
+            <div class="modal-header">
+                <h3>🚨 Signalement d'Urgence</h3>
+                <button class="modal-close" id="closeEmergencyModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="emergency-alert">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-content">
+                        <h4>Assistance immédiate requise</h4>
+                        <p>Voulez-vous contacter les services d'urgence ?</p>
+                    </div>
+                </div>
+                <div class="emergency-actions">
+                    <button class="btn btn-emergency-lg" id="confirmEmergency">
+                        🚨 Appeler les urgences
+                    </button>
+                    <button class="btn btn-outline" id="contactSupportEmergency">
+                        📞 Support MiabeTrans
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../js/main.js"></script>
+    <script src="../../js/signaler-trajet.js"></script>
+</body>
+</html>

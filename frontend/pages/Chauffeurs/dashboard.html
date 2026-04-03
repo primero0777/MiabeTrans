@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord Chauffeur - MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/dashboard-chauffeur.css">
+</head>
+<body class="dashboard-page">
+    <!-- Sidebar Navigation -->
+    <nav class="dashboard-sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <span class="brand-name">MiabeTrans</span>
+                <span class="role-badge">Chauffeur</span>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-item active">
+                <a href="dashboard.html" class="menu-link">
+                    <span class="menu-icon">🚗</span>
+                    <span class="menu-text">Tableau de bord</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="trajets-assignes.html" class="menu-link">
+                    <span class="menu-icon">📋</span>
+                    <span class="menu-text">Trajets assignés</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="signaler-trajet.html" class="menu-link">
+                    <span class="menu-icon">⚠️</span>
+                    <span class="menu-text">Signaler problème</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="../Utilisateurs/profil.html" class="menu-link">
+                    <span class="menu-icon">👤</span>
+                    <span class="menu-text">Mon profil</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">C</div>
+                <div class="user-details">
+                    <div class="user-name" id="chauffeurName">Chauffeur</div>
+                    <div class="user-email" id="chauffeurEmail">chauffeur@miabetrans.tg</div>
+                </div>
+            </div>
+            <button class="btn-logout" onclick="authManager.logout()">
+                <span class="logout-icon">🚪</span>
+                Déconnexion
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <header class="dashboard-header">
+            <div class="header-left">
+                <h1>Tableau de bord Chauffeur</h1>
+                <p class="welcome-message" id="welcomeMessage">Bienvenue dans votre espace chauffeur</p>
+            </div>
+            <div class="header-right">
+                <div class="status-indicator">
+                    <span class="status-dot online"></span>
+                    <span class="status-text" id="statusText">En service</span>
+                </div>
+                <div class="date-display" id="currentDate"></div>
+            </div>
+        </header>
+
+        <!-- Statistiques rapides -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon today">📅</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="trajetsAujourdhui">0</div>
+                        <div class="stat-label">Trajets aujourd'hui</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon passengers">👥</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="passagersTotal">0</div>
+                        <div class="stat-label">Passagers aujourd'hui</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon revenue">💰</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="revenuEstime">0 FCFA</div>
+                        <div class="stat-label">Revenu estimé</div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon rating">⭐</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="noteMoyenne">4.8</div>
+                        <div class="stat-label">Note moyenne</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prochain trajet -->
+        <section class="next-trip-section">
+            <div class="section-header">
+                <h2>Prochain trajet</h2>
+                <div class="header-actions">
+                    <button class="btn btn-outline btn-sm" id="refreshTrips">
+                        🔄 Actualiser
+                    </button>
+                </div>
+            </div>
+
+            <div class="next-trip-card" id="nextTripCard">
+                <!-- Chargé dynamiquement -->
+            </div>
+        </section>
+
+        <!-- Trajets du jour -->
+        <section class="today-trips-section">
+            <div class="section-header">
+                <h2>Trajets d'aujourd'hui</h2>
+                <span class="trip-count" id="todayTripsCount">0 trajets</span>
+            </div>
+
+            <div class="trips-timeline" id="todayTripsTimeline">
+                <!-- Chargé dynamiquement -->
+            </div>
+        </section>
+
+        <!-- Actions rapides -->
+        <section class="quick-actions-section">
+            <h2>Actions rapides</h2>
+            <div class="quick-actions-grid">
+                <button class="action-card" onclick="chauffeurManager.startTrip()" id="startTripBtn">
+                    <div class="action-icon">🚀</div>
+                    <div class="action-text">Démarrer le trajet</div>
+                </button>
+
+                <button class="action-card" onclick="chauffeurManager.reportProblem()">
+                    <div class="action-icon">⚠️</div>
+                    <div class="action-text">Signaler problème</div>
+                </button>
+
+                <button class="action-card" onclick="chauffeurManager.viewSchedule()">
+                    <div class="action-icon">📅</div>
+                    <div class="action-text">Voir planning</div>
+                </button>
+
+                <button class="action-card" onclick="chauffeurManager.contactSupport()">
+                    <div class="action-icon">📞</div>
+                    <div class="action-text">Support urgent</div>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de démarrage de trajet -->
+    <div class="modal" id="startTripModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Démarrer le trajet</h3>
+                <button class="modal-close" onclick="chauffeurManager.closeModal('startTripModal')">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="startTripForm">
+                    <div class="form-group">
+                        <label for="tripSelect" class="form-label">Sélectionner le trajet</label>
+                        <select id="tripSelect" class="form-input" required>
+                            <option value="">Choisir un trajet...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicleStatus" class="form-label">État du véhicule</label>
+                        <select id="vehicleStatus" class="form-input" required>
+                            <option value="excellent">Excellent</option>
+                            <option value="bon">Bon</option>
+                            <option value="maintenance">Nécessite maintenance</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tripNotes" class="form-label">Notes (optionnel)</label>
+                        <textarea id="tripNotes" class="form-input" rows="3" placeholder="Informations supplémentaires..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="chauffeurManager.closeModal('startTripModal')">Annuler</button>
+                <button class="btn btn-primary" onclick="chauffeurManager.confirmStartTrip()">Démarrer le trajet</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/app.js"></script>
+    <script src="../../js/dashboard-chauffeur.js"></script>
+</body>
+</html>

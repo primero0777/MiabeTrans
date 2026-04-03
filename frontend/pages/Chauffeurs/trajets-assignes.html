@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Trajets Assignés - MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/trajets-assignes.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../Accueil/index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../Chauffeurs/dashboard.html" class="nav-link">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="trajets-assignes.html" class="nav-link active">Mes Trajets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="signaler-trajet.html" class="nav-link">Signaler</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement -->
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="chauffeur-main">
+        <div class="container">
+            <!-- En-tête -->
+            <header class="chauffeur-header">
+                <div class="header-content">
+                    <h1>Mes Trajets Assignés</h1>
+                    <p>Gérez vos trajets en cours et à venir</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-outline" id="refreshBtn">
+                        🔄 Actualiser
+                    </button>
+                    <button class="btn btn-primary" id="startServiceBtn">
+                        🚗 Démarrer le service
+                    </button>
+                </div>
+            </header>
+
+            <!-- Statut du chauffeur -->
+            <section class="driver-status-section">
+                <div class="status-card">
+                    <div class="status-indicator">
+                        <div class="status-dot" id="statusDot"></div>
+                        <span class="status-text" id="statusText">Hors service</span>
+                    </div>
+                    <div class="status-info">
+                        <div class="info-item">
+                            <span class="label">Trajet en cours:</span>
+                            <span class="value" id="currentTrip">Aucun</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Prochain trajet:</span>
+                            <span class="value" id="nextTrip">-</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filtres et recherche -->
+            <section class="filters-section">
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label for="filter-date" class="filter-label">Date</label>
+                        <input type="date" id="filter-date" class="filter-input">
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filter-status" class="filter-label">Statut</label>
+                        <select id="filter-status" class="filter-select">
+                            <option value="all">Tous les statuts</option>
+                            <option value="a_venir">À venir</option>
+                            <option value="en_cours">En cours</option>
+                            <option value="termine">Terminé</option>
+                            <option value="annule">Annulé</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filter-vehicle" class="filter-label">Véhicule</label>
+                        <select id="filter-vehicle" class="filter-select">
+                            <option value="all">Tous les véhicules</option>
+                            <!-- Rempli dynamiquement -->
+                        </select>
+                    </div>
+
+                    <div class="filter-actions">
+                        <button class="btn btn-outline" id="applyFilters">
+                            Appliquer
+                        </button>
+                        <button class="btn btn-text" id="resetFilters">
+                            Réinitialiser
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistiques rapides -->
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="totalTrips">0</div>
+                            <div class="stat-label">Trajets aujourd'hui</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏱️</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="avgDelay">0min</div>
+                            <div class="stat-label">Retard moyen</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="rating">0.0</div>
+                            <div class="stat-label">Note moyenne</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="earnings">0 FCFA</div>
+                            <div class="stat-label">Gains aujourd'hui</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Liste des trajets -->
+            <section class="trips-section">
+                <div class="section-header">
+                    <h2>Trajets Assignés</h2>
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="list">
+                            📋 Liste
+                        </button>
+                        <button class="view-btn" data-view="calendar">
+                            📅 Calendrier
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Vue Liste -->
+                <div class="trips-container active" id="listView">
+                    <div class="trips-list" id="tripsList">
+                        <!-- Chargé dynamiquement -->
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination" id="pagination">
+                        <!-- Généré dynamiquement -->
+                    </div>
+                </div>
+
+                <!-- Vue Calendrier -->
+                <div class="calendar-container" id="calendarView">
+                    <div class="calendar-header">
+                        <button class="calendar-nav" id="prevMonth">←</button>
+                        <h3 id="currentMonth">Mois en cours</h3>
+                        <button class="calendar-nav" id="nextMonth">→</button>
+                    </div>
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- Généré dynamiquement -->
+                    </div>
+                </div>
+
+                <!-- État vide -->
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <div class="empty-icon">🚗</div>
+                    <h3>Aucun trajet assigné</h3>
+                    <p>Vous n'avez pas de trajets assignés pour le moment.</p>
+                    <button class="btn btn-primary" id="checkAvailability">
+                        Vérifier les disponibilités
+                    </button>
+                </div>
+            </section>
+
+            <!-- Carte interactive -->
+            <section class="map-section">
+                <div class="section-header">
+                    <h2>Carte des Trajets</h2>
+                    <button class="btn btn-outline btn-sm" id="toggleMap">
+                        Masquer la carte
+                    </button>
+                </div>
+                <div class="map-container" id="mapContainer">
+                    <div class="map-placeholder">
+                        <div class="map-mockup">
+                            <div class="map-points">
+                                <div class="point start" data-trip="TR-001">
+                                    <div class="point-label">Départ</div>
+                                </div>
+                                <div class="point end" data-trip="TR-001">
+                                    <div class="point-label">Arrivée</div>
+                                </div>
+                                <div class="route-line"></div>
+                            </div>
+                        </div>
+                        <p class="map-notice">Intégration carte réelle à venir</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal Détails Trajet -->
+    <div class="modal" id="tripDetailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Détails du Trajet</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Contenu chargé dynamiquement -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="closeDetails">
+                    Fermer
+                </button>
+                <button class="btn btn-primary" id="startTripBtn">
+                    Démarrer le trajet
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../js/main.js"></script>
+    <script src="../../js/trajets-assignes.js"></script>
+</body>
+</html>

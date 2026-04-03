@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Chauffeurs - Admin MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/gestion.css">
+</head>
+<body class="admin-dashboard">
+    <!-- Navigation Admin -->
+    <nav class="navbar admin-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../../pages/Accueil/index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                    <span class="admin-badge">Admin</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestion-trajets.html" class="nav-link">🚌 Trajets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestion-utilisateurs.html" class="nav-link">👥 Utilisateurs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestion-chauffeurs.html" class="nav-link active">👨‍✈️ Chauffeurs</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement -->
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="gestion-main">
+        <div class="container-fluid">
+            <!-- En-tête -->
+            <header class="gestion-header">
+                <div class="header-content">
+                    <h1>Gestion des Chauffeurs</h1>
+                    <p>Gérez les chauffeurs et leurs affectations</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="addChauffeurBtn">
+                        ➕ Ajouter un chauffeur
+                    </button>
+                    <button class="btn btn-outline" id="exportChauffeurs">
+                        📊 Exporter
+                    </button>
+                </div>
+            </header>
+
+            <!-- Filtres et recherche -->
+            <section class="filters-section">
+                <div class="filters-card">
+                    <div class="filters-header">
+                        <h3>🔍 Filtres et recherche</h3>
+                        <button class="btn-toggle-filters" id="toggleFilters">
+                            Masquer les filtres
+                        </button>
+                    </div>
+                    
+                    <div class="filters-content" id="filtersContent">
+                        <div class="filters-grid">
+                            <div class="filter-group">
+                                <label for="filter-statut" class="filter-label">Statut</label>
+                                <select id="filter-statut" class="filter-select">
+                                    <option value="">Tous les statuts</option>
+                                    <option value="actif">Actif</option>
+                                    <option value="inactif">Inactif</option>
+                                    <option value="en_conge">En congé</option>
+                                    <option value="suspendu">Suspendu</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="filter-ville" class="filter-label">Ville de résidence</label>
+                                <select id="filter-ville" class="filter-select">
+                                    <option value="">Toutes les villes</option>
+                                    <option value="Lomé">Lomé</option>
+                                    <option value="Kpalimé">Kpalimé</option>
+                                    <option value="Sokodé">Sokodé</option>
+                                    <option value="Kara">Kara</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="filter-permis" class="filter-label">Type de permis</label>
+                                <select id="filter-permis" class="filter-select">
+                                    <option value="">Tous les permis</option>
+                                    <option value="A">Permis A</option>
+                                    <option value="B">Permis B</option>
+                                    <option value="C">Permis C</option>
+                                    <option value="D">Permis D</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="filter-experience" class="filter-label">Expérience</label>
+                                <select id="filter-experience" class="filter-select">
+                                    <option value="">Toutes</option>
+                                    <option value="0-2">0-2 ans</option>
+                                    <option value="2-5">2-5 ans</option>
+                                    <option value="5-10">5-10 ans</option>
+                                    <option value="10+">10+ ans</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="search-group">
+                            <input type="text" id="searchChauffeurs" class="search-input" 
+                                   placeholder="Rechercher un chauffeur par nom, email, téléphone...">
+                            <button class="btn btn-primary" id="searchBtn">
+                                🔍 Rechercher
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistiques rapides -->
+            <section class="quick-stats">
+                <div class="stats-grid">
+                    <div class="quick-stat">
+                        <div class="stat-value" id="totalChauffeurs">0</div>
+                        <div class="stat-label">Total chauffeurs</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="stat-value" id="chauffeursActifs">0</div>
+                        <div class="stat-label">Chauffeurs actifs</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="stat-value" id="moyenneNotes">0.0</div>
+                        <div class="stat-label">Note moyenne</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="stat-value" id="trajetsEffectues">0</div>
+                        <div class="stat-label">Trajets effectués</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableau des chauffeurs -->
+            <section class="table-section">
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Liste des chauffeurs</h3>
+                        <div class="table-actions">
+                            <button class="btn btn-outline btn-sm" id="refreshTable">
+                                🔄 Actualiser
+                            </button>
+                            <div class="pagination-info">
+                                Affichage de <span id="startIndex">1</span> à <span id="endIndex">10</span> sur <span id="totalItems">0</span> chauffeurs
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="data-table" id="chauffeursTable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="selectAll">
+                                    </th>
+                                    <th>ID</th>
+                                    <th>Chauffeur</th>
+                                    <th>Contact</th>
+                                    <th>Permis/Expérience</th>
+                                    <th>Statut</th>
+                                    <th>Performance</th>
+                                    <th>Trajets assignés</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="chauffeursTableBody">
+                                <!-- Chargé dynamiquement -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="table-footer">
+                        <div class="pagination-controls">
+                            <button class="btn-pagination" id="prevPage" disabled>
+                                ◀ Précédent
+                            </button>
+                            <div class="pagination-numbers" id="paginationNumbers">
+                                <!-- Généré dynamiquement -->
+                            </div>
+                            <button class="btn-pagination" id="nextPage" disabled>
+                                Suivant ▶
+                            </button>
+                        </div>
+                        
+                        <div class="rows-per-page">
+                            <label for="rowsPerPage">Lignes par page:</label>
+                            <select id="rowsPerPage" class="form-select">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Actions groupées -->
+            <section class="bulk-actions" id="bulkActions" style="display: none;">
+                <div class="bulk-actions-card">
+                    <div class="bulk-info">
+                        <span id="selectedCount">0</span> chauffeur(s) sélectionné(s)
+                    </div>
+                    <div class="bulk-buttons">
+                        <button class="btn btn-outline btn-sm" id="bulkActivate">
+                            ✅ Activer
+                        </button>
+                        <button class="btn btn-outline btn-sm" id="bulkSuspend">
+                            ⏸️ Suspendre
+                        </button>
+                        <button class="btn btn-outline btn-sm" id="bulkAssignVehicule">
+                            🚌 Assigner véhicule
+                        </button>
+                        <button class="btn btn-outline btn-sm btn-danger" id="bulkDelete">
+                            🗑️ Supprimer
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal Ajout/Modification Chauffeur -->
+    <div class="modal" id="chauffeurModal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3 id="modalTitle">Ajouter un chauffeur</h3>
+                <button class="modal-close" id="closeChauffeurModal">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="chauffeurForm" class="modal-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="modal-prenom" class="form-label">Prénom *</label>
+                            <input type="text" id="modal-prenom" name="prenom" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-nom" class="form-label">Nom *</label>
+                            <input type="text" id="modal-nom" name="nom" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-email" class="form-label">Email *</label>
+                            <input type="email" id="modal-email" name="email" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-telephone" class="form-label">Téléphone *</label>
+                            <input type="tel" id="modal-telephone" name="telephone" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-date-naissance" class="form-label">Date de naissance</label>
+                            <input type="date" id="modal-date-naissance" name="date_naissance" class="form-input">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-ville" class="form-label">Ville de résidence</label>
+                            <select id="modal-ville" name="ville" class="form-input">
+                                <option value="">Sélectionnez une ville</option>
+                                <option value="Lomé">Lomé</option>
+                                <option value="Kpalimé">Kpalimé</option>
+                                <option value="Sokodé">Sokodé</option>
+                                <option value="Kara">Kara</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="modal-adresse" class="form-label">Adresse</label>
+                        <textarea id="modal-adresse" name="adresse" class="form-input" 
+                                  rows="2" placeholder="Adresse complète..."></textarea>
+                    </div>
+
+                    <!-- Informations professionnelles -->
+                    <div class="section-divider">
+                        <h4>Informations professionnelles</h4>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="modal-numero-permis" class="form-label">Numéro de permis *</label>
+                            <input type="text" id="modal-numero-permis" name="numero_permis" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-type-permis" class="form-label">Type de permis *</label>
+                            <select id="modal-type-permis" name="type_permis" class="form-input" required>
+                                <option value="">Sélectionnez un type</option>
+                                <option value="A">Permis A</option>
+                                <option value="B">Permis B</option>
+                                <option value="C">Permis C</option>
+                                <option value="D">Permis D</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-date-expiration" class="form-label">Date d'expiration *</label>
+                            <input type="date" id="modal-date-expiration" name="date_expiration_permis" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-annees-experience" class="form-label">Années d'expérience</label>
+                            <input type="number" id="modal-annees-experience" name="annees_experience" 
+                                   class="form-input" min="0" max="50">
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="modal-date-embauche" class="form-label">Date d'embauche</label>
+                            <input type="date" id="modal-date-embauche" name="date_embauche" class="form-input">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-salaire" class="form-label">Salaire (FCFA)</label>
+                            <input type="number" id="modal-salaire" name="salaire" class="form-input" min="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-statut" class="form-label">Statut *</label>
+                            <select id="modal-statut" name="statut" class="form-input" required>
+                                <option value="actif">Actif</option>
+                                <option value="inactif">Inactif</option>
+                                <option value="en_conge">En congé</option>
+                                <option value="suspendu">Suspendu</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="password-section" id="passwordSection">
+                        <h4>Compte utilisateur</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="modal-password" class="form-label">Mot de passe *</label>
+                                <input type="password" id="modal-password" name="password" class="form-input" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="modal-confirm-password" class="form-label">Confirmer le mot de passe *</label>
+                                <input type="password" id="modal-confirm-password" name="confirm_password" class="form-input" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="cancelChauffeurForm">
+                            Annuler
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            💾 Enregistrer le chauffeur
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmation -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content modal-sm">
+            <div class="modal-header">
+                <h3>Confirmation</h3>
+                <button class="modal-close" id="closeConfirmModal">×</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Êtes-vous sûr de vouloir effectuer cette action ?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelConfirm">Annuler</button>
+                <button class="btn btn-primary" id="confirmAction">Confirmer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/app.js"></script>
+    <script src="../../js/gestion-chauffeurs.js"></script>
+</body>
+</html>

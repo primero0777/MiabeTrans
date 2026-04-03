@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapports et Statistiques - Admin MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/rapports.css">
+</head>
+<body class="admin-dashboard">
+    <!-- Navigation Admin -->
+    <nav class="navbar admin-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../../pages/Accueil/index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                    <span class="admin-badge">Admin</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestion-trajets.html" class="nav-link">🚌 Trajets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestion-utilisateurs.html" class="nav-link">👥 Utilisateurs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestion-chauffeurs.html" class="nav-link">👨‍✈️ Chauffeurs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="rapports.html" class="nav-link active">📈 Rapports</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement -->
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="rapports-main">
+        <div class="container-fluid">
+            <!-- En-tête -->
+            <header class="rapports-header">
+                <div class="header-content">
+                    <h1>Rapports et Statistiques</h1>
+                    <p>Analysez les performances et l'activité de MiabeTrans</p>
+                </div>
+                <div class="header-actions">
+                    <div class="period-selector">
+                        <label for="reportPeriod">Période:</label>
+                        <select id="reportPeriod" class="form-select">
+                            <option value="7">7 derniers jours</option>
+                            <option value="30" selected>30 derniers jours</option>
+                            <option value="90">3 derniers mois</option>
+                            <option value="365">12 derniers mois</option>
+                            <option value="custom">Personnalisée</option>
+                        </select>
+                    </div>
+                    <div class="custom-dates" id="customDates" style="display: none;">
+                        <input type="date" id="startDate" class="form-input">
+                        <span>à</span>
+                        <input type="date" id="endDate" class="form-input">
+                    </div>
+                    <button class="btn btn-primary" id="generateReport">
+                        📊 Générer le rapport
+                    </button>
+                    <button class="btn btn-outline" id="exportReport">
+                        📥 Exporter PDF
+                    </button>
+                </div>
+            </header>
+
+            <!-- Métriques principales -->
+            <section class="metrics-section">
+                <div class="metrics-grid">
+                    <div class="metric-card revenue">
+                        <div class="metric-icon">💰</div>
+                        <div class="metric-content">
+                            <h3 id="totalRevenue">0 FCFA</h3>
+                            <p>Chiffre d'affaires total</p>
+                            <div class="metric-trend" id="revenueTrend">
+                                <span class="trend-up">+12%</span> vs période précédente
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card bookings">
+                        <div class="metric-icon">🎫</div>
+                        <div class="metric-content">
+                            <h3 id="totalBookings">0</h3>
+                            <p>Réservations totales</p>
+                            <div class="metric-trend" id="bookingsTrend">
+                                <span class="trend-up">+8%</span> vs période précédente
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card occupancy">
+                        <div class="metric-icon">🚌</div>
+                        <div class="metric-content">
+                            <h3 id="avgOccupancy">0%</h3>
+                            <p>Taux d'occupation moyen</p>
+                            <div class="metric-trend" id="occupancyTrend">
+                                <span class="trend-up">+3%</span> vs période précédente
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card satisfaction">
+                        <div class="metric-icon">⭐</div>
+                        <div class="metric-content">
+                            <h3 id="avgSatisfaction">0.0</h3>
+                            <p>Satisfaction moyenne</p>
+                            <div class="metric-trend" id="satisfactionTrend">
+                                <span class="trend-up">+0.2</span> vs période précédente
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Graphiques principaux -->
+            <section class="charts-section">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Évolution du chiffre d'affaires</h3>
+                                <div class="chart-legend">
+                                    <div class="legend-item">
+                                        <span class="legend-color revenue"></span>
+                                        Chiffre d'affaires
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color bookings"></span>
+                                        Réservations
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="revenueChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Répartition par type de trajet</h3>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="trajetTypesChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-lg-6">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Top 5 destinations</h3>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="destinationsChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Performance des chauffeurs</h3>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="driversPerformanceChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableaux détaillés -->
+            <section class="tables-section">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="table-card">
+                            <div class="table-header">
+                                <h3>Trajets les plus rentables</h3>
+                            </div>
+                            <div class="table-container">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Itinéraire</th>
+                                            <th>Revenu</th>
+                                            <th>Occupation</th>
+                                            <th>Rentabilité</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="profitableTrajets">
+                                        <!-- Chargé dynamiquement -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6">
+                        <div class="table-card">
+                            <div class="table-header">
+                                <h3>Clients les plus actifs</h3>
+                            </div>
+                            <div class="table-container">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Client</th>
+                                            <th>Réservations</th>
+                                            <th>Dépenses</th>
+                                            <th>Dernière activité</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="activeClients">
+                                        <!-- Chargé dynamiquement -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analyses avancées -->
+            <section class="analysis-section">
+                <div class="analysis-card">
+                    <div class="analysis-header">
+                        <h3>📈 Analyse des performances</h3>
+                    </div>
+                    <div class="analysis-grid">
+                        <div class="analysis-item">
+                            <h4>Taux de croissance</h4>
+                            <div class="analysis-value" id="growthRate">0%</div>
+                            <div class="analysis-description">
+                                Croissance mensuelle du chiffre d'affaires
+                            </div>
+                        </div>
+                        
+                        <div class="analysis-item">
+                            <h4>Taux de fidélisation</h4>
+                            <div class="analysis-value" id="retentionRate">0%</div>
+                            <div class="analysis-description">
+                                Pourcentage de clients récurrents
+                            </div>
+                        </div>
+                        
+                        <div class="analysis-item">
+                            <h4>Coût d'acquisition</h4>
+                            <div class="analysis-value" id="acquisitionCost">0 FCFA</div>
+                            <div class="analysis-description">
+                                Coût moyen par nouveau client
+                            </div>
+                        </div>
+                        
+                        <div class="analysis-item">
+                            <h4>Valeur à vie</h4>
+                            <div class="analysis-value" id="lifetimeValue">0 FCFA</div>
+                            <div class="analysis-description">
+                                Valeur moyenne d'un client sur 12 mois
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Insights et recommandations -->
+            <section class="insights-section">
+                <div class="insights-card">
+                    <div class="insights-header">
+                        <h3>💡 Insights et Recommandations</h3>
+                    </div>
+                    <div class="insights-content" id="insightsContent">
+                        <!-- Chargé dynamiquement -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="../../js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../js/rapports.js"></script>
+</body>
+</html>

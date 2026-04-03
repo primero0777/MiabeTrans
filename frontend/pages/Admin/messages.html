@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Admin MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/messages.css">
+</head>
+<body class="admin-dashboard">
+    <!-- Navigation Admin -->
+    <nav class="navbar admin-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../../pages/Accueil/index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                    <span class="admin-badge">Admin</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestion-trajets.html" class="nav-link">🚌 Trajets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestion-utilisateurs.html" class="nav-link">👥 Utilisateurs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestion-chauffeurs.html" class="nav-link">👨‍✈️ Chauffeurs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="messages.html" class="nav-link active">💬 Messages</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement -->
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="messages-main">
+        <div class="container-fluid">
+            <!-- En-tête -->
+            <header class="messages-header">
+                <div class="header-content">
+                    <h1>Centre de Messages</h1>
+                    <p>Gérez les communications avec les utilisateurs et l'équipe</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="newMessageBtn">
+                        ✉️ Nouveau message
+                    </button>
+                    <button class="btn btn-outline" id="markAllRead">
+                        ✅ Tout marquer comme lu
+                    </button>
+                </div>
+            </header>
+
+            <div class="messages-layout">
+                <!-- Sidebar des conversations -->
+                <aside class="conversations-sidebar">
+                    <div class="sidebar-header">
+                        <h3>Conversations</h3>
+                        <div class="search-conversations">
+                            <input type="text" id="searchConversations" 
+                                   placeholder="Rechercher une conversation...">
+                            <button class="btn-search">🔍</button>
+                        </div>
+                    </div>
+
+                    <div class="conversation-filters">
+                        <button class="filter-btn active" data-filter="all">
+                            Tous <span class="count" id="countAll">0</span>
+                        </button>
+                        <button class="filter-btn" data-filter="unread">
+                            Non lus <span class="count" id="countUnread">0</span>
+                        </button>
+                        <button class="filter-btn" data-filter="important">
+                            Important <span class="count" id="countImportant">0</span>
+                        </button>
+                    </div>
+
+                    <div class="conversations-list" id="conversationsList">
+                        <!-- Chargé dynamiquement -->
+                    </div>
+                </aside>
+
+                <!-- Zone de conversation principale -->
+                <section class="conversation-main">
+                    <div class="conversation-header" id="conversationHeader">
+                        <div class="conversation-info">
+                            <div class="avatar">👤</div>
+                            <div class="conversation-details">
+                                <h3 id="conversationTitle">Sélectionnez une conversation</h3>
+                                <p id="conversationSubtitle">Choisissez une conversation pour commencer à discuter</p>
+                            </div>
+                        </div>
+                        <div class="conversation-actions" id="conversationActions" style="display: none;">
+                            <button class="btn btn-outline btn-sm" id="markImportant">
+                                ⭐ Marquer important
+                            </button>
+                            <button class="btn btn-outline btn-sm" id="archiveConversation">
+                                📁 Archiver
+                            </button>
+                            <button class="btn btn-outline btn-sm btn-danger" id="deleteConversation">
+                                🗑️ Supprimer
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="messages-container" id="messagesContainer">
+                        <div class="empty-conversation" id="emptyConversation">
+                            <div class="empty-icon">💬</div>
+                            <h3>Aucune conversation sélectionnée</h3>
+                            <p>Sélectionnez une conversation dans la liste pour afficher les messages</p>
+                        </div>
+                    </div>
+
+                    <!-- Zone de saisie de message -->
+                    <div class="message-input-container" id="messageInputContainer" style="display: none;">
+                        <form id="messageForm" class="message-form">
+                            <div class="input-group">
+                                <textarea id="messageInput" class="message-input" 
+                                          placeholder="Tapez votre message..." rows="3"></textarea>
+                                <div class="input-actions">
+                                    <button type="button" class="btn-attachment" title="Joindre un fichier">
+                                        📎
+                                    </button>
+                                    <button type="submit" class="btn-send" id="sendMessageBtn">
+                                        📤 Envoyer
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Sidebar des détails -->
+                <aside class="details-sidebar" id="detailsSidebar" style="display: none;">
+                    <div class="sidebar-header">
+                        <h3>Détails</h3>
+                        <button class="btn-close-sidebar" id="closeDetailsSidebar">×</button>
+                    </div>
+
+                    <div class="participant-info">
+                        <h4>Participants</h4>
+                        <div class="participants-list" id="participantsList">
+                            <!-- Chargé dynamiquement -->
+                        </div>
+                    </div>
+
+                    <div class="conversation-metadata">
+                        <h4>Informations</h4>
+                        <div class="metadata-list">
+                            <div class="metadata-item">
+                                <span class="label">Créée le:</span>
+                                <span class="value" id="conversationCreated">-</span>
+                            </div>
+                            <div class="metadata-item">
+                                <span class="label">Dernier message:</span>
+                                <span class="value" id="lastMessageTime">-</span>
+                            </div>
+                            <div class="metadata-item">
+                                <span class="label">Statut:</span>
+                                <span class="value" id="conversationStatus">-</span>
+                            </div>
+                            <div class="metadata-item">
+                                <span class="label">Priorité:</span>
+                                <span class="value" id="conversationPriority">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+                        <h4>Actions rapides</h4>
+                        <button class="btn btn-outline btn-sm btn-block" id="addParticipant">
+                            👥 Ajouter un participant
+                        </button>
+                        <button class="btn btn-outline btn-sm btn-block" id="changePriority">
+                            🎯 Changer la priorité
+                        </button>
+                        <button class="btn btn-outline btn-sm btn-block" id="exportConversation">
+                            📥 Exporter la conversation
+                        </button>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Nouveau Message -->
+    <div class="modal" id="newMessageModal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>Nouveau message</h3>
+                <button class="modal-close" id="closeNewMessageModal">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="newMessageForm" class="modal-form">
+                    <div class="form-group">
+                        <label for="newMessageRecipients" class="form-label">Destinataires *</label>
+                        <select id="newMessageRecipients" name="recipients" class="form-input" multiple required>
+                            <option value="all_users">Tous les utilisateurs</option>
+                            <option value="all_chauffeurs">Tous les chauffeurs</option>
+                            <option value="all_admins">Tous les administrateurs</option>
+                            <optgroup label="Utilisateurs spécifiques">
+                                <!-- Chargé dynamiquement -->
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newMessageSubject" class="form-label">Sujet *</label>
+                        <input type="text" id="newMessageSubject" name="subject" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newMessageContent" class="form-label">Message *</label>
+                        <textarea id="newMessageContent" name="content" class="form-input" rows="8" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newMessagePriority" class="form-label">Priorité</label>
+                        <select id="newMessagePriority" name="priority" class="form-input">
+                            <option value="normal">Normale</option>
+                            <option value="high">Haute</option>
+                            <option value="urgent">Urgente</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="cancelNewMessage">
+                            Annuler
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            📤 Envoyer le message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Confirmation -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content modal-sm">
+            <div class="modal-header">
+                <h3>Confirmation</h3>
+                <button class="modal-close" id="closeConfirmModal">×</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Êtes-vous sûr de vouloir effectuer cette action ?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelConfirm">Annuler</button>
+                <button class="btn btn-primary" id="confirmAction">Confirmer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/app.js"></script>
+    <script src="../../js/messages.js"></script>
+</body>
+</html>

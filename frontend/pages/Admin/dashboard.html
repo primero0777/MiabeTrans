@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord Admin - MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/dashboard.css">
+</head>
+<body class="dashboard-page">
+    <!-- Sidebar Navigation -->
+    <nav class="dashboard-sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <span class="brand-name">MiabeTrans</span>
+                <span class="role-badge">Admin</span>
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li class="menu-item active">
+                <a href="dashboard.html" class="menu-link">
+                    <span class="menu-icon">📊</span>
+                    <span class="menu-text">Tableau de bord</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="gestion-trajets.html" class="menu-link">
+                    <span class="menu-icon">🚌</span>
+                    <span class="menu-text">Gestion des trajets</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="gestion-utilisateurs.html" class="menu-link">
+                    <span class="menu-icon">👥</span>
+                    <span class="menu-text">Utilisateurs</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="gestion-chauffeurs.html" class="menu-link">
+                    <span class="menu-icon">👨‍✈️</span>
+                    <span class="menu-text">Chauffeurs</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="rapports.html" class="menu-link">
+                    <span class="menu-icon">📈</span>
+                    <span class="menu-text">Rapports</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="publicites.html" class="menu-link">
+                    <span class="menu-icon">📢</span>
+                    <span class="menu-text">Publicités</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="messages.html" class="menu-link">
+                    <span class="menu-icon">💬</span>
+                    <span class="menu-text">Messages</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">A</div>
+                <div class="user-details">
+                    <div class="user-name" id="adminName">Administrateur</div>
+                    <div class="user-email" id="adminEmail">admin@miabetrans.tg</div>
+                </div>
+            </div>
+            <button class="btn-logout" onclick="authManager.logout()">
+                <span class="logout-icon">🚪</span>
+                Déconnexion
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <header class="dashboard-header">
+            <div class="header-left">
+                <h1>Tableau de bord</h1>
+                <p class="welcome-message" id="welcomeMessage">Bienvenue dans l'administration MiabeTrans</p>
+            </div>
+            <div class="header-right">
+                <div class="date-display" id="currentDate"></div>
+            </div>
+        </header>
+
+        <!-- Statistiques -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon revenue">💰</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="totalRevenue">0 FCFA</div>
+                        <div class="stat-label">Chiffre d'affaires</div>
+                        <div class="stat-trend positive" id="revenueTrend">
+                            +12% ce mois
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon bookings">🎫</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="totalBookings">0</div>
+                        <div class="stat-label">Réservations</div>
+                        <div class="stat-trend positive" id="bookingsTrend">
+                            +8% ce mois
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon users">👥</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="totalUsers">0</div>
+                        <div class="stat-label">Utilisateurs</div>
+                        <div class="stat-trend positive" id="usersTrend">
+                            +5% ce mois
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon routes">🛣️</div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="activeRoutes">0</div>
+                        <div class="stat-label">Trajets actifs</div>
+                        <div class="stat-trend negative" id="routesTrend">
+                            -2% ce mois
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Graphiques et données -->
+        <section class="charts-section">
+            <div class="charts-grid">
+                <!-- Réservations récentes -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Réservations récentes</h3>
+                        <a href="rapports.html" class="view-all">Voir tout</a>
+                    </div>
+                    <div class="chart-content">
+                        <div class="recent-bookings" id="recentBookings">
+                            <!-- Chargé dynamiquement -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistiques des trajets -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Trajets populaires</h3>
+                    </div>
+                    <div class="chart-content">
+                        <div class="popular-routes" id="popularRoutes">
+                            <!-- Chargé dynamiquement -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <!-- Activité récente -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Activité récente</h3>
+                    </div>
+                    <div class="chart-content">
+                        <div class="recent-activity" id="recentActivity">
+                            <!-- Chargé dynamiquement -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions rapides -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Actions rapides</h3>
+                    </div>
+                    <div class="chart-content">
+                        <div class="quick-actions">
+                            <a href="gestion-trajets.html?action=create" class="quick-action">
+                                <span class="action-icon">➕</span>
+                                <span class="action-text">Nouveau trajet</span>
+                            </a>
+                            <a href="gestion-chauffeurs.html?action=create" class="quick-action">
+                                <span class="action-icon">👨‍✈️</span>
+                                <span class="action-text">Ajouter chauffeur</span>
+                            </a>
+                            <a href="rapports.html" class="quick-action">
+                                <span class="action-icon">📊</span>
+                                <span class="action-text">Générer rapport</span>
+                            </a>
+                            <a href="publicites.html" class="quick-action">
+                                <span class="action-icon">📢</span>
+                                <span class="action-text">Créer publicité</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../js/app.js"></script>
+    <script src="../../js/dashboard.js"></script>
+</body>
+</html>

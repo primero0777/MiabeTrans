@@ -1,0 +1,77 @@
+# Environnement et configuration
+.env
+.env.local
+.env.production
+.env.development
+.env.testing
+
+# Logs
+*.log
+logs/
+backend/api/logs/
+frontend/logs/
+
+# Dependencies
+node_modules/
+vendor/
+composer.lock
+package-lock.json
+yarn.lock
+
+# Build outputs
+dist/
+build/
+frontend/dist/
+frontend/build/
+
+# Database
+*.sqlite
+*.db
+database/dumps/
+backups/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Uploads
+uploads/
+frontend/assets/uploads/
+backend/api/uploads/
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+temp/
+
+# Cache
+.cache/
+frontend/.cache/
+backend/api/cache/
+
+# Coverage reports
+coverage/
+*.lcov
+htmlcov/
+
+# Testing
+.phpunit.result.cache
+/reports/test-*.html
+
+# Deployment
+deploy/
+*.tar.gz
+*.zip
+
+# Custom
+/config.local.php
+/config.production.php

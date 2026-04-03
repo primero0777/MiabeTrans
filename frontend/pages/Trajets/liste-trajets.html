@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trajets disponibles - MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/trajets.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../../pages/Accueil/index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../../pages/Accueil/index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="liste-trajets.html" class="nav-link active">Trajets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../Aide/faq.html" class="nav-link">Aide</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement par JavaScript -->
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="trajets-main">
+        <div class="container">
+            <!-- En-tête avec recherche -->
+            <header class="trajets-header">
+                <h1>Trajets disponibles</h1>
+                
+                <!-- Filtres de recherche -->
+                <div class="search-filters">
+                    <form id="filterForm" class="filter-grid">
+                        <div class="filter-group">
+                            <label for="filter-depart" class="filter-label">Départ</label>
+                            <input type="text" id="filter-depart" name="depart" 
+                                   placeholder="Ville de départ" class="filter-input">
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="filter-arrivee" class="filter-label">Arrivée</label>
+                            <input type="text" id="filter-arrivee" name="arrivee" 
+                                   placeholder="Ville d'arrivée" class="filter-input">
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="filter-date" class="filter-label">Date</label>
+                            <input type="date" id="filter-date" name="date" 
+                                   class="filter-input">
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="filter-passagers" class="filter-label">Passagers</label>
+                            <select id="filter-passagers" name="passagers" class="filter-input">
+                                <option value="1">1 passager</option>
+                                <option value="2">2 passagers</option>
+                                <option value="3">3 passagers</option>
+                                <option value="4">4+ passagers</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <button type="submit" class="btn btn-primary">
+                                <span class="btn-text">Filtrer</span>
+                                <span class="btn-loading" aria-hidden="true">🔍</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </header>
+
+            <!-- Résultats -->
+            <section class="trajets-results">
+                <div class="results-header">
+                    <h2 id="resultsCount">Chargement des trajets...</h2>
+                    <div class="sort-options">
+                        <label for="sortBy" class="sort-label">Trier par:</label>
+                        <select id="sortBy" class="sort-select">
+                            <option value="prix_croissant">Prix (croissant)</option>
+                            <option value="prix_decroissant">Prix (décroissant)</option>
+                            <option value="heure_depart">Heure de départ</option>
+                            <option value="duree">Durée</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="trajetsList" class="trajets-list">
+                    <!-- Chargé dynamiquement -->
+                </div>
+
+                <!-- Pagination -->
+                <div id="pagination" class="pagination" aria-label="Navigation des pages">
+                    <!-- Généré dynamiquement -->
+                </div>
+
+                <!-- État vide -->
+                <div id="emptyState" class="empty-state" style="display: none;">
+                    <div class="empty-icon">🚌</div>
+                    <h3>Aucun trajet trouvé</h3>
+                    <p>Aucun trajet ne correspond à vos critères de recherche.</p>
+                    <button class="btn btn-primary" onclick="window.location.href='../../pages/Accueil/index.html'">
+                        Nouvelle recherche
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MiabeTrans</h4>
+                    <p>Votre partenaire de confiance pour les voyages interurbains au Togo</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="liste-trajets.html">Tous les trajets</a></li>
+                        <li><a href="../Aide/faq.html">FAQ</a></li>
+                        <li><a href="../Aide/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Légal</h4>
+                    <ul>
+                        <li><a href="../Aide/politique-confidentialite.html">Confidentialité</a></li>
+                        <li><a href="#">Conditions d'utilisation</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 MiabeTrans. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/app.js"></script>
+    <script src="../../js/trajets.js"></script>
+</body>
+</html>

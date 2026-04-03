@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Utilisateurs - Admin MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/gestion.css">
+</head>
+<body class="admin-dashboard">
+    <!-- Navigation Admin -->
+    <nav class="navbar admin-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../../pages/Accueil/index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                    <span class="admin-badge">Admin</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link">📊 Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestion-trajets.html" class="nav-link">🚌 Trajets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestion-utilisateurs.html" class="nav-link active">👥 Utilisateurs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="gestion-chauffeurs.html" class="nav-link">👨‍✈️ Chauffeurs</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement -->
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="gestion-main">
+        <div class="container-fluid">
+            <!-- En-tête -->
+            <header class="gestion-header">
+                <div class="header-content">
+                    <h1>Gestion des Utilisateurs</h1>
+                    <p>Gérez les comptes utilisateurs et leurs permissions</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="addUserBtn">
+                        ➕ Ajouter un utilisateur
+                    </button>
+                    <button class="btn btn-outline" id="exportUsers">
+                        📊 Exporter
+                    </button>
+                </div>
+            </header>
+
+            <!-- Filtres et recherche -->
+            <section class="filters-section">
+                <div class="filters-card">
+                    <div class="filters-header">
+                        <h3>🔍 Filtres et recherche</h3>
+                        <button class="btn-toggle-filters" id="toggleFilters">
+                            Masquer les filtres
+                        </button>
+                    </div>
+                    
+                    <div class="filters-content" id="filtersContent">
+                        <div class="filters-grid">
+                            <div class="filter-group">
+                                <label for="filter-role" class="filter-label">Rôle</label>
+                                <select id="filter-role" class="filter-select">
+                                    <option value="">Tous les rôles</option>
+                                    <option value="client">Client</option>
+                                    <option value="chauffeur">Chauffeur</option>
+                                    <option value="admin">Administrateur</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="filter-statut" class="filter-label">Statut</label>
+                                <select id="filter-statut" class="filter-select">
+                                    <option value="">Tous les statuts</option>
+                                    <option value="actif">Actif</option>
+                                    <option value="inactif">Inactif</option>
+                                    <option value="suspendu">Suspendu</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="filter-date-inscription" class="filter-label">Date d'inscription</label>
+                                <input type="date" id="filter-date-inscription" class="filter-input">
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="filter-ville" class="filter-label">Ville</label>
+                                <select id="filter-ville" class="filter-select">
+                                    <option value="">Toutes les villes</option>
+                                    <option value="Lomé">Lomé</option>
+                                    <option value="Kpalimé">Kpalimé</option>
+                                    <option value="Sokodé">Sokodé</option>
+                                    <option value="Kara">Kara</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="search-group">
+                            <input type="text" id="searchUsers" class="search-input" 
+                                   placeholder="Rechercher un utilisateur par nom, email, téléphone...">
+                            <button class="btn btn-primary" id="searchBtn">
+                                🔍 Rechercher
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistiques rapides -->
+            <section class="quick-stats">
+                <div class="stats-grid">
+                    <div class="quick-stat">
+                        <div class="stat-value" id="totalUsers">0</div>
+                        <div class="stat-label">Total utilisateurs</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="stat-value" id="clientsCount">0</div>
+                        <div class="stat-label">Clients</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="stat-value" id="chauffeursCount">0</div>
+                        <div class="stat-label">Chauffeurs</div>
+                    </div>
+                    <div class="quick-stat">
+                        <div class="stat-value" id="adminsCount">0</div>
+                        <div class="stat-label">Administrateurs</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableau des utilisateurs -->
+            <section class="table-section">
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>Liste des utilisateurs</h3>
+                        <div class="table-actions">
+                            <button class="btn btn-outline btn-sm" id="refreshTable">
+                                🔄 Actualiser
+                            </button>
+                            <div class="pagination-info">
+                                Affichage de <span id="startIndex">1</span> à <span id="endIndex">10</span> sur <span id="totalItems">0</span> utilisateurs
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="data-table" id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="selectAll">
+                                    </th>
+                                    <th>ID</th>
+                                    <th>Utilisateur</th>
+                                    <th>Contact</th>
+                                    <th>Rôle</th>
+                                    <th>Inscription</th>
+                                    <th>Statut</th>
+                                    <th>Réservations</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <!-- Chargé dynamiquement -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="table-footer">
+                        <div class="pagination-controls">
+                            <button class="btn-pagination" id="prevPage" disabled>
+                                ◀ Précédent
+                            </button>
+                            <div class="pagination-numbers" id="paginationNumbers">
+                                <!-- Généré dynamiquement -->
+                            </div>
+                            <button class="btn-pagination" id="nextPage" disabled>
+                                Suivant ▶
+                            </button>
+                        </div>
+                        
+                        <div class="rows-per-page">
+                            <label for="rowsPerPage">Lignes par page:</label>
+                            <select id="rowsPerPage" class="form-select">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Actions groupées -->
+            <section class="bulk-actions" id="bulkActions" style="display: none;">
+                <div class="bulk-actions-card">
+                    <div class="bulk-info">
+                        <span id="selectedCount">0</span> utilisateur(s) sélectionné(s)
+                    </div>
+                    <div class="bulk-buttons">
+                        <button class="btn btn-outline btn-sm" id="bulkActivate">
+                            ✅ Activer
+                        </button>
+                        <button class="btn btn-outline btn-sm" id="bulkSuspend">
+                            ⏸️ Suspendre
+                        </button>
+                        <button class="btn btn-outline btn-sm" id="bulkResetPassword">
+                            🔑 Réinitialiser MDP
+                        </button>
+                        <button class="btn btn-outline btn-sm btn-danger" id="bulkDelete">
+                            🗑️ Supprimer
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal Ajout/Modification Utilisateur -->
+    <div class="modal" id="userModal">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3 id="modalTitle">Ajouter un utilisateur</h3>
+                <button class="modal-close" id="closeUserModal">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="userForm" class="modal-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="modal-prenom" class="form-label">Prénom *</label>
+                            <input type="text" id="modal-prenom" name="prenom" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-nom" class="form-label">Nom *</label>
+                            <input type="text" id="modal-nom" name="nom" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-email" class="form-label">Email *</label>
+                            <input type="email" id="modal-email" name="email" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-telephone" class="form-label">Téléphone *</label>
+                            <input type="tel" id="modal-telephone" name="telephone" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-role" class="form-label">Rôle *</label>
+                            <select id="modal-role" name="role" class="form-input" required>
+                                <option value="">Sélectionnez un rôle</option>
+                                <option value="client">Client</option>
+                                <option value="chauffeur">Chauffeur</option>
+                                <option value="admin">Administrateur</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="modal-ville" class="form-label">Ville</label>
+                            <select id="modal-ville" name="ville" class="form-input">
+                                <option value="">Sélectionnez une ville</option>
+                                <option value="Lomé">Lomé</option>
+                                <option value="Kpalimé">Kpalimé</option>
+                                <option value="Sokodé">Sokodé</option>
+                                <option value="Kara">Kara</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="modal-adresse" class="form-label">Adresse</label>
+                        <textarea id="modal-adresse" name="adresse" class="form-input" 
+                                  rows="2" placeholder="Adresse complète..."></textarea>
+                    </div>
+
+                    <div class="password-section" id="passwordSection">
+                        <h4>Mot de passe</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="modal-password" class="form-label">Mot de passe *</label>
+                                <input type="password" id="modal-password" name="password" class="form-input" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="modal-confirm-password" class="form-label">Confirmer le mot de passe *</label>
+                                <input type="password" id="modal-confirm-password" name="confirm_password" class="form-input" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="cancelUserForm">
+                            Annuler
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            💾 Enregistrer l'utilisateur
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmation -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content modal-sm">
+            <div class="modal-header">
+                <h3>Confirmation</h3>
+                <button class="modal-close" id="closeConfirmModal">×</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Êtes-vous sûr de vouloir effectuer cette action ?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancelConfirm">Annuler</button>
+                <button class="btn btn-primary" id="confirmAction">Confirmer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/app.js"></script>
+    <script src="../../js/gestion-utilisateurs.js"></script>
+</body>
+</html>

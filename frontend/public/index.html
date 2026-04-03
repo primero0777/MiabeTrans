@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiabeTrans - Votre partenaire de voyage au Togo</title>
+    <meta name="description" content="Réservez vos trajets interurbains en toute simplicité avec MiabeTrans. Voyagez en toute sécurité et confort à travers le Togo.">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/home.css">
+    <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link active">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../pages/Trajets/liste-trajets.html" class="nav-link">Trajets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../pages/Aide/faq.html" class="nav-link">Aide</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement -->
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        Voyagez en toute <span class="highlight">sérénité</span> à travers le Togo
+                    </h1>
+                    <p class="hero-subtitle">
+                        Réservez vos trajets interurbains en quelques clics. Confort, sécurité et ponctualité garantis.
+                    </p>
+                    
+                    <!-- Widget de recherche rapide -->
+                    <div class="quick-search-widget">
+                        <div class="search-form">
+                            <div class="form-group">
+                                <label for="quick-depart" class="visually-hidden">Départ</label>
+                                <input type="text" id="quick-depart" class="form-input" placeholder="Ville de départ">
+                            </div>
+                            <div class="form-group">
+                                <label for="quick-arrivee" class="visually-hidden">Arrivée</label>
+                                <input type="text" id="quick-arrivee" class="form-input" placeholder="Ville d'arrivée">
+                            </div>
+                            <div class="form-group">
+                                <label for="quick-date" class="visually-hidden">Date</label>
+                                <input type="date" id="quick-date" class="form-input" min="<?= date('Y-m-d') ?>">
+                            </div>
+                            <button class="btn btn-primary btn-lg" onclick="homeManager.quickSearch()">
+                                🔍 Rechercher
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number" data-target="50000">0</div>
+                            <div class="stat-label">Voyageurs satisfaits</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number" data-target="150">0</div>
+                            <div class="stat-label">Villes desservies</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number" data-target="99">0</div>
+                            <div class="stat-label">% de ponctualité</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="floating-card card-1">
+                        <div class="card-icon">🚌</div>
+                        <div class="card-text">Trajets directs</div>
+                    </div>
+                    <div class="floating-card card-2">
+                        <div class="card-icon">💰</div>
+                        <div class="card-text">Meilleurs prix</div>
+                    </div>
+                    <div class="floating-card card-3">
+                        <div class="card-icon">🛡️</div>
+                        <div class="card-text">Voyage sécurisé</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Pourquoi Nous Choisir -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Pourquoi choisir MiabeTrans ?</h2>
+                <p>Découvrez ce qui fait de nous votre meilleur choix pour voyager au Togo</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Réservation Rapide</h3>
+                    <p>Réservez votre trajet en moins de 2 minutes avec notre processus simplifié et intuitif.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Voyage Sécurisé</h3>
+                    <p>Tous nos chauffeurs sont vérifiés et nos véhicules régulièrement inspectés pour votre sécurité.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Prix Transparents</h3>
+                    <p>Pas de frais cachés. Le prix affiché est le prix que vous payez, garantie satisfait ou remboursé.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Suivi en Temps Réel</h3>
+                    <p>Suivez votre trajet en direct et recevez des notifications en temps réel sur votre voyage.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Service Client 24/7</h3>
+                    <p>Notre équipe support est disponible à tout moment pour répondre à vos questions.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Couvre Tout le Togo</h3>
+                    <p>Desservons toutes les régions du Togo avec un réseau étendu de partenaires fiables.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Destinations Populaires -->
+    <section class="destinations-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Destinations Populaires</h2>
+                <p>Découvrez nos trajets les plus demandés</p>
+            </div>
+
+            <div class="destinations-grid" id="popularDestinations">
+                <!-- Chargé dynamiquement -->
+            </div>
+
+            <div class="section-cta">
+                <a href="../pages/Trajets/liste-trajets.html" class="btn btn-outline btn-lg">
+                    Voir tous les trajets
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Comment ça marche -->
+    <section class="how-it-works-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Comment réserver en 3 étapes</h2>
+                <p>Simple, rapide et sécurisé</p>
+            </div>
+
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Recherchez votre trajet</h3>
+                        <p>Saisissez votre ville de départ, destination et date de voyage.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Choisissez votre option</h3>
+                        <p>Sélectionnez le trajet qui correspond à vos préférences et budget.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Confirmez et voyagez</h3>
+                        <p>Payez en ligne et recevez votre e-billet instantanément.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Témoignages -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Ils nous font confiance</h2>
+                <p>Découvrez les expériences de nos voyageurs</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Service exceptionnel ! Mon trajet Lomé-Kpalimé s'est déroulé parfaitement. Chauffeur professionnel et véhicule confortable."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👩‍💼</div>
+                        <div class="author-info">
+                            <strong>Akossiwa D.</strong>
+                            <span>Voyageuse régulière</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"La réservation en ligne est très simple. J'ai particulièrement apprécié le suivi en temps réel de mon trajet."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👨‍💻</div>
+                        <div class="author-info">
+                            <strong>Koffi M.</strong>
+                            <span>Entrepreneur</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"Prix très compétitifs et excellent service client. Je recommande MiabeTrans à tous mes proches !"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👵</div>
+                        <div class="author-info">
+                            <strong>Maman A.</strong>
+                            <span>Retraitée</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Application Mobile -->
+    <section class="app-section">
+        <div class="container">
+            <div class="app-content">
+                <div class="app-text">
+                    <h2>📱 Emportez MiabeTrans partout avec vous</h2>
+                    <p>Téléchargez notre application mobile pour réserver vos trajets, suivre vos voyages en temps réel et gérer vos réservations où que vous soyez.</p>
+                    
+                    <div class="app-features">
+                        <div class="app-feature">
+                            <span class="feature-check">✓</span>
+                            <span>Réservation en 1 minute</span>
+                        </div>
+                        <div class="app-feature">
+                            <span class="feature-check">✓</span>
+                            <span>Notifications en temps réel</span>
+                        </div>
+                        <div class="app-feature">
+                            <span class="feature-check">✓</span>
+                            <span>Paiement sécurisé</span>
+                        </div>
+                        <div class="app-feature">
+                            <span class="feature-check">✓</span>
+                            <span>Support 24h/24</span>
+                        </div>
+                    </div>
+
+                    <div class="download-buttons">
+                        <a href="#" class="download-btn app-store">
+                            <span>Téléchargez sur l'App Store</span>
+                        </a>
+                        <a href="#" class="download-btn google-play">
+                            <span>Disponible sur Google Play</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="app-visual">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <!-- Image de l'application -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section CTA Finale -->
+    <section class="final-cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Prêt à voyager ?</h2>
+                <p>Rejoignez des milliers de voyageurs satisfaits et découvrez une nouvelle façon de voyager au Togo.</p>
+                <div class="cta-buttons">
+                    <a href="../pages/Trajets/liste-trajets.html" class="btn btn-primary btn-lg">
+                        Réserver un trajet
+                    </a>
+                    <a href="../pages/Utilisateurs/inscription.html" class="btn btn-outline btn-lg">
+                        Créer un compte
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MiabeTrans</h3>
+                    <p>Votre partenaire de confiance pour des voyages sécurisés et confortables à travers le Togo.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="../pages/Trajets/liste-trajets.html">Trajets</a></li>
+                        <li><a href="../pages/Aide/faq.html">FAQ</a></li>
+                        <li><a href="../pages/Aide/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Entreprise</h4>
+                    <ul>
+                        <li><a href="../pages/Accueil/section-presentation.html">À propos</a></li>
+                        <li><a href="../pages/Accueil/section-fonctionnalites.html">Fonctionnalités</a></li>
+                        <li><a href="#">Carrières</a></li>
+                        <li><a href="#">Presse</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Légal</h4>
+                    <ul>
+                        <li><a href="../pages/Aide/politique-confidentialite.html">Confidentialité</a></li>
+                        <li><a href="#">Conditions d'utilisation</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">Mentions légales</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <div class="contact-info">
+                        <p>📞 +228 90 00 00 00</p>
+                        <p>✉️ contact@miabetrans.tg</p>
+                        <p>📍 Lomé, Togo</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 MiabeTrans. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script src="../js/home.js"></script>
+</body>
+</html>

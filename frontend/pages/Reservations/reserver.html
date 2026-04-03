@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réserver un trajet - MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/reservations.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../../pages/Accueil/index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../../pages/Accueil/index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../Trajets/liste-trajets.html" class="nav-link">Trajets</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement -->
+                </li>
+            </ul>
+            <input type="hidden" name="csrf_token" id="csrf_token">
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="reservation-main">
+        <div class="container">
+            <div class="reservation-layout">
+                <!-- Processus de réservation -->
+                <section class="reservation-process">
+                    <h1>Finaliser votre réservation</h1>
+                    
+                    <div class="process-steps">
+                        <div class="step active" data-step="1">
+                            <span class="step-number">1</span>
+                            <span class="step-label">Détails du trajet</span>
+                        </div>
+                        <div class="step" data-step="2">
+                            <span class="step-number">2</span>
+                            <span class="step-label">Informations personnelles</span>
+                        </div>
+                        <div class="step" data-step="3">
+                            <span class="step-number">3</span>
+                            <span class="step-label">Confirmation</span>
+                        </div>
+                    </div>
+
+                    <!-- Étape 1: Détails du trajet -->
+                    <div class="step-content active" id="step1">
+                        <div class="trajet-summary" id="trajetSummary">
+                            <!-- Chargé dynamiquement -->
+                        </div>
+
+                        <div class="reservation-form">
+                            <h3>Détails de la réservation</h3>
+                            
+                            <form id="reservationFormStep1">
+                                <div class="form-group">
+                                    <label for="nombre_places" class="form-label">Nombre de places</label>
+                                    <select id="nombre_places" name="nombre_places" class="form-input" required>
+                                        <option value="1">1 place</option>
+                                        <option value="2">2 places</option>
+                                        <option value="3">3 places</option>
+                                        <option value="4">4 places</option>
+                                        <option value="5">5 places</option>
+                                    </select>
+                                    <div class="form-help" id="placesHelp">
+                                        Maximum 5 places par réservation
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Moyen de paiement</label>
+                                    <div class="payment-options">
+                                        <label class="payment-option">
+                                            <input type="radio" name="moyen_paiement" value="especes" checked>
+                                            <span class="payment-label">
+                                                <span class="payment-icon">💵</span>
+                                                Paiement en espèces
+                                            </span>
+                                        </label>
+                                        <label class="payment-option">
+                                            <input type="radio" name="moyen_paiement" value="flooz">
+                                            <span class="payment-label">
+                                                <span class="payment-icon">📱</span>
+                                                Flooz Money
+                                            </span>
+                                        </label>
+                                        <label class="payment-option">
+                                            <input type="radio" name="moyen_paiement" value="tmoney">
+                                            <span class="payment-label">
+                                                <span class="payment-icon">📱</span>
+                                                T-Money
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="reservation-summary">
+                                    <div class="summary-item">
+                                        <span>Prix unitaire:</span>
+                                        <span id="prixUnitaire">0 FCFA</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span>Nombre de places:</span>
+                                        <span id="nbPlaces">1</span>
+                                    </div>
+                                    <div class="summary-item total">
+                                        <span>Total à payer:</span>
+                                        <span id="prixTotal">0 FCFA</span>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-primary btn-next" onclick="reservationManager.nextStep(2)">
+                                    Continuer
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Étape 2: Informations personnelles -->
+                    <div class="step-content" id="step2">
+                        <h3>Vos informations</h3>
+                        
+                        <form id="reservationFormStep2">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="nom" class="form-label">Nom</label>
+                                    <input type="text" id="nom" name="nom" class="form-input" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="prenom" class="form-label">Prénom</label>
+                                    <input type="text" id="prenom" name="prenom" class="form-input" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" name="email" class="form-input" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="telephone" class="form-label">Téléphone</label>
+                                <input type="tel" id="telephone" name="telephone" class="form-input" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="notes" class="form-label">Notes supplémentaires (optionnel)</label>
+                                <textarea id="notes" name="notes" class="form-input" rows="3" 
+                                          placeholder="Informations supplémentaires pour le chauffeur..."></textarea>
+                            </div>
+
+                            <div class="step-actions">
+                                <button type="button" class="btn btn-outline" onclick="reservationManager.previousStep(1)">
+                                    Retour
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="reservationManager.nextStep(3)">
+                                    Confirmer la réservation
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Étape 3: Confirmation -->
+                    <div class="step-content" id="step3">
+                        <div class="confirmation-content">
+                            <div class="confirmation-icon">✅</div>
+                            <h3>Réservation confirmée!</h3>
+                            
+                            <div class="confirmation-details" id="confirmationDetails">
+                                <!-- Rempli dynamiquement -->
+                            </div>
+                            <!-- AJOUTER RÉCAPITULATIF -->
+                            <div class="reservation-summary" id="reservationSummary">
+                                <h3>Récapitulatif de votre réservation</h3>
+                            </div>
+                            <div class="summary-content">
+                                    <div class="summary-item">
+                                        <span>Trajet:</span>
+                                        <span id="summaryRoute"></span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span>Date:</span>
+                                        <span id="summaryDate"></span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span>Passagers:</span>
+                                        <span id="summaryPassengers"></span>
+                                    </div>
+                                    <div class="summary-item total">
+                                        <span>Total:</span>
+                                        <span id="summaryTotal"></span>
+                                    </div>
+                                </div>
+                            <div class="confirmation-actions">
+                                <button class="btn btn-primary" onclick="reservationManager.downloadTicket()">
+                                    📥 Télécharger le ticket
+                                </button>
+                                <button class="btn btn-outline" onclick="window.location.href='../Trajets/liste-trajets.html'">
+                                    🔍 Voir d'autres trajets
+                                </button>
+                            </div>
+
+                            <div class="confirmation-info">
+                                <p><strong>Prochaines étapes:</strong></p>
+                                <ul>
+                                    <li>Présentez votre ticket au chauffeur avant le départ</li>
+                                    <li>Arrivez au moins 15 minutes avant l'heure de départ</li>
+                                    <li>Gardez une pièce d'identité avec vous</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Récapitulatif latéral -->
+                <aside class="reservation-sidebar">
+                    <div class="sidebar-card">
+                        <h4>Récapitulatif</h4>
+                        <div class="sidebar-content" id="sidebarSummary">
+                            <!-- Rempli dynamiquement -->
+                        </div>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h4>Assistance</h4>
+                        <div class="assistance-info">
+                            <p>Besoin d'aide?</p>
+                            <div class="assistance-contacts">
+                                <a href="tel:+22890123456" class="contact-link">
+                                    📞 +228 90 12 34 56
+                                </a>
+                                <a href="https://wa.me/22890123456" class="contact-link" target="_blank">
+                                    💬 WhatsApp
+                                </a>
+                                <a href="mailto:support@miabetrans.tg" class="contact-link">
+                                    ✉️ Email
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MiabeTrans</h4>
+                    <p>Votre partenaire de confiance pour les voyages interurbains au Togo</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="../Trajets/liste-trajets.html">Tous les trajets</a></li>
+                        <li><a href="../Aide/faq.html">FAQ</a></li>
+                        <li><a href="../Aide/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Légal</h4>
+                    <ul>
+                        <li><a href="../Aide/politique-confidentialite.html">Confidentialité</a></li>
+                        <li><a href="#">Conditions d'utilisation</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 MiabeTrans. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/app.js"></script>
+    <script src="../../js/reservations.js"></script>
+</body>
+</html>
