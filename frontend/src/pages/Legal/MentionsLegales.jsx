@@ -89,7 +89,7 @@ export default function MentionsLegales() {
                 { label: 'Téléphone',              value: '+228 90 00 00 01' },
                 { label: 'Email',                  value: 'contact@miabetrans.tg' },
                 { label: 'Pays d\'immatriculation',value: 'République Togolaise' },
-                { label: 'Développeur',            value: 'NATO Komi Ephraïm Dieudonné — FORMATEC' },
+                { label: 'Développeur',            value: 'NATO Komi Ephraïm Dieudonné, FORMATEC' },
               ].map((r, i) => (
                 <div key={i} className="legal-info-row">
                   <span className="lir-label">{r.label}</span>
@@ -118,7 +118,7 @@ export default function MentionsLegales() {
                 de l'activité de transport routier de personnes au Togo
               </li>
               <li>
-                <strong>Ministère des Transports et de la Logistique</strong> de la République Togolaise —
+                <strong>Ministère des Transports et de la Logistique</strong> de la République Togolaise,
                 autorité de tutelle et de délivrance des agréments de transport
               </li>
               <li>
@@ -158,8 +158,8 @@ export default function MentionsLegales() {
               <h2>Propriété intellectuelle</h2>
             </div>
             <p>
-              L'ensemble des éléments du site MiabeTrans — textes, logos, icônes, interface graphique,
-              base de données, structure et code source — sont protégés par le droit de la propriété
+              L'ensemble des éléments du site MiabeTrans (textes, logos, icônes, interface graphique,
+              base de données, structure et code source) sont protégés par le droit de la propriété
               intellectuelle applicable en République Togolaise et par les conventions internationales
               auxquelles le Togo est partie.
             </p>
