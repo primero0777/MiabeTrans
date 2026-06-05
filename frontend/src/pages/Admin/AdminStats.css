@@ -1,0 +1,24 @@
+/* AdminStats.css */
+.report-title { margin-bottom: var(--space-xl); padding: var(--space-md) var(--space-lg); background: linear-gradient(135deg, var(--primary-dark), var(--primary)); border-radius: var(--radius-lg); color: var(--white); }
+.report-title h2 { font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+.report-title p  { font-size: 0.85rem; opacity: 0.75; }
+
+.stats-kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: var(--space-md); margin-bottom: var(--space-xl); }
+
+.stat-kpi-card { background: var(--white); border-radius: var(--radius-lg); padding: var(--space-lg); border: 1px solid var(--gray-100); text-align: center; }
+.skc-icon  { width: 48px; height: 48px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin: 0 auto var(--space-sm); }
+.skc-val   { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 800; line-height: 1; }
+.skc-label { font-size: 0.78rem; color: var(--gray-500); margin-top: 4px; }
+
+.stats-section { margin-bottom: var(--space-xl); }
+.stats-section h3 { font-family: var(--font-heading); font-size: 1rem; font-weight: 700; color: var(--gray-800); margin-bottom: var(--space-md); padding-bottom: var(--space-sm); border-bottom: 1px solid var(--gray-100); }
+
+.taux-bar-wrap { display: flex; align-items: center; gap: var(--space-md); }
+.taux-bar-track { flex: 1; height: 12px; background: var(--gray-100); border-radius: var(--radius-full); overflow: hidden; }
+.taux-bar-fill  { height: 100%; background: linear-gradient(90deg, var(--primary), var(--primary-light)); border-radius: var(--radius-full); transition: width 1s ease; }
+.taux-val { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; color: var(--primary); min-width: 48px; text-align: right; }
+
+.report-footer { margin-top: var(--space-2xl); padding: var(--space-md); text-align: center; font-size: 0.78rem; color: var(--gray-400); border-top: 1px solid var(--gray-100); }
+
+@media (max-width: 1024px) { .stats-kpi-grid { grid-template-columns: repeat(4,1fr); } }
+@media (max-width: 768px)  { .stats-kpi-grid { grid-template-columns: repeat(2,1fr); } }

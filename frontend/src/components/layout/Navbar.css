@@ -1,0 +1,457 @@
+/* ── Navbar v3 — Glassmorphism ── */
+
+:root {
+  --header-height: 76px;
+}
+
+/* Voile flouté qui couvre le gap au-dessus de la navbar */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 18px;
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  z-index: 998;
+  pointer-events: none;
+}
+
+.navbar {
+  position: fixed;
+  top: 10px;
+  left: 16px;
+  right: 16px;
+  z-index: 999;
+  height: var(--header-height);
+  border-radius: 24px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── État transparent (sur le hero) — glass sombre ── */
+.navbar-transparent {
+  background: rgba(13, 43, 31, 0.35);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* ── État scrollé — glass blanc ── */
+.navbar-solid {
+  background: rgba(255, 255, 255, 0.80);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.60);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 4px 24px rgba(15, 23, 42, 0.08);
+}
+
+/* ── Inner ── */
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  gap: var(--space-8);
+}
+
+/* ══════════════════════════════
+   LOGO
+══════════════════════════════ */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease;
+}
+
+.navbar-logo:hover { opacity: 0.82; }
+
+.logo-icon {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, #0D2B1F 0%, #2D6A4F 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 12px rgba(13, 43, 31, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+/* Quand la navbar est transparente, le logo peut se fondre légèrement */
+.navbar-transparent .logo-icon {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.logo-name {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+}
+
+.navbar-transparent .logo-name { color: #fff; }
+
+.logo-tagline {
+  font-size: 0.58rem;
+  color: var(--gray-400);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.navbar-transparent .logo-tagline { color: rgba(255, 255, 255, 0.55); }
+
+/* ══════════════════════════════
+   LIENS DE NAVIGATION
+══════════════════════════════ */
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;          /* espace entre les liens */
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-link {
+  position: relative;
+  padding: 9px 16px;   /* plus de padding horizontal */
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  transition: all 0.18s ease;
+  text-decoration: none;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+/* Indicateur actif */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  right: 50%;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 99px;
+  transition: all 0.2s ease;
+  opacity: 0;
+}
+
+.nav-link:hover {
+  background: var(--gray-100);
+  color: var(--primary);
+}
+
+.nav-link.active {
+  color: var(--primary);
+  background: rgba(27, 67, 50, 0.10);
+  font-weight: 700;
+  box-shadow: inset 0 -2px 0 var(--primary);
+}
+
+/* ── Couleurs sur fond transparent (hero) ── */
+.navbar-transparent .nav-link {
+  color: rgba(255, 255, 255, 0.80);
+}
+
+.navbar-transparent .nav-link:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+.navbar-transparent .nav-link.active {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: inset 0 -2px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* ══════════════════════════════
+   BOUTONS AUTH / BLOC DROITE
+══════════════════════════════ */
+
+/* Conteneur droit (auth ou user dropdown) */
+.nav-actions-right {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: auto;
+  padding-right: var(--space-2);
+}
+
+/* Auth dans le menu mobile */
+.nav-auth-mobile { display: none; }
+
+.nav-auth {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.user-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Bouton Connexion sur hero (transparent) */
+.navbar-transparent .nav-auth .btn-ghost {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.navbar-transparent .nav-auth .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+/* ══════════════════════════════
+   DROPDOWN UTILISATEUR
+══════════════════════════════ */
+.nav-dropdown { position: relative; }
+
+.nav-user-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 6px;
+  border-radius: 99px;
+  border: 1.5px solid var(--gray-200);
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  backdrop-filter: blur(8px);
+}
+
+.nav-user-btn:hover {
+  border-color: var(--primary-light);
+  color: var(--primary);
+  box-shadow: 0 2px 12px rgba(27, 67, 50, 0.15);
+}
+
+.navbar-transparent .nav-user-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.30);
+  color: #fff;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #0D2B1F 0%, #2D6A4F 100%);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.chevron {
+  font-size: 0.6rem;
+  color: var(--gray-400);
+  transition: transform 0.2s ease;
+  margin-left: 2px;
+}
+
+.nav-user-btn:hover .chevron { color: var(--primary); }
+
+/* ── Dropdown menu ── */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 16px;
+  box-shadow:
+    0 8px 32px rgba(15, 23, 42, 0.14),
+    0 1px 0 rgba(255, 255, 255, 0.8) inset;
+  border: 1px solid rgba(255, 255, 255, 0.60);
+  min-width: 220px;
+  overflow: hidden;
+  animation: dropIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 200;
+}
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  font-size: 0.875rem;
+  color: var(--gray-700);
+  text-decoration: none;
+  transition: background 0.15s ease;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.dropdown-item:hover { background: rgba(27, 67, 50, 0.06); color: var(--primary); }
+.dropdown-item.danger { color: var(--danger); }
+.dropdown-item.danger:hover { background: rgba(220, 38, 38, 0.06); }
+
+.dropdown-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.07);
+  margin: 4px 0;
+}
+
+/* ══════════════════════════════
+   BURGER MOBILE
+══════════════════════════════ */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  cursor: pointer;
+  padding: 9px;
+  border-radius: 10px;
+  transition: background 0.18s ease;
+  flex-shrink: 0;
+  backdrop-filter: blur(8px);
+}
+
+.burger:hover { background: rgba(255, 255, 255, 0.22); }
+
+.navbar-solid .burger {
+  background: var(--gray-100);
+  border-color: var(--gray-200);
+}
+
+.navbar-solid .burger:hover { background: var(--gray-200); }
+
+.burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: all 0.25s ease;
+  transform-origin: center;
+}
+
+.navbar-solid .burger span { background: var(--gray-700); }
+
+.burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media (max-width: 900px) {
+  .burger { display: flex; }
+
+  /* Sur mobile, les boutons auth passent dans le menu burger */
+  .nav-actions-right { display: none; }
+  .nav-auth-mobile   { display: block; }
+
+  .navbar-nav {
+    position: fixed;
+    top: var(--header-height);
+    left: 0; right: 0;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    flex-direction: column;
+    padding: 12px;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s ease;
+    align-items: stretch;
+    gap: 2px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    max-height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+  }
+
+  /* Ajouter auth dans le menu mobile via footer du nav */
+  .navbar-nav.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .nav-link {
+    color: var(--gray-700) !important;
+    background: transparent !important;
+    padding: 13px 16px;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+
+  .nav-link:hover { background: var(--gray-100) !important; }
+  .nav-link.active { background: rgba(27, 67, 50, 0.08) !important; color: var(--primary) !important; box-shadow: none !important; border-left: 3px solid var(--primary); padding-left: 13px; }
+  .nav-link::after { display: none; }
+
+  .nav-auth {
+    flex-direction: column;
+    padding-top: 10px;
+    border-top: 1px solid var(--gray-100);
+    margin-top: 6px;
+    gap: 8px;
+  }
+  .nav-auth .btn { width: 100%; justify-content: center; }
+
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    border: 1px solid var(--gray-200);
+    margin-top: 4px;
+    animation: none;
+    background: var(--gray-50);
+    backdrop-filter: none;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Réduire le flottement sur très petits écrans */
+  .navbar { top: 6px; left: 8px; right: 8px; border-radius: 18px; }
+  .logo-tagline { display: none; }
+  .logo-name    { font-size: 1.05rem; }
+  .navbar-inner { gap: var(--space-4); }
+}

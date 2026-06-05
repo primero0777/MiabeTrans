@@ -1,0 +1,5 @@
+.notfound-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--gray-50); text-align: center; padding: var(--header-height) var(--space-lg) var(--space-lg); }
+.notfound-number { font-family: var(--font-heading); font-size: 8rem; font-weight: 800; color: var(--gray-200); line-height: 1; margin-bottom: var(--space-lg); }
+.notfound-content h1 { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; color: var(--gray-900); margin-bottom: var(--space-md); }
+.notfound-content p { color: var(--gray-500); margin-bottom: var(--space-xl); }
+.notfound-actions { display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap; }
