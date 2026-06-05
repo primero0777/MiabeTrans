@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Profil - MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/profil.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../../pages/Accueil/index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../../pages/Accueil/index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../Trajets/liste-trajets.html" class="nav-link">Trajets</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement -->
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="profil-main">
+        <div class="container">
+            <div class="profil-header">
+                <h1>Mon Profil</h1>
+                <p>Gérez vos informations personnelles et vos préférences</p>
+            </div>
+
+            <div class="profil-layout">
+                <!-- Navigation du profil -->
+                <aside class="profil-sidebar">
+                    <nav class="profil-nav">
+                        <a href="#informations" class="nav-link active" data-tab="informations">
+                            📝 Informations personnelles
+                        </a>
+                        <a href="#reservations" class="nav-link" data-tab="reservations">
+                            🎫 Mes réservations
+                        </a>
+                        <a href="#securite" class="nav-link" data-tab="securite">
+                            🔒 Sécurité
+                        </a>
+                        <a href="#preferences" class="nav-link" data-tab="preferences">
+                            ⚙️ Préférences
+                        </a>
+                    </nav>
+                </aside>
+
+                <!-- Contenu du profil -->
+                <section class="profil-content">
+                    <!-- Informations personnelles -->
+                    <div class="tab-content active" id="informations-tab">
+                        <h2>Informations personnelles</h2>
+                        
+                        <form id="profilForm" class="profil-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="profil-nom" class="form-label">Nom</label>
+                                    <input type="text" id="profil-nom" name="nom" 
+                                           class="form-input" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="profil-prenom" class="form-label">Prénom</label>
+                                    <input type="text" id="profil-prenom" name="prenom" 
+                                           class="form-input" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profil-email" class="form-label">Email</label>
+                                <input type="email" id="profil-email" name="email" 
+                                       class="form-input" required disabled>
+                                <div class="form-help">
+                                    L'email ne peut pas être modifié
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profil-telephone" class="form-label">Téléphone</label>
+                                <input type="tel" id="profil-telephone" name="telephone" 
+                                       class="form-input" required>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    💾 Enregistrer les modifications
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Mes réservations -->
+                    <div class="tab-content" id="reservations-tab">
+                        <h2>Mes réservations</h2>
+                        <div class="reservations-list" id="reservationsList">
+                            <!-- Chargé dynamiquement -->
+                        </div>
+                    </div>
+
+                    <!-- Sécurité -->
+                    <div class="tab-content" id="securite-tab">
+                        <h2>Sécurité du compte</h2>
+                        
+                        <form id="passwordForm" class="security-form">
+                            <div class="form-group">
+                                <label for="current-password" class="form-label">Mot de passe actuel</label>
+                                <input type="password" id="current-password" name="current_password" 
+                                       class="form-input" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="new-password" class="form-label">Nouveau mot de passe</label>
+                                <input type="password" id="new-password" name="new_password" 
+                                       class="form-input" required
+                                       minlength="6">
+                                <div class="form-help">
+                                    Minimum 6 caractères
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="confirm-password" class="form-label">Confirmer le nouveau mot de passe</label>
+                                <input type="password" id="confirm-password" name="confirm_password" 
+                                       class="form-input" required>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    🔒 Changer le mot de passe
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Préférences -->
+                    <div class="tab-content" id="preferences-tab">
+                        <h2>Préférences</h2>
+                        
+                        <form id="preferencesForm" class="preferences-form">
+                            <div class="preference-group">
+                                <h3>Notifications</h3>
+                                
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="notifications_email" checked>
+                                    <span class="checkmark"></span>
+                                    Notifications par email
+                                </label>
+                                
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="notifications_sms" checked>
+                                    <span class="checkmark"></span>
+                                    Notifications par SMS
+                                </label>
+                                
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="promotions" checked>
+                                    <span class="checkmark"></span>
+                                    Recevoir les promotions et offres spéciales
+                                </label>
+                            </div>
+
+                            <div class="preference-group">
+                                <h3>Préférences de voyage</h3>
+                                
+                                <div class="form-group">
+                                    <label for="preferred_payment" class="form-label">Moyen de paiement préféré</label>
+                                    <select id="preferred_payment" name="preferred_payment" class="form-input">
+                                        <option value="especes">Espèces</option>
+                                        <option value="flooz">Flooz Money</option>
+                                        <option value="tmoney">T-Money</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    💾 Enregistrer les préférences
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MiabeTrans</h4>
+                    <p>Votre partenaire de confiance pour les voyages interurbains au Togo</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="../Trajets/liste-trajets.html">Tous les trajets</a></li>
+                        <li><a href="../Aide/faq.html">FAQ</a></li>
+                        <li><a href="../Aide/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Légal</h4>
+                    <ul>
+                        <li><a href="../Aide/politique-confidentialite.html">Confidentialité</a></li>
+                        <li><a href="#">Conditions d'utilisation</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 MiabeTrans. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/app.js"></script>
+    <script src="../../js/profil.js"></script>
+</body>
+</html>

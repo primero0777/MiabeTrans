@@ -63,7 +63,7 @@ export default function Login() {
             </div>
             <div className="auth-feature">
               <div className="auth-feature-dot" />
-              Paiement sécurisé — Mixx By Yas, Moov Money, MobileMoney
+              Paiement sécurisé : Mixx By Yas, Moov Money, MobileMoney
             </div>
             <div className="auth-feature">
               <div className="auth-feature-dot" />

@@ -73,7 +73,7 @@ export default function Confirmation() {
               <span className="recu-logo"><FontAwesomeIcon icon={faBus} /></span>
               <div>
                 <div className="recu-brand-name">MiabeTrans</div>
-                <div className="recu-brand-sub">Transport Interurbain — Lomé, Togo</div>
+                <div className="recu-brand-sub">Transport Interurbain, Lomé, Togo</div>
               </div>
             </div>
             <div className="recu-meta">
@@ -95,7 +95,7 @@ export default function Confirmation() {
               <div className="recu-distance">{recu.distance_km} km</div>
             </div>
             <div className="recu-ville recu-ville-right">
-              <div className="rv-time">—</div>
+              <div className="rv-time">-</div>
               <div className="rv-name">{recu.ville_arrivee}</div>
               <div className="rv-date">Heure d'arrivée estimée</div>
             </div>

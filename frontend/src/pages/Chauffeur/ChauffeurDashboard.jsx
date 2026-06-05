@@ -62,7 +62,7 @@ export default function ChauffeurDashboard() {
                         </div>
                         <div className="ctc-arrow"><FontAwesomeIcon icon={faBus} /> →</div>
                         <div style={{textAlign:'right'}}>
-                          <div className="ctc-time">—</div>
+                          <div className="ctc-time">-</div>
                           <div className="ctc-city">{t.ville_arrivee}</div>
                         </div>
                       </div>

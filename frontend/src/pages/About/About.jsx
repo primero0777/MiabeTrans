@@ -25,7 +25,7 @@ const VALUES = [
   {
     icon: faClock, color: '#2563EB', bg: '#EFF6FF',
     title: 'Ponctualité garantie',
-    desc: 'Chaque départ est planifié à la minute. Nous savons que votre temps est précieux — 98% de nos bus partent à l\'heure.',
+    desc: 'Chaque départ est planifié à la minute. Nous savons que votre temps est précieux : 98% de nos bus partent à l\'heure.',
   },
   {
     icon: faHeart, color: '#DC2626', bg: '#FEF2F2',
@@ -128,7 +128,7 @@ export default function About() {
             <p>
               Rendre le transport interurbain accessible, fiable et moderne pour tous les Togolais.
               MiabeTrans a été fondée avec une conviction simple : chaque voyageur mérite un service
-              digne, ponctuel et sécurisé — quel que soit sa destination.
+              digne, ponctuel et sécurisé, quel que soit sa destination.
             </p>
             <p>
               En digitalisant la réservation de bus, nous éliminons les files d'attente,
@@ -143,7 +143,7 @@ export default function About() {
             <h2>Notre vision</h2>
             <p>
               Devenir la référence du transport interurbain numérique en Afrique de l'Ouest.
-              Nous voulons que chaque ville du Togo — des plus grandes aux plus reculées —
+              Nous voulons que chaque ville du Togo, des plus grandes aux plus reculées,
               soit accessible en quelques clics, avec un service de qualité internationale.
             </p>
             <p>
@@ -201,7 +201,7 @@ export default function About() {
             <p className="about-eyebrow">Ce que nous vous promettons</p>
             <h2 className="about-section-title">Nos engagements envers vous</h2>
             <p className="about-engage-desc">
-              Chez MiabeTrans, un engagement n'est pas un slogan — c'est une promesse
+              Chez MiabeTrans, un engagement n'est pas un slogan, c'est une promesse
               concrète que nous prenons envers chaque voyageur, à chaque trajet.
             </p>
             <button className="btn btn-primary btn-lg" onClick={() => navigate('/search')}>

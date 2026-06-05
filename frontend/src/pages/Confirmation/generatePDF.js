@@ -5,7 +5,7 @@
  * Remplace les caractères accentués par leurs équivalents ASCII
  */
 function n(str) {
-  if (!str) return '';
+  if (str === null || str === undefined) return '';
   return String(str)
     .replace(/[éèêë]/g, 'e').replace(/[ÉÈÊË]/g, 'E')
     .replace(/[àâä]/g,  'a').replace(/[ÀÂÄ]/g,  'A')
@@ -15,7 +15,14 @@ function n(str) {
     .replace(/ç/g,      'c').replace(/Ç/g,      'C')
     .replace(/œ/g,      'oe').replace(/Œ/g,     'OE')
     .replace(/æ/g,      'ae').replace(/Æ/g,     'AE')
-    .replace(/[^\x00-\x7E]/g, ''); // supprimer tout autre caractère non-ASCII
+    .replace(/ /g, ' ')  // espace insécable → espace normal
+    .replace(/[^\x00-\x7E]/g, '');
+}
+
+// Formater un nombre en FCFA sans toLocaleString (évite l'espace insécable)
+function fmt(val) {
+  const num = parseInt(val || 0);
+  return String(num).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
 
 export async function generateRecuPDF(recu) {
@@ -191,7 +198,7 @@ export async function generateRecuPDF(recu) {
 
   doc.setFontSize(14);
   doc.setTextColor(244, 161, 0);
-  const prixStr = parseInt(recu.prix).toLocaleString('fr-FR') + ' FCFA';
+  const prixStr = fmt(recu.prix) + ' FCFA';
   doc.text(prixStr, W - margin - 4, y + 9, { align: 'right' });
 
   // ── LIGNE POINTILLEE ──────────────────────────────────────
@@ -330,7 +337,7 @@ export async function generateRapportPDF(stats, reservations) {
     [PDF_ICONS.ticket, 'Reservations',       stats.total_reservations,                                   [107,114,128]],
     [PDF_ICONS.check,  'Confirmees',         stats.reservations_confirmees,                              [16,185,129]],
     [PDF_ICONS.cross,  'Annulees',           stats.reservations_annulees,                                [239,68,68]],
-    [PDF_ICONS.money,  'Revenus (FCFA)',      parseInt(stats.revenus_total||0).toLocaleString('fr-FR'),   [13,43,31]],
+    [PDF_ICONS.money,  'Revenus (FCFA)',      fmt(stats.revenus_total||0),                                [13,43,31]],
   ];
 
   kpiData.forEach((k, i) => {
@@ -362,7 +369,7 @@ export async function generateRapportPDF(stats, reservations) {
     doc.setFont('helvetica','bold');
     doc.setFontSize(13);
     doc.setTextColor(...k[3]);
-    doc.text(String(k[2]), x + 14, ky + 13);
+    doc.text(n(String(k[2])), x + 14, ky + 13);
   });
 
   // Taux de confirmation
@@ -414,15 +421,17 @@ export async function generateRapportPDF(stats, reservations) {
 
     doc.text('#'+r.id_reservation, colX[0], y+5.5);
 
-    const nom = (r.client||'').substring(0,18);
+    const nom = n(r.client||'').substring(0,18);
     doc.text(nom, colX[1], y+5.5);
 
-    // Trajet avec flèche Unicode
-    const trajet = `${r.ville_depart||''} > ${r.ville_arrivee||''}`.substring(0,24);
+    const trajet = (n(r.ville_depart||'') + ' -> ' + n(r.ville_arrivee||'')).substring(0,26);
     doc.text(trajet, colX[2], y+5.5);
 
-    doc.text(new Date(r.date_depart).toLocaleDateString('fr-FR'), colX[3], y+5.5);
-    doc.text(parseInt(r.prix).toLocaleString('fr-FR')+' F', colX[4], y+5.5);
+    // Date au format jj/mm/aaaa (ASCII pur)
+    const d = new Date(r.date_depart);
+    const dateStr = String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0') + '/' + d.getFullYear();
+    doc.text(dateStr, colX[3], y+5.5);
+    doc.text(fmt(r.prix) + ' F', colX[4], y+5.5);
 
     // Badge statut
     const sc = {

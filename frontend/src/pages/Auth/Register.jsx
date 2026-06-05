@@ -281,7 +281,7 @@ export default function Register() {
                 <button type="submit" className="btn btn-primary btn-full btn-lg" disabled={loading}>
                   {loading
                     ? <><span className="auth-spinner" />Envoi du code…</>
-                    : 'Continuer — Vérifier l\'email'
+                    : 'Continuer, vérifier l\'email'
                   }
                 </button>
               </form>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rechercher un trajet - MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/recherche.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../../pages/Accueil/index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../../pages/Accueil/index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="liste-trajets.html" class="nav-link active">Trajets</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement -->
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="recherche-main">
+        <div class="container">
+            <!-- Formulaire de recherche avancée -->
+            <section class="search-section">
+                <div class="search-header">
+                    <h1>Rechercher un trajet</h1>
+                    <p>Trouvez le voyage parfait selon vos préférences</p>
+                </div>
+
+                <form id="advancedSearchForm" class="advanced-search-form">
+                    <div class="search-grid">
+                        <div class="form-group">
+                            <label for="search-depart" class="form-label">Ville de départ</label>
+                            <input type="text" id="search-depart" name="depart" 
+                                   class="form-input" 
+                                   placeholder="Ex: Lomé"
+                                   list="villes-depart">
+                            <datalist id="villes-depart">
+                                <option value="Lomé">
+                                <option value="Kpalimé">
+                                <option value="Sokodé">
+                                <option value="Kara">
+                                <option value="Atakpamé">
+                                <option value="Dapaong">
+                                <option value="Tsévié">
+                            </datalist>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="search-arrivee" class="form-label">Ville d'arrivée</label>
+                            <input type="text" id="search-arrivee" name="arrivee" 
+                                   class="form-input" 
+                                   placeholder="Ex: Kpalimé"
+                                   list="villes-arrivee">
+                            <datalist id="villes-arrivee">
+                                <option value="Lomé">
+                                <option value="Kpalimé">
+                                <option value="Sokodé">
+                                <option value="Kara">
+                                <option value="Atakpamé">
+                                <option value="Dapaong">
+                                <option value="Tsévié">
+                            </datalist>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="search-date" class="form-label">Date de voyage</label>
+                            <input type="date" id="search-date" name="date" 
+                                   class="form-input"
+                                   min="<?= date('Y-m-d') ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="search-passagers" class="form-label">Passagers</label>
+                            <select id="search-passagers" name="passagers" class="form-input">
+                                <option value="1">1 passager</option>
+                                <option value="2">2 passagers</option>
+                                <option value="3">3 passagers</option>
+                                <option value="4">4 passagers</option>
+                                <option value="5">5+ passagers</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Filtres avancés -->
+                    <div class="advanced-filters" id="advancedFilters">
+                        <div class="filters-header">
+                            <h3>🔧 Filtres avancés</h3>
+                            <button type="button" class="btn-toggle-filters" id="toggleFilters">
+                                Masquer les filtres
+                            </button>
+                        </div>
+
+                        <div class="filters-grid">
+                            <div class="filter-group">
+                                <label for="filter-prix-max" class="filter-label">Prix maximum</label>
+                                <input type="range" id="filter-prix-max" name="prix_max" 
+                                       class="filter-range" min="1000" max="10000" step="500" value="10000">
+                                <div class="range-value">
+                                    <span id="prixMaxValue">10 000 FCFA</span>
+                                </div>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="filter-heure-depart" class="filter-label">Heure de départ</label>
+                                <select id="filter-heure-depart" name="heure_depart" class="filter-select">
+                                    <option value="">Toutes les heures</option>
+                                    <option value="morning">Matin (6h - 12h)</option>
+                                    <option value="afternoon">Après-midi (12h - 18h)</option>
+                                    <option value="evening">Soir (18h - 23h)</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="filter-type-vehicule" class="filter-label">Type de véhicule</label>
+                                <select id="filter-type-vehicule" name="type_vehicule" class="filter-select">
+                                    <option value="">Tous les types</option>
+                                    <option value="bus">Bus</option>
+                                    <option value="minibus">Minibus</option>
+                                    <option value="van">Van</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="filter-compagnie" class="filter-label">Compagnie</label>
+                                <select id="filter-compagnie" name="compagnie" class="filter-select">
+                                    <option value="">Toutes les compagnies</option>
+                                    <option value="miabetrans">MiabeTrans</option>
+                                    <option value="abc">ABC Transport</option>
+                                    <option value="rapide">Rapide Express</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="services-filters">
+                            <h4>Services inclus</h4>
+                            <div class="services-checkboxes">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="service_climatisation" checked>
+                                    <span class="checkmark"></span>
+                                    ❄️ Climatisation
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="service_wifi">
+                                    <span class="checkmark"></span>
+                                    📶 Wi-Fi
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="service_prises">
+                                    <span class="checkmark"></span>
+                                    🔌 Prises électriques
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="service_toilettes">
+                                    <span class="checkmark"></span>
+                                    🚻 Toilettes
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="search-actions">
+                        <button type="reset" class="btn btn-outline" id="resetSearch">
+                            🔄 Réinitialiser
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            🔍 Rechercher des trajets
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Résultats de recherche -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-header">
+                    <h2 id="resultsTitle">Résultats de recherche</h2>
+                    <div class="results-meta">
+                        <span id="resultsCount">0 trajets trouvés</span>
+                        <div class="sort-options">
+                            <label for="sortResults" class="sort-label">Trier par:</label>
+                            <select id="sortResults" class="sort-select">
+                                <option value="prix_croissant">Prix (croissant)</option>
+                                <option value="prix_decroissant">Prix (décroissant)</option>
+                                <option value="heure_depart">Heure de départ</option>
+                                <option value="duree">Durée</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-container" id="resultsContainer">
+                    <!-- Résultats chargés dynamiquement -->
+                </div>
+
+                <!-- Chargement -->
+                <div class="loading-results" id="loadingResults" style="display: none;">
+                    <div class="loading-spinner"></div>
+                    <p>Recherche de trajets en cours...</p>
+                </div>
+
+                <!-- État vide -->
+                <div class="empty-results" id="emptyResults" style="display: none;">
+                    <div class="empty-icon">🔍</div>
+                    <h3>Aucun trajet trouvé</h3>
+                    <p>Aucun trajet ne correspond à vos critères de recherche.</p>
+                    <button class="btn btn-outline" id="modifySearch">
+                        Modifier ma recherche
+                    </button>
+                </div>
+            </section>
+
+            <!-- Suggestions populaires -->
+            <section class="suggestions-section" id="suggestionsSection">
+                <h2>🚌 Destinations populaires</h2>
+                <div class="suggestions-grid" id="suggestionsGrid">
+                    <!-- Chargé dynamiquement -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MiabeTrans</h4>
+                    <p>Votre partenaire de confiance pour les voyages interurbains au Togo</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="liste-trajets.html">Tous les trajets</a></li>
+                        <li><a href="../Aide/faq.html">FAQ</a></li>
+                        <li><a href="../Aide/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Légal</h4>
+                    <ul>
+                        <li><a href="../Aide/politique-confidentialite.html">Confidentialité</a></li>
+                        <li><a href="#">Conditions d'utilisation</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 MiabeTrans. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/app.js"></script>
+    <script src="../../js/recherche.js"></script>
+</body>
+</html>

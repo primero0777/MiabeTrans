@@ -1,4 +1,9 @@
 # ─── Variables d'environnement (SECRETS – ne jamais committer) ───────────────
+.env
+.env.local
+.env.production
+.env.development
+.env.testing
 backend/.env
 backend/.env.*
 frontend/.env
@@ -6,33 +11,76 @@ frontend/.env.*
 !frontend/.env.example
 !backend/.env.example
 
-# ─── Uploads utilisateurs (photos profil, docs) ──────────────────────────────
+# ─── Uploads utilisateurs ────────────────────────────────────────────────────
 uploads/
 backend/uploads/
+backend/api/uploads/
 frontend/public/uploads/
+frontend/assets/uploads/
 
 # ─── Dépendances ─────────────────────────────────────────────────────────────
 node_modules/
-frontend/node_modules/
+vendor/
 
-# ─── Build frontend ──────────────────────────────────────────────────────────
+# ─── Build ───────────────────────────────────────────────────────────────────
+dist/
+build/
 frontend/dist/
 frontend/dist-ssr/
+frontend/build/
 
-# ─── Cache Vite / outils ─────────────────────────────────────────────────────
+# ─── Cache ───────────────────────────────────────────────────────────────────
+.cache/
+.vite/
 frontend/.vite/
+frontend/.cache/
 frontend/*.local
+backend/api/cache/
+*.cache
 
 # ─── Logs ────────────────────────────────────────────────────────────────────
 *.log
 logs/
+backend/api/logs/
+frontend/logs/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+
+# ─── Base de données ─────────────────────────────────────────────────────────
+*.sqlite
+*.db
+database/dumps/
+backups/
+
+# ─── Fichiers temporaires ─────────────────────────────────────────────────────
+*.tmp
+*.temp
+.tmp/
+temp/
+
+# ─── PHP ─────────────────────────────────────────────────────────────────────
+composer.lock
+/config.local.php
+/config.production.php
+.phpunit.result.cache
+
+# ─── Tests & couverture ──────────────────────────────────────────────────────
+coverage/
+*.lcov
+htmlcov/
+/reports/test-*.html
+
+# ─── Déploiement ─────────────────────────────────────────────────────────────
+deploy/
+*.tar.gz
+*.zip
 
 # ─── Système d'exploitation ──────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
+Desktop.ini
 desktop.ini
 
 # ─── Éditeurs ────────────────────────────────────────────────────────────────
@@ -44,7 +92,6 @@ desktop.ini
 *.njsproj
 *.sln
 *.sw?
-
-# ─── PHP / backend ───────────────────────────────────────────────────────────
-vendor/
-*.cache
+*.swp
+*.swo
+*~

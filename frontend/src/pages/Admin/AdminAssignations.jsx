@@ -190,7 +190,7 @@ export default function AdminAssignations() {
                         <td>{h.ville_depart} → {h.ville_arrivee}</td>
                         <td style={{fontSize:'0.85rem'}}>{new Date(h.date_depart).toLocaleString('fr-FR',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}</td>
                         <td style={{fontFamily:'monospace',fontSize:'0.85rem'}}>{h.numero_bus}</td>
-                        <td style={{fontSize:'0.85rem'}}>{h.chauffeur_nom_complet || '—'}</td>
+                        <td style={{fontSize:'0.85rem'}}>{h.chauffeur_nom_complet || '-'}</td>
                         <td>{statusBadge(h.statut)}</td>
                       </tr>
                     ))}
@@ -288,7 +288,7 @@ export default function AdminAssignations() {
                     <div className="assign-step-label">
                       <span className="step-num">3</span>
                       Choisir le bus
-                      {form.date_depart && <span style={{fontSize:'0.75rem',color:'var(--gray-400)',marginLeft:'8px'}}>— disponibilités pour la date choisie</span>}
+                      {form.date_depart && <span style={{fontSize:'0.75rem',color:'var(--gray-400)',marginLeft:'8px'}}>, disponibilités pour la date choisie</span>}
                     </div>
                     {!form.date_depart ? (
                       <p className="assign-hint">Choisissez d'abord une date pour voir les bus disponibles</p>

@@ -95,7 +95,7 @@ export default function AdminUsers() {
                       </div>
                     </td>
                     <td style={{fontSize:'0.875rem'}}>{u.email}</td>
-                    <td>{u.telephone||'—'}</td>
+                    <td>{u.telephone||'-'}</td>
                     <td>{roleBadge(u.libelle_role)}</td>
                     <td style={{fontSize:'0.8rem',color:'var(--gray-400)'}}>{new Date(u.date_creation).toLocaleDateString('fr-FR')}</td>
                     <td>

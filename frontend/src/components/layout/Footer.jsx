@@ -99,7 +99,7 @@ export default function Footer() {
             <Link to="/mentions-legales">Mentions légales</Link>
             <Link to="/confidentialite">Confidentialité</Link>
           </div>
-          <p>Par <strong>NATO Komi Ephraïm</strong> — FORMATEC</p>
+          <p>Par <strong>NATO Komi Ephraïm</strong>, FORMATEC</p>
         </div>
       </div>
     </footer>

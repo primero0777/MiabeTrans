@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du trajet - MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/details-trajet.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../../pages/Accueil/index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../../pages/Accueil/index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="liste-trajets.html" class="nav-link active">Trajets</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement -->
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="details-main">
+        <div class="container">
+            <!-- En-tête du trajet -->
+            <header class="trajet-header">
+                <div class="header-content">
+                    <div class="route-info">
+                        <h1 id="trajetRoute">Chargement...</h1>
+                        <div class="route-meta">
+                            <span class="date" id="trajetDate"></span>
+                            <span class="duration" id="trajetDuree"></span>
+                            <span class="availability" id="trajetPlaces"></span>
+                        </div>
+                    </div>
+                    <div class="price-section">
+                        <div class="price" id="trajetPrix">0 FCFA</div>
+                        <div class="price-note">par personne</div>
+                        <button class="btn btn-primary btn-large" id="reserverBtn">
+                            🎫 Réserver maintenant
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <div class="details-layout">
+                <!-- Contenu principal -->
+                <section class="main-content">
+                    <!-- Informations détaillées -->
+                    <div class="details-section">
+                        <h2>📋 Informations du trajet</h2>
+                        <div class="details-grid">
+                            <div class="detail-card">
+                                <div class="detail-icon">🕒</div>
+                                <div class="detail-content">
+                                    <h3>Heure de départ</h3>
+                                    <p id="heureDepart">--:--</p>
+                                </div>
+                            </div>
+                            <div class="detail-card">
+                                <div class="detail-icon">⏱️</div>
+                                <div class="detail-content">
+                                    <h3>Durée estimée</h3>
+                                    <p id="dureeEstimee">Non spécifiée</p>
+                                </div>
+                            </div>
+                            <div class="detail-card">
+                                <div class="detail-icon">🚌</div>
+                                <div class="detail-content">
+                                    <h3>Type de véhicule</h3>
+                                    <p id="typeVehicule">Bus climatisé</p>
+                                </div>
+                            </div>
+                            <div class="detail-card">
+                                <div class="detail-icon">👨‍✈️</div>
+                                <div class="detail-content">
+                                    <h3>Chauffeur</h3>
+                                    <p id="chauffeurNom">Chauffeur vérifié</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Itinéraire -->
+                    <div class="details-section">
+                        <h2>🗺️ Itinéraire détaillé</h2>
+                        <div class="itineraire-timeline">
+                            <div class="timeline-item departure">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h4>Départ</h4>
+                                    <p id="villeDepart">Chargement...</p>
+                                    <span class="timeline-time" id="heureDepartDetail">--:--</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item arrival">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h4>Arrivée</h4>
+                                    <p id="villeArrivee">Chargement...</p>
+                                    <span class="timeline-time" id="heureArrivee">--:--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Services inclus -->
+                    <div class="details-section">
+                        <h2>🎁 Services inclus</h2>
+                        <div class="services-grid">
+                            <div class="service-item">
+                                <div class="service-icon">💺</div>
+                                <div class="service-text">Siège numéroté</div>
+                            </div>
+                            <div class="service-item">
+                                <div class="service-icon">❄️</div>
+                                <div class="service-text">Climatisation</div>
+                            </div>
+                            <div class="service-item">
+                                <div class="service-icon">💧</div>
+                                <div class="service-text">Eau offerte</div>
+                            </div>
+                            <div class="service-item">
+                                <div class="service-icon">🎒</div>
+                                <div class="service-text">Bagage 20kg inclus</div>
+                            </div>
+                            <div class="service-item">
+                                <div class="service-icon">🔒</div>
+                                <div class="service-text">Assurance voyage</div>
+                            </div>
+                            <div class="service-item">
+                                <div class="service-icon">📱</div>
+                                <div class="service-text">Suivi en temps réel</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conditions d'annulation -->
+                    <div class="details-section">
+                        <h2>ℹ️ Conditions d'annulation</h2>
+                        <div class="cancellation-policy">
+                            <div class="policy-item">
+                                <div class="policy-period">Plus de 24h avant</div>
+                                <div class="policy-amount">Remboursement à 100%</div>
+                            </div>
+                            <div class="policy-item">
+                                <div class="policy-period">2h à 24h avant</div>
+                                <div class="policy-amount">Frais de 20%</div>
+                            </div>
+                            <div class="policy-item">
+                                <div class="policy-period">Moins de 2h avant</div>
+                                <div class="policy-amount">Frais de 50%</div>
+                            </div>
+                            <div class="policy-item">
+                                <div class="policy-period">Après le départ</div>
+                                <div class="policy-amount">Aucun remboursement</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <!-- Réservation rapide -->
+                    <div class="booking-card">
+                        <h3>Réserver ce trajet</h3>
+                        <form id="quickBookingForm">
+                            <div class="form-group">
+                                <label for="passagers" class="form-label">Nombre de passagers</label>
+                                <select id="passagers" name="passagers" class="form-input">
+                                    <option value="1">1 passager</option>
+                                    <option value="2">2 passagers</option>
+                                    <option value="3">3 passagers</option>
+                                    <option value="4">4 passagers</option>
+                                    <option value="5">5 passagers</option>
+                                </select>
+                            </div>
+
+                            <div class="booking-summary">
+                                <div class="summary-item">
+                                    <span>Prix unitaire:</span>
+                                    <span id="summaryPrixUnitaire">0 FCFA</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Passagers:</span>
+                                    <span id="summaryPassagers">1</span>
+                                </div>
+                                <div class="summary-item total">
+                                    <span>Total:</span>
+                                    <span id="summaryTotal">0 FCFA</span>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-full">
+                                🎫 Réserver maintenant
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Informations importantes -->
+                    <div class="info-card">
+                        <h4>💡 Informations importantes</h4>
+                        <ul class="info-list">
+                            <li>Présentez-vous 15 minutes avant le départ</li>
+                            <li>Pièce d'identité obligatoire</li>
+                            <li>Bagage maximum: 20kg + bagage à main</li>
+                            <li>Animaux non acceptés</li>
+                        </ul>
+                    </div>
+
+                    <!-- Assistance -->
+                    <div class="assistance-card">
+                        <h4>📞 Besoin d'aide?</h4>
+                        <p>Notre équipe est là pour vous accompagner</p>
+                        <div class="assistance-contacts">
+                            <a href="tel:+22890123456" class="contact-link">
+                                📱 +228 90 12 34 56
+                            </a>
+                            <a href="https://wa.me/22890123456" class="contact-link" target="_blank">
+                                💬 WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MiabeTrans</h4>
+                    <p>Votre partenaire de confiance pour les voyages interurbains au Togo</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="liste-trajets.html">Tous les trajets</a></li>
+                        <li><a href="../Aide/faq.html">FAQ</a></li>
+                        <li><a href="../Aide/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Légal</h4>
+                    <ul>
+                        <li><a href="../Aide/politique-confidentialite.html">Confidentialité</a></li>
+                        <li><a href="#">Conditions d'utilisation</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 MiabeTrans. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/app.js"></script>
+    <script src="../../js/details-trajet.js"></script>
+</body>
+</html>

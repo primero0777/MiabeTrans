@@ -1,0 +1,863 @@
+/* ===== STYLES PAGE SUIVI RÉSERVATION ===== */
+
+.suivi-main {
+    min-height: calc(100vh - 80px);
+    background: var(--background-light);
+    padding: 2rem 0;
+}
+
+/* En-tête */
+.suivi-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.header-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.header-content p {
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+}
+
+.header-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Carte de réservation */
+.reservation-card-section {
+    margin-bottom: 2rem;
+}
+
+.reservation-overview {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+.reservation-id {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.reservation-id h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    border-radius: 20px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    animation: pulse 2s infinite;
+}
+
+/* Informations d'itinéraire */
+.route-info {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.route-point {
+    display: flex;
+    gap: 1rem;
+    align-items: start;
+}
+
+.point-marker {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin-top: 0.5rem;
+    flex-shrink: 0;
+}
+
+.departure .point-marker {
+    background: var(--success-color);
+}
+
+.arrival .point-marker {
+    background: var(--error-color);
+}
+
+.point-details h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.point-details p {
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.point-details .time {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.125rem;
+}
+
+.route-line {
+    text-align: center;
+    padding: 1rem;
+    background: var(--background-light);
+    border-radius: 12px;
+}
+
+.duration {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.distance {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    background: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+/* Métadonnées de réservation */
+.reservation-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.meta-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.meta-item:last-child {
+    border-bottom: none;
+}
+
+.meta-item .label {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.meta-item .value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.meta-item .value.price {
+    color: var(--success-color);
+    font-size: 1.125rem;
+}
+
+/* Section carte */
+.map-section {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.section-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.map-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* Container carte */
+.map-container {
+    height: 400px;
+    background: var(--background-light);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.map-placeholder {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.map-mockup {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+    position: relative;
+}
+
+/* Marqueur véhicule */
+.vehicle-marker {
+    position: absolute;
+    top: 40%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border: 2px solid var(--primary-color);
+    animation: moveVehicle 20s linear infinite;
+}
+
+.vehicle-icon {
+    font-size: 1.5rem;
+}
+
+.vehicle-info {
+    font-size: 0.875rem;
+}
+
+.vehicle-info strong {
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+/* Chemin du trajet */
+.route-path {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.start-point, .end-point {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.start-point {
+    background: var(--success-color);
+    top: 30%;
+    left: 20%;
+}
+
+.end-point {
+    background: var(--error-color);
+    top: 70%;
+    left: 80%;
+}
+
+.point-label {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: var(--shadow);
+}
+
+.progress-line {
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    width: 60%;
+    height: 40%;
+    border-bottom: 3px solid var(--border-color);
+    transform: rotate(30deg);
+    transform-origin: left top;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+    width: 45%; /* Progression actuelle */
+    transition: width 2s ease;
+}
+
+/* Statistiques carte */
+.map-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.stat-item {
+    background: var(--background-light);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Timeline */
+.timeline-section {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.timeline-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline-progress {
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--border-color);
+    border-radius: 2px;
+}
+
+.timeline-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%; /* Progression actuelle */
+    background: var(--primary-color);
+    border-radius: 2px;
+    transition: height 0.5s ease;
+}
+
+.timeline-step {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+}
+
+.timeline-step:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.step-marker {
+    position: absolute;
+    left: -2.125rem;
+    top: 0.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid var(--border-color);
+    z-index: 2;
+}
+
+.timeline-step.completed .step-marker {
+    background: var(--success-color);
+    border-color: var(--success-color);
+}
+
+.timeline-step.active .step-marker {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    animation: pulse 2s infinite;
+}
+
+.timeline-step.upcoming .step-marker {
+    background: white;
+    border-color: var(--border-color);
+}
+
+.step-content {
+    background: var(--background-light);
+    padding: 1.25rem;
+    border-radius: 12px;
+    border-left: 4px solid var(--border-color);
+}
+
+.timeline-step.completed .step-content {
+    border-left-color: var(--success-color);
+}
+
+.timeline-step.active .step-content {
+    border-left-color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.05);
+}
+
+.step-content h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.step-content p {
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.step-details {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.detail-item {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* Section chauffeur */
+.driver-section {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.driver-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.driver-profile {
+    display: flex;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.driver-avatar {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.driver-avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--border-color);
+}
+
+.online-status {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--success-color);
+    border: 2px solid white;
+}
+
+.driver-info h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.driver-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.stars {
+    color: #fbbf24;
+}
+
+.rating-value {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.review-count {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.driver-contact {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* Informations véhicule */
+.vehicle-details {
+    display: flex;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.vehicle-image img {
+    width: 120px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.vehicle-specs {
+    flex: 1;
+}
+
+.spec-item {
+    margin-bottom: 0.5rem;
+}
+
+.spec-item:last-child {
+    margin-bottom: 0;
+}
+
+.spec-item strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--text-primary);
+}
+
+/* Alertes */
+.alerts-section {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.alerts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.alert-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--border-color);
+}
+
+.alert-item.info {
+    border-left-color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.05);
+}
+
+.alert-item.warning {
+    border-left-color: var(--warning-color);
+    background: rgba(245, 158, 11, 0.05);
+}
+
+.alert-item.success {
+    border-left-color: var(--success-color);
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.alert-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.alert-content h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.alert-content p {
+    color: var(--text-secondary);
+    margin: 0;
+    font-size: 0.875rem;
+}
+
+.alert-time {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+    display: block;
+}
+
+/* Actions rapides */
+.actions-section {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem 1rem;
+    background: var(--background-light);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.action-btn:hover {
+    background: white;
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.action-icon {
+    font-size: 2rem;
+}
+
+.action-btn span {
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+/* Modal contact */
+.contact-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-option {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--background-light);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-align: left;
+}
+
+.contact-option:hover {
+    background: white;
+    border-color: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+.option-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.option-text strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--text-primary);
+}
+
+.option-text span {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes moveVehicle {
+    0% { left: 25%; }
+    100% { left: 75%; }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .reservation-overview {
+        grid-template-columns: 1fr;
+    }
+    
+    .driver-card {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .suivi-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .header-actions {
+        justify-content: center;
+    }
+    
+    .route-info {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .route-point {
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .route-line {
+        order: -1;
+        margin-bottom: 1rem;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .map-actions {
+        justify-content: center;
+    }
+    
+    .driver-profile {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .vehicle-details {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .reservation-overview,
+    .map-section,
+    .timeline-section,
+    .driver-section,
+    .alerts-section,
+    .actions-section {
+        padding: 1.5rem;
+    }
+    
+    .reservation-id {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    
+    .map-container {
+        height: 300px;
+    }
+    
+    .map-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .actions-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .timeline {
+        padding-left: 1.5rem;
+    }
+    
+    .step-marker {
+        left: -1.625rem;
+    }
+}

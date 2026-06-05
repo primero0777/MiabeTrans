@@ -48,7 +48,7 @@ const CATEGORIES = [
     questions: [
       {
         q: 'Quels sont les modes de paiement acceptés ?',
-        a: `MiabeTrans accepte les modes de paiement suivants :\n• **Mixx By Yas** — Paiement mobile Togocom (*144#)\n• **Moov Money** — Paiement mobile Moov Africa (*155#)\n• **Carte Bancaire** — Visa / Mastercard\n• **Cash (espèces)** — Paiement à la montée dans le bus\n\nPour les paiements mobiles, vous recevrez les instructions par email après confirmation de votre réservation.`
+        a: `MiabeTrans accepte les modes de paiement suivants :\n• **Mixx By Yas** : Paiement mobile Togocom (*144#)\n• **Moov Money** : Paiement mobile Moov Africa (*155#)\n• **Carte Bancaire** : Visa / Mastercard\n• **Cash (espèces)** : Paiement à la montée dans le bus\n\nPour les paiements mobiles, vous recevrez les instructions par email après confirmation de votre réservation.`
       },
       {
         q: 'Quand faut-il payer ?',
@@ -77,7 +77,7 @@ const CATEGORIES = [
       },
       {
         q: 'Quelle est la politique concernant les bagages ?',
-        a: `Chaque passager a droit à :\n• **1 bagage en soute** (max 20 kg) — inclus dans le prix du billet\n• **1 bagage à main** (petite taille) — à garder avec soi dans le bus\n\nPour les bagages supplémentaires ou très volumineux, des frais peuvent s'appliquer.\nContactez-nous à l'avance pour les grandes quantités.`
+        a: `Chaque passager a droit à :\n• **1 bagage en soute** (max 20 kg), inclus dans le prix du billet\n• **1 bagage à main** (petite taille), à garder avec soi dans le bus\n\nPour les bagages supplémentaires ou très volumineux, des frais peuvent s'appliquer.\nContactez-nous à l'avance pour les grandes quantités.`
       },
       {
         q: 'Y a-t-il de la climatisation dans les bus ?',

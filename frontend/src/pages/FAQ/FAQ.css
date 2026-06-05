@@ -576,6 +576,21 @@
   white-space: nowrap;
 }
 
+/* btn-outline sur fond sombre du banner : rendre visible sans hover */
+.faq-banner-actions .btn-outline {
+  background: rgba(255,255,255,0.08);
+  color: var(--white);
+  border-color: rgba(255,255,255,0.4);
+  backdrop-filter: blur(4px);
+}
+.faq-banner-actions .btn-outline:hover {
+  background: rgba(255,255,255,0.20);
+  border-color: rgba(255,255,255,0.75);
+  color: var(--white);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
 .faq-wa-cta {
   background: #25D366;
   color: white;

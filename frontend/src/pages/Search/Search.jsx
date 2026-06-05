@@ -379,7 +379,7 @@ export default function Search() {
                           <span className="trip-time">
                             {r.date_depart
                               ? new Date(r.date_depart).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
-                              : '—'}
+                              : '-'}
                           </span>
                           <span className="trip-name">
                             <FontAwesomeIcon icon={faLocationDot} className="trip-loc-icon trip-loc-icon--primary" />
@@ -399,7 +399,7 @@ export default function Search() {
                         </div>
 
                         <div className="trip-city trip-city--right">
-                          <span className="trip-time trip-time--muted">—</span>
+                          <span className="trip-time trip-time--muted">-</span>
                           <span className="trip-name">
                             <FontAwesomeIcon icon={faLocationDot} className="trip-loc-icon trip-loc-icon--accent" />
                             {r.ville_arrivee}
@@ -554,7 +554,7 @@ export default function Search() {
                   <FontAwesomeIcon icon={faArrowRight} className="modal-arrow-icon" />
                 </div>
                 <div className="modal-city modal-city--right">
-                  <div className="modal-city-time modal-city-time--muted">—</div>
+                  <div className="modal-city-time modal-city-time--muted">-</div>
                   <div className="modal-city-name">{detailModal.ville_arrivee}</div>
                 </div>
               </div>

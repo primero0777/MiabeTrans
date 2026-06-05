@@ -100,6 +100,7 @@ export default function Contact() {
   return (
     <div className="contact-page">
       <div className="contact-hero">
+        <div className="contact-hero-bg" />
         <div className="container contact-hero-inner">
           <div className="contact-hero-badge">
             <span className="contact-hero-dot" />

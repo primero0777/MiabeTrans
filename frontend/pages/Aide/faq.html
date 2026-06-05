@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/faq.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../../pages/Accueil/index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../../pages/Accueil/index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../Trajets/liste-trajets.html" class="nav-link">Trajets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="faq.html" class="nav-link active">FAQ</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement -->
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="faq-main">
+        <div class="container">
+            <header class="faq-header">
+                <h1>Foire Aux Questions</h1>
+                <p>Trouvez rapidement des réponses à vos questions les plus fréquentes</p>
+                
+                <div class="search-faq">
+                    <input type="text" id="faqSearch" placeholder="Rechercher dans la FAQ..." 
+                           class="search-input">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </header>
+
+            <section class="faq-categories">
+                <div class="category-tabs">
+                    <button class="category-tab active" data-category="general">
+                        🌟 Général
+                    </button>
+                    <button class="category-tab" data-category="reservations">
+                        🎫 Réservations
+                    </button>
+                    <button class="category-tab" data-category="paiements">
+                        💰 Paiements
+                    </button>
+                    <button class="category-tab" data-category="annulations">
+                        ❌ Annulations
+                    </button>
+                    <button class="category-tab" data-category="technique">
+                        🔧 Technique
+                    </button>
+                </div>
+            </section>
+
+            <section class="faq-content">
+                <!-- Catégorie Général -->
+                <div class="faq-category active" id="general-category">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Qu'est-ce que MiabeTrans?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>MiabeTrans est une plateforme de réservation de voyages interurbains au Togo. Nous connectons les voyageurs avec des agences de transport fiables pour des trajets sécurisés et confortables.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Comment créer un compte?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Pour créer un compte :</p>
+                            <ol>
+                                <li>Cliquez sur "Connexion" en haut à droite</li>
+                                <li>Choisissez "Créer un compte"</li>
+                                <li>Remplissez le formulaire avec vos informations</li>
+                                <li>Confirmez votre email</li>
+                                <li>Vous pouvez maintenant réserver des trajets!</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Quelles villes sont desservies?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Nous desservons actuellement les principales villes du Togo :</p>
+                            <ul>
+                                <li><strong>Lomé</strong> - Capitale</li>
+                                <li><strong>Kpalimé</strong> - Ville touristique</li>
+                                <li><strong>Sokodé</strong> - Ville centrale</li>
+                                <li><strong>Kara</strong> - Ville du nord</li>
+                                <li><strong>Atakpamé</strong> - Ville des plateaux</li>
+                                <li>Et bien d'autres...</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catégorie Réservations -->
+                <div class="faq-category" id="reservations-category">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Comment réserver un trajet?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Le processus de réservation est simple :</p>
+                            <ol>
+                                <li>Recherchez un trajet avec vos critères</li>
+                                <li>Sélectionnez le trajet qui vous convient</li>
+                                <li>Choisissez le nombre de places</li>
+                                <li>Remplissez vos informations personnelles</li>
+                                <li>Confirmez la réservation</li>
+                                <li>Recevez votre ticket par email</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Puis-je modifier ma réservation?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Les modifications de réservation sont possibles sous certaines conditions :</p>
+                            <ul>
+                                <li>Vous pouvez modifier jusqu'à 2 heures avant le départ</li>
+                                <li>Le changement de date peut entraîner des frais supplémentaires</li>
+                                <li>Le changement de trajet dépend des disponibilités</li>
+                                <li>Contactez notre service client pour toute modification</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Dois-je imprimer mon ticket?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Non, l'impression n'est pas obligatoire. Vous pouvez présenter :</p>
+                            <ul>
+                                <li>Votre ticket numérique sur votre smartphone</li>
+                                <li>Le code QR reçu par email</li>
+                                <li>La référence de réservation avec une pièce d'identité</li>
+                            </ul>
+                            <p><strong>Conseil :</strong> Sauvegardez toujours votre ticket hors ligne.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catégorie Paiements -->
+                <div class="faq-category" id="paiements-category">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Quels moyens de paiement acceptez-vous?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Nous acceptons plusieurs moyens de paiement :</p>
+                            <ul>
+                                <li>💵 <strong>Paiement en espèces</strong> - Directement au chauffeur</li>
+                                <li>📱 <strong>Flooz Money</strong> - Paiement mobile</li>
+                                <li>📱 <strong>T-Money</strong> - Paiement mobile</li>
+                                <li>💳 <strong>Carte bancaire</strong> - Bientôt disponible</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Le paiement est-il sécurisé?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Oui, la sécurité de vos paiements est notre priorité :</p>
+                            <ul>
+                                <li>Transactions cryptées et sécurisées</li>
+                                <li>Conformité aux standards de sécurité</li>
+                                <li>Aucune conservation des données bancaires</li>
+                                <li>Protection contre la fraude</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Puis-je payer en plusieurs fois?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Actuellement, le paiement en plusieurs fois n'est pas disponible. Cependant :</p>
+                            <ul>
+                                <li>Le paiement complet est requis au moment de la réservation</li>
+                                <li>Pour les groupes importants, contactez-nous pour des arrangements</li>
+                                <li>Nous travaillons sur des options de paiement échelonné</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catégorie Annulations -->
+                <div class="faq-category" id="annulations-category">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Comment annuler une réservation?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Pour annuler une réservation :</p>
+                            <ol>
+                                <li>Connectez-vous à votre compte</li>
+                                <li>Allez dans "Mes réservations"</li>
+                                <li>Sélectionnez la réservation à annuler</li>
+                                <li>Cliquez sur "Annuler la réservation"</li>
+                                <li>Confirmez l'annulation</li>
+                            </ol>
+                            <p><strong>Important :</strong> Consultez notre politique d'annulation pour les frais applicables.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Quels sont les frais d'annulation?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Les frais d'annulation dépendent du moment :</p>
+                            <ul>
+                                <li><strong>Plus de 24h avant :</strong> Remboursement intégral</li>
+                                <li><strong>Entre 2h et 24h avant :</strong> Frais de 20%</li>
+                                <li><strong>Moins de 2h avant :</strong> Frais de 50%</li>
+                                <li><strong>Après le départ :</strong> Aucun remboursement</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catégorie Technique -->
+                <div class="faq-category" id="technique-category">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Le site ne fonctionne pas, que faire?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Si vous rencontrez des problèmes techniques :</p>
+                            <ol>
+                                <li>Vérifiez votre connexion internet</li>
+                                <li>Actualisez la page (F5 ou Ctrl+R)</li>
+                                <li>Effacez le cache de votre navigateur</li>
+                                <li>Essayez avec un autre navigateur</li>
+                                <li>Contactez notre support technique</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Je n'ai pas reçu mon ticket, que faire?
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Si vous n'avez pas reçu votre ticket :</p>
+                            <ul>
+                                <li>Vérifiez vos spams/courriers indésirables</li>
+                                <li>Vérifiez l'adresse email utilisée</li>
+                                <li>Connectez-vous à votre compte pour le télécharger</li>
+                                <li>Contactez-nous avec votre référence de réservation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="faq-contact">
+                <div class="contact-card">
+                    <h2>Vous n'avez pas trouvé de réponse?</h2>
+                    <p>Notre équipe de support est là pour vous aider</p>
+                    <div class="contact-options">
+                        <a href="contact.html" class="btn btn-primary">
+                            📞 Nous contacter
+                        </a>
+                        <a href="tel:+22890123456" class="btn btn-outline">
+                            💬 Appeler le support
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MiabeTrans</h4>
+                    <p>Votre partenaire de confiance pour les voyages interurbains au Togo</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="../Trajets/liste-trajets.html">Tous les trajets</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Légal</h4>
+                    <ul>
+                        <li><a href="politique-confidentialite.html">Confidentialité</a></li>
+                        <li><a href="#">Conditions d'utilisation</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 MiabeTrans. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/app.js"></script>
+    <script src="../../js/faq.js"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes réservations - MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/historique.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../../pages/Accueil/index.html">
+                    <span class="brand-name">MiabeTrans</span>
+                </a>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../../pages/Accueil/index.html" class="nav-link">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../Trajets/liste-trajets.html" class="nav-link">Trajets</a>
+                </li>
+                <li class="nav-item" id="authSection">
+                    <!-- Rempli dynamiquement -->
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="historique-main">
+        <div class="container">
+            <header class="historique-header">
+                <h1>Mes réservations</h1>
+                <p>Consultez l'historique complet de vos voyages avec MiabeTrans</p>
+            </header>
+
+            <!-- Filtres et statistiques -->
+            <section class="filters-section">
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label for="filter-period" class="filter-label">Période</label>
+                        <select id="filter-period" class="filter-select">
+                            <option value="all">Toutes les périodes</option>
+                            <option value="today">Aujourd'hui</option>
+                            <option value="week">Cette semaine</option>
+                            <option value="month">Ce mois</option>
+                            <option value="3months">3 derniers mois</option>
+                            <option value="year">Cette année</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filter-status" class="filter-label">Statut</label>
+                        <select id="filter-status" class="filter-select">
+                            <option value="all">Tous les statuts</option>
+                            <option value="confirme">Confirmées</option>
+                            <option value="en_attente">En attente</option>
+                            <option value="annule">Annulées</option>
+                            <option value="completed">Terminées</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="filter-sort" class="filter-label">Trier par</label>
+                        <select id="filter-sort" class="filter-select">
+                            <option value="date_desc">Date (récent)</option>
+                            <option value="date_asc">Date (ancien)</option>
+                            <option value="prix_desc">Prix (élevé)</option>
+                            <option value="prix_asc">Prix (bas)</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-outline" id="resetFilters">
+                        🔄 Réinitialiser
+                    </button>
+                </div>
+
+                <!-- Statistiques rapides -->
+                <div class="stats-overview">
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalReservations">0</div>
+                        <div class="stat-label">Total réservations</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="upcomingTrips">0</div>
+                        <div class="stat-label">Prochains voyages</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="totalSpent">0 FCFA</div>
+                        <div class="stat-label">Total dépensé</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Liste des réservations -->
+            <section class="reservations-section">
+                <div class="section-header">
+                    <h2>Historique des réservations</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-outline btn-sm" id="exportHistory">
+                            📊 Exporter
+                        </button>
+                    </div>
+                </div>
+
+                <div class="reservations-container" id="reservationsContainer">
+                    <!-- Chargé dynamiquement -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination" id="pagination">
+                    <!-- Généré dynamiquement -->
+                </div>
+
+                <!-- État vide -->
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <div class="empty-icon">🎫</div>
+                    <h3>Aucune réservation trouvée</h3>
+                    <p>Vous n'avez pas encore effectué de réservation avec MiabeTrans.</p>
+                    <a href="../Trajets/liste-trajets.html" class="btn btn-primary">
+                        🔍 Chercher un trajet
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MiabeTrans</h4>
+                    <p>Votre partenaire de confiance pour les voyages interurbains au Togo</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="../Trajets/liste-trajets.html">Tous les trajets</a></li>
+                        <li><a href="../Aide/faq.html">FAQ</a></li>
+                        <li><a href="../Aide/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Légal</h4>
+                    <ul>
+                        <li><a href="../Aide/politique-confidentialite.html">Confidentialité</a></li>
+                        <li><a href="#">Conditions d'utilisation</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 MiabeTrans. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/app.js"></script>
+    <script src="../../js/historique.js"></script>
+</body>
+</html>

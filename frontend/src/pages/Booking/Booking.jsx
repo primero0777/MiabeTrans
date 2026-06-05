@@ -74,7 +74,7 @@ function CarteForm({ onSubmit, loading, error }) {
           value={c.nom} onChange={e=>setC({...c,nom:e.target.value.toUpperCase()})}
           style={{textTransform:'uppercase'}} required/>
       </div>
-      <div className="carte-secure"><FontAwesomeIcon icon={faLock} /> Paiement simulé — données non conservées</div>
+      <div className="carte-secure"><FontAwesomeIcon icon={faLock} /> Paiement simulé, données non conservées</div>
       {error && <div className="alert alert-danger">{error}</div>}
       <button type="submit" className="btn btn-primary btn-full btn-lg" disabled={loading}
         style={{marginTop:'var(--space-lg)'}}>
@@ -215,7 +215,7 @@ export default function Booking() {
                     <div className="bk-route-dist">{horaire.distance_km} km</div>
                   </div>
                   <div className="bk-city bk-city-right">
-                    <div className="bk-city-time bk-time-dim">—</div>
+                    <div className="bk-city-time bk-time-dim">-</div>
                     <div className="bk-city-name">{horaire.ville_arrivee}</div>
                     <div className="bk-city-tag">Arrivée</div>
                   </div>
@@ -290,7 +290,7 @@ export default function Booking() {
                 </h2>
 
                 <div className="bk-timer-bar">
-                  <span>Place réservée — temps restant :</span>
+                  <span>Place réservée, temps restant :</span>
                   <Countdown expireAt={resa.expire_le} onExpire={handleExpire}/>
                 </div>
 
@@ -333,7 +333,7 @@ export default function Booking() {
                     <div className="bk-actions">
                       <button className="btn btn-ghost" onClick={() => setStep(2)}><FontAwesomeIcon icon={faChevronLeft} /> Retour</button>
                       <button className="btn btn-primary btn-lg" onClick={() => handleSimuler()} disabled={saving}>
-                        {saving ? <><FontAwesomeIcon icon={faSpinner} spin /> Envoi...</> : <><FontAwesomeIcon icon={faEnvelope} /> J'ai payé — Recevoir ma référence</>}
+                        {saving ? <><FontAwesomeIcon icon={faSpinner} spin /> Envoi...</> : <><FontAwesomeIcon icon={faEnvelope} /> J'ai payé, recevoir ma référence</>}
                       </button>
                     </div>
                   </>

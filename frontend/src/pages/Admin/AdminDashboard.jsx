@@ -179,7 +179,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Réservations cliquables */}
-      <div className="kpi-grid" style={{gridTemplateColumns:'repeat(3,1fr)',marginBottom:'var(--space-xl)'}}>
+      <div className="kpi-grid kpi-grid-3">
         {[
           { faIcon:faTicket, label:'Total réservations', value:totalResa, color:'#6B7280', bg:'#F3F4F6', path:'/admin/reservations' },
           { faIcon:faCheck,  label:'Confirmées',         value:confirmed, color:'#10B981', bg:'#D1FAE5', path:'/admin/reservations' },

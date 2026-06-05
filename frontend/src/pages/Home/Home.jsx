@@ -57,7 +57,7 @@ const POPULAR_ROUTES = [
 const SERVICES = [
   { color: '#1B4332', bg: '#ECFDF5', icon: faBus,          num: '01', title: 'Confort Premium',      desc: 'Bus climatisés avec sièges ergonomiques pour un voyage agréable sur toutes nos liaisons.' },
   { color: '#2563EB', bg: '#EFF6FF', icon: faMobileScreen,  num: '02', title: 'Réservation en ligne', desc: "Réservez votre place en quelques clics depuis n'importe où, 24h/24 et 7j/7." },
-  { color: '#D97706', bg: '#FFFBEB', icon: faLock,          num: '03', title: 'Paiement sécurisé',    desc: 'Mixx By Yas, Moov Money, MobileMoney — transactions chiffrées et sécurisées.' },
+  { color: '#D97706', bg: '#FFFBEB', icon: faLock,          num: '03', title: 'Paiement sécurisé',    desc: 'Mixx By Yas, Moov Money, MobileMoney, transactions chiffrées et sécurisées.' },
   { color: '#059669', bg: '#ECFDF5', icon: faClock,         num: '04', title: 'Ponctualité garantie', desc: "Départs à l'heure avec suivi en temps réel de vos trajets interurbains." },
   { color: '#7C3AED', bg: '#F5F3FF', icon: faShieldHalved,  num: '05', title: 'Sécurité maximale',    desc: 'Chauffeurs professionnels certifiés et véhicules régulièrement contrôlés.' },
   { color: '#DC2626', bg: '#FEF2F2', icon: faHeadset,       num: '06', title: 'Support 24/7',         desc: 'Notre équipe est disponible à tout moment pour vous assister.' },
@@ -484,7 +484,7 @@ export default function Home() {
           </div>
           <div className="how-cta text-center">
             <button className="btn btn-primary btn-lg" onClick={() => navigate('/register')}>
-              <FontAwesomeIcon icon={faUserPlus} /> Commencer maintenant — C'est gratuit
+              <FontAwesomeIcon icon={faUserPlus} /> Commencer maintenant, c'est gratuit
             </button>
           </div>
         </div>
@@ -499,7 +499,7 @@ export default function Home() {
               <h2 className="payment-title">Payez avec votre téléphone</h2>
               <p className="payment-desc">
                 MiabeTrans accepte les principaux opérateurs de mobile money au Togo.
-                Aucune carte bancaire requise — réglez directement depuis votre téléphone.
+                Aucune carte bancaire requise, réglez directement depuis votre téléphone.
               </p>
               <div className="payment-methods">
                 <div className="pay-method">
@@ -508,7 +508,7 @@ export default function Home() {
                   </div>
                   <div>
                     <strong>Mixx By Yas</strong>
-                    <span>Mobile Money Togocom — composez *144#</span>
+                    <span>Mobile Money Togocom, composez *144#</span>
                   </div>
                 </div>
                 <div className="pay-method">
@@ -517,7 +517,7 @@ export default function Home() {
                   </div>
                   <div>
                     <strong>Moov Money</strong>
-                    <span>Mobile Money Moov Africa — composez *155#</span>
+                    <span>Mobile Money Moov Africa, composez *155#</span>
                   </div>
                 </div>
                 <div className="pay-method">
@@ -624,7 +624,7 @@ export default function Home() {
                   <div className="faq-contact-icon"><FontAwesomeIcon icon={faPhone} /></div>
                   <div>
                     <strong>Appelez-nous</strong>
-                    <span>+228 90 00 00 01 — Lun–Sam 6h–20h</span>
+                    <span>+228 90 00 00 01, Lun–Sam 6h–20h</span>
                   </div>
                 </a>
                 <a href="mailto:contact@miabetrans.tg" className="faq-contact-btn">

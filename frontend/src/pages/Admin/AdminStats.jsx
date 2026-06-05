@@ -109,7 +109,7 @@ export default function AdminStats() {
       doc.setTextColor(255,255,255);
       doc.setFont('helvetica','bold');
       doc.setFontSize(18);
-      doc.text('MiabeTrans — Rapport de statistiques', 15, 18);
+      doc.text('MiabeTrans, Rapport de statistiques', 15, 18);
       doc.setFont('helvetica','normal');
       doc.setFontSize(9);
       doc.setTextColor(200,230,215);
@@ -199,7 +199,7 @@ export default function AdminStats() {
         doc.setFont('helvetica','normal');
         doc.setFontSize(7);
         doc.setTextColor(156,163,175);
-        doc.text(`© ${new Date().getFullYear()} MiabeTrans — Document confidentiel — Page ${i} / ${pageCount}`, 105, 291, { align: 'center' });
+        doc.text(`© ${new Date().getFullYear()} MiabeTrans, Document confidentiel, Page ${i} / ${pageCount}`, 105, 291, { align: 'center' });
       }
 
       doc.save(`Rapport_MiabeTrans_${dateRapport.replace(/ /g,'_')}.pdf`);
@@ -249,7 +249,7 @@ export default function AdminStats() {
       <div ref={reportRef}>
         {/* Titre rapport */}
         <div className="report-title">
-          <h2>Rapport de statistiques — MiabeTrans</h2>
+          <h2>Rapport de statistiques, MiabeTrans</h2>
           <p>Généré le {new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</p>
         </div>
 
@@ -311,7 +311,7 @@ export default function AdminStats() {
         </div>
 
         <div className="report-footer">
-          © {new Date().getFullYear()} MiabeTrans — Lomé, Togo | contact@miabetrans.tg | +228 90 00 00 01
+          © {new Date().getFullYear()} MiabeTrans, Lomé, Togo | contact@miabetrans.tg | +228 90 00 00 01
         </div>
       </div>
     </div>

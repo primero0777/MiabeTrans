@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance - MiabeTrans</title>
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/erreurs.css">
+</head>
+<body class="error-page maintenance-page">
+    <div class="error-container">
+        <div class="error-content">
+            <div class="error-icon">🔧</div>
+            <h1>Maintenance</h1>
+            <h2>Nous serons bientôt de retour !</h2>
+            <p>Nous effectuons actuellement une maintenance planifiée pour améliorer votre expérience. Le service sera rétabli très prochainement.</p>
+            
+            <div class="maintenance-progress">
+                <div class="progress-bar"></div>
+            </div>
+
+            <!-- Compte à rebours -->
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Jours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Heures</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Secondes</span>
+                </div>
+            </div>
+
+            <div class="error-suggestions">
+                <h3>En attendant...</h3>
+                <div class="suggestions-grid">
+                    <div class="suggestion-card">
+                        <div class="suggestion-icon">📱</div>
+                        <div class="suggestion-text">
+                            <strong>Suivez-nous</strong>
+                            <br>
+                            <small>Sur les réseaux sociaux</small>
+                        </div>
+                    </div>
+                    <div class="suggestion-card">
+                        <div class="suggestion-icon">📧</div>
+                        <div class="suggestion-text">
+                            <strong>Contactez-nous</strong>
+                            <br>
+                            <small>support@miabetrans.tg</small>
+                        </div>
+                    </div>
+                    <div class="suggestion-card">
+                        <div class="suggestion-icon">📞</div>
+                        <div class="suggestion-text">
+                            <strong>Appelez-nous</strong>
+                            <br>
+                            <small>+228 XX XX XX XX</small>
+                        </div>
+                    </div>
+                    <div class="suggestion-card">
+                        <div class="suggestion-icon">🔄</div>
+                        <div class="suggestion-text">
+                            <strong>Actualisez</strong>
+                            <br>
+                            <small>La page régulièrement</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="error-graphic">
+            <div class="graphic-element"></div>
+        </div>
+    </div>
+
+    <footer class="error-footer">
+        <div class="container">
+            <p>&copy; 2025 MiabeTrans. Maintenance en cours.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Compte à rebours jusqu'à une date future (exemple: 2 heures)
+        const countdownDate = new Date();
+        countdownDate.setHours(countdownDate.getHours() + 2);
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+            
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML = '<h3>Maintenance terminée !</h3>';
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>

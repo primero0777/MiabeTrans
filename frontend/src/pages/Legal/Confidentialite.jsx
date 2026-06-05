@@ -84,7 +84,7 @@ export default function Confidentialite() {
           <h2>8. Contact</h2>
           <p>
             Pour toute question relative à cette politique de confidentialité :<br/>
-            <strong>contact@miabetrans.tg</strong> — <strong>+228 90 00 00 01</strong>
+            <strong>contact@miabetrans.tg</strong> · <strong>+228 90 00 00 01</strong>
           </p>
         </section>
 

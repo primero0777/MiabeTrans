@@ -50,7 +50,7 @@ export default function AdminVilles() {
 
       {error && <div className="alert alert-danger" style={{marginBottom:'var(--space-lg)'}}>{error}</div>}
 
-      <div style={{display:'grid',gridTemplateColumns:'360px 1fr',gap:'var(--space-xl)'}}>
+      <div className="villes-grid">
         <div className="card">
           <div className="card-header"><FontAwesomeIcon icon={faPlus} /> Ajouter une ville</div>
           <div className="card-body">

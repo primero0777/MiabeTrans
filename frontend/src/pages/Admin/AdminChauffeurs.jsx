@@ -176,7 +176,7 @@ export default function AdminChauffeurs() {
                 {[
                   {label:'Nom',       value: detailModal.nom},
                   {label:'Email',     value: detailModal.email},
-                  {label:'Téléphone', value: detailModal.telephone || '—'},
+                  {label:'Téléphone', value: detailModal.telephone || '-'},
                 ].map((r,i) => (
                   <div key={i} style={{display:'flex',justifyContent:'space-between',padding:'8px 0',borderBottom:'1px solid var(--gray-200)',fontSize:'0.9rem'}}>
                     <span style={{color:'var(--gray-500)'}}>{r.label}</span>

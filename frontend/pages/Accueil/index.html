@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiabeTrans - Voyagez en toute sérénité</title>
+    <link rel="shortcut icon" href="../../assets/MiabeTrans_logo2.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/responsive.css">
+</head>
+<body>
+    <!-- Navigation inspirée de Lambus -->
+    <nav class="navbar" role="navigation">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="../../assets/MiabeTrans_logo2.png" alt="MiabeTrans" class="logo">
+                <span class="brand-name">MiabeTrans</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#accueil" class="nav-link active">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../../pages/Trajets/liste-trajets.html" class="nav-link">Trajets</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../../pages/Aide/faq.html" class="nav-link">Aide</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../../pages/Utilisateurs/connexion.html" class="nav-link btn-login">Connexion</a>
+                </li>
+            </ul>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section inspirée de Mapngo -->
+    <section class="hero" id="accueil">
+        <div class="hero-content">
+            <h1 class="hero-title">Voyagez malin avec MiabeTrans</h1>
+            <p class="hero-subtitle">Réservez vos trajets interurbains en toute simplicité</p>
+            
+            <!-- Formulaire de recherche inspiré de Rome2Rio -->
+            <div class="search-form" role="search">
+                <form id="searchTrajets" class="search-grid">
+                    <div class="form-group">
+                        <label for="ville_depart" class="sr-only">Ville de départ</label>
+                        <input type="text" id="ville_depart" name="ville_depart" 
+                               placeholder="D'où partez-vous?" required
+                               aria-required="true">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ville_arrivee" class="sr-only">Ville d'arrivée</label>
+                        <input type="text" id="ville_arrivee" name="ville_arrivee" 
+                               placeholder="Où allez-vous?" required
+                               aria-required="true">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="date_voyage" class="sr-only">Date du voyage</label>
+                        <input type="date" id="date_voyage" name="date_voyage" 
+                               min="<?= date('Y-m-d') ?>" required
+                               aria-required="true">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="passagers" class="sr-only">Nombre de passagers</label>
+                        <select id="passagers" name="passagers" aria-label="Nombre de passagers">
+                            <option value="1">1 passager</option>
+                            <option value="2">2 passagers</option>
+                            <option value="3">3 passagers</option>
+                            <option value="4">4+ passagers</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-search">
+                        <span class="btn-text">Rechercher</span>
+                        <span class="btn-loading" aria-hidden="true">🔍</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="hero-visual">
+            <img src="../../assets/images/hero-bus.png" alt="Bus de voyage moderne" 
+                 class="hero-image" loading="lazy">
+        </div>
+    </section>
+
+    <!-- Section Fonctionnalités inspirée de Tripkygo -->
+    <section class="features" id="fonctionnalites">
+        <div class="container">
+            <h2 class="section-title">Pourquoi choisir MiabeTrans?</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚌</div>
+                    <h3>Réservation simple</h3>
+                    <p>Réservez votre trajet en quelques clics, sans complication</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Prix transparents</h3>
+                    <p>Pas de frais cachés, vous savez exactement ce que vous payez</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Voyagez serein</h3>
+                    <p>Conducteurs vérifiés et véhicules conformes aux normes</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Suivi en temps réel</h3>
+                    <p>Suivez votre trajet et recevez des notifications importantes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Trajets Populaires -->
+    <section class="popular-routes">
+        <div class="container">
+            <h2 class="section-title">Destinations populaires</h2>
+            <div class="routes-grid" id="popularRoutes">
+                <!-- Chargé dynamiquement via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MiabeTrans</h4>
+                    <p>Votre partenaire de confiance pour les voyages interurbains au Togo</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="../../pages/Trajets/liste-trajets.html">Tous les trajets</a></li>
+                        <li><a href="../../pages/Aide/faq.html">FAQ</a></li>
+                        <li><a href="../../pages/Aide/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Légal</h4>
+                    <ul>
+                        <li><a href="../../pages/Aide/politique-confidentialite.html">Confidentialité</a></li>
+                        <li><a href="#">Conditions d'utilisation</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 MiabeTrans. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/app.js"></script>
+    <script src="../../js/api.js"></script>
+</body>
+</html>
