@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faGauge, faMagnifyingGlass, faUser, faClipboardList,
-  faRightFromBracket, faChevronDown,
+  faRightFromBracket, faChevronDown, faBus,
 } from '@fortawesome/free-solid-svg-icons';
 import './Navbar.css';
 
@@ -54,7 +54,7 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link to="/" className="navbar-logo">
-          <div className="logo-icon">🚌</div>
+          <div className="logo-icon"><FontAwesomeIcon icon={faBus} /></div>
           <div className="logo-text">
             <span className="logo-name">MiabeTrans</span>
             <span className="logo-tagline">Transport Interurbain</span>

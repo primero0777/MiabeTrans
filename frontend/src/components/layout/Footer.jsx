@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faWhatsapp, faXTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faLocationDot, faPhone, faEnvelope, faClock } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot, faPhone, faEnvelope, faClock, faBus } from '@fortawesome/free-solid-svg-icons';
 import './Footer.css';
 
 export default function Footer() {
@@ -17,7 +17,7 @@ export default function Footer() {
             <div className="footer-brand">
               <div className="footer-togo-badge">🇹🇬 Transport interurbain au Togo</div>
               <div className="footer-logo">
-                <div className="footer-logo-icon">🚌</div>
+                <div className="footer-logo-icon"><FontAwesomeIcon icon={faBus} /></div>
                 <span className="footer-logo-name">MiabeTrans</span>
               </div>
               <p className="footer-desc">
