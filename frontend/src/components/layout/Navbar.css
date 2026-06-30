@@ -460,3 +460,199 @@ body::before {
   .logo-name    { font-size: 1.05rem; }
   .navbar-inner { gap: var(--space-4); }
 }
+
+/* ══════════════════════════════
+   LIQUID GLASS BUTTONS
+══════════════════════════════ */
+
+/* SVG filtre — masqué visuellement */
+.navbar-glass-svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* Base commune : pill shape + transition fluide */
+.nav-auth .btn,
+.nav-auth-mobile .btn {
+  border-radius: 99px;
+  position: relative;
+  font-weight: 600;
+  letter-spacing: 0.015em;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.1, 0.4, 0.2, 1);
+}
+
+/* ── NAVBAR SOLID (scrollée, fond blanc) ── */
+
+/* Connexion : verre blanc léger */
+.navbar-solid .nav-auth .btn-ghost {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  color: var(--gray-700);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  box-shadow:
+    0 0 6px rgba(0, 0, 0, 0.03),
+    0 2px 6px rgba(0, 0, 0, 0.06),
+    inset 1px  1px  1px -0.5px rgba(255, 255, 255, 0.95),
+    inset -1px -1px  1px -0.5px rgba(0,   0,   0,   0.12),
+    inset 0 0 8px 4px rgba(255, 255, 255, 0.28);
+}
+.navbar-solid .nav-auth .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--primary);
+  transform: translateY(-1px) scale(1.02);
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.08),
+    inset 1px  1px  1px -0.5px rgba(255, 255, 255, 1),
+    inset -1px -1px  1px -0.5px rgba(0,   0,   0,   0.08),
+    inset 0 0 10px 4px rgba(255, 255, 255, 0.40);
+}
+
+/* S'inscrire : verre vert émeraude */
+.navbar-solid .nav-auth .btn-accent {
+  background: rgba(27, 67, 50, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #fff;
+  backdrop-filter: blur(16px) saturate(200%);
+  -webkit-backdrop-filter: blur(16px) saturate(200%);
+  box-shadow:
+    0 0 6px rgba(0, 0, 0, 0.03),
+    0 2px 8px rgba(27, 67, 50, 0.28),
+    inset  2px  2px 0.5px -2px rgba(255, 255, 255, 0.60),
+    inset -2px -2px 0.5px -2px rgba(0,   0,   0,   0.55),
+    inset  1px  1px  1px -0.5px rgba(255, 255, 255, 0.40),
+    inset -1px -1px  1px -0.5px rgba(0,   0,   0,   0.35),
+    inset 0 0 8px 4px rgba(27, 67, 50, 0.18),
+    0 0 16px rgba(45, 106, 79, 0.18);
+}
+.navbar-solid .nav-auth .btn-accent:hover {
+  background: rgba(27, 67, 50, 0.92);
+  transform: translateY(-1px) scale(1.04);
+  box-shadow:
+    0 4px 18px rgba(27, 67, 50, 0.32),
+    inset  2px  2px 0.5px -2px rgba(255, 255, 255, 0.72),
+    inset -2px -2px 0.5px -2px rgba(0,   0,   0,   0.45),
+    inset  1px  1px  1px -0.5px rgba(255, 255, 255, 0.52),
+    inset -1px -1px  1px -0.5px rgba(0,   0,   0,   0.28),
+    inset 0 0 10px 5px rgba(27, 67, 50, 0.22),
+    0 0 24px rgba(45, 106, 79, 0.28);
+}
+
+/* ── NAVBAR TRANSPARENT (hero, fond sombre/image) ── */
+
+/* Connexion : verre blanc sur fond sombre */
+.navbar-transparent .nav-auth .btn-ghost {
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 0 8px rgba(0, 0, 0, 0.04),
+    0 2px 6px rgba(0, 0, 0, 0.10),
+    inset  2px  2px 0.5px -2.5px rgba(255, 255, 255, 0.92),
+    inset -2px -2px 0.5px -2.5px rgba(255, 255, 255, 0.88),
+    inset  1px  1px  1px -0.5px rgba(255, 255, 255, 0.60),
+    inset -1px -1px  1px -0.5px rgba(255, 255, 255, 0.55),
+    inset 0 0 6px 5px rgba(255, 255, 255, 0.07),
+    0 0 12px rgba(0, 0, 0, 0.18);
+}
+.navbar-transparent .nav-auth .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.20),
+    inset  2px  2px 0.5px -2.5px rgba(255, 255, 255, 1),
+    inset -2px -2px 0.5px -2.5px rgba(255, 255, 255, 0.95),
+    inset 0 0 10px 5px rgba(255, 255, 255, 0.10);
+}
+
+/* S'inscrire : verre vert translucide sur fond sombre */
+.navbar-transparent .nav-auth .btn-accent {
+  background: rgba(45, 106, 79, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  color: #fff;
+  backdrop-filter: blur(16px) saturate(200%);
+  -webkit-backdrop-filter: blur(16px) saturate(200%);
+  box-shadow:
+    0 0 8px rgba(0, 0, 0, 0.04),
+    0 2px 8px rgba(0, 0, 0, 0.14),
+    inset  3px  3px 0.5px -3px rgba(255, 255, 255, 0.92),
+    inset -3px -3px 0.5px -3px rgba(255, 255, 255, 0.85),
+    inset  1px  1px  1px -0.5px rgba(255, 255, 255, 0.62),
+    inset -1px -1px  1px -0.5px rgba(255, 255, 255, 0.58),
+    inset 0 0 8px 5px rgba(45, 106, 79, 0.14),
+    0 0 16px rgba(0, 0, 0, 0.18);
+}
+.navbar-transparent .nav-auth .btn-accent:hover {
+  background: rgba(45, 106, 79, 0.54);
+  transform: translateY(-1px) scale(1.04);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.24),
+    inset  3px  3px 0.5px -3px rgba(255, 255, 255, 1),
+    inset -3px -3px 0.5px -3px rgba(255, 255, 255, 0.92),
+    inset  1px  1px  1px -0.5px rgba(255, 255, 255, 0.72),
+    inset -1px -1px  1px -0.5px rgba(255, 255, 255, 0.66),
+    inset 0 0 10px 5px rgba(45, 106, 79, 0.20),
+    0 0 24px rgba(0, 0, 0, 0.22);
+}
+
+/* ── NAV-USER-BTN (connecté) : glass pill ── */
+.nav-user-btn {
+  border-radius: 99px;
+  transition: all 0.25s cubic-bezier(0.1, 0.4, 0.2, 1);
+}
+
+.navbar-solid .nav-user-btn {
+  background: rgba(255, 255, 255, 0.60);
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  box-shadow:
+    0 0 6px rgba(0, 0, 0, 0.03),
+    0 2px 6px rgba(0, 0, 0, 0.06),
+    inset  1px  1px 1px -0.5px rgba(255, 255, 255, 0.95),
+    inset -1px -1px 1px -0.5px rgba(0,   0,   0,   0.10),
+    inset 0 0 8px 4px rgba(255, 255, 255, 0.30);
+}
+.navbar-solid .nav-user-btn:hover {
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(27, 67, 50, 0.18);
+  color: var(--primary);
+  transform: translateY(-1px);
+  box-shadow:
+    0 4px 14px rgba(27, 67, 50, 0.12),
+    inset  1px  1px 1px -0.5px rgba(255, 255, 255, 1),
+    inset -1px -1px 1px -0.5px rgba(0,   0,   0,   0.07),
+    inset 0 0 10px 4px rgba(255, 255, 255, 0.40);
+}
+
+.navbar-transparent .nav-user-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  color: #fff;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.12),
+    inset  2px  2px 0.5px -2.5px rgba(255, 255, 255, 0.90),
+    inset -2px -2px 0.5px -2.5px rgba(255, 255, 255, 0.85),
+    inset 0 0 6px 4px rgba(255, 255, 255, 0.07);
+}
+.navbar-transparent .nav-user-btn:hover {
+  background: rgba(255, 255, 255, 0.20);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-1px);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.18),
+    inset  2px  2px 0.5px -2.5px rgba(255, 255, 255, 1),
+    inset -2px -2px 0.5px -2.5px rgba(255, 255, 255, 0.95),
+    inset 0 0 10px 5px rgba(255, 255, 255, 0.12);
+}
+.navbar-transparent .nav-user-btn .chevron { color: rgba(255, 255, 255, 0.55); }
+.navbar-transparent .nav-user-btn:hover .chevron { color: rgba(255, 255, 255, 0.88); }

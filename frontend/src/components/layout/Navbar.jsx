@@ -50,6 +50,20 @@ export default function Navbar() {
 
   return (
     <header className={`navbar ${scrolled || !isHome ? 'navbar-solid' : 'navbar-transparent'}`}>
+
+      {/* Filtre SVG liquid glass — caché, utilisé via backdrop-filter CSS */}
+      <svg className="navbar-glass-svg" aria-hidden="true">
+        <defs>
+          <filter id="navbar-glass" x="0%" y="0%" width="100%" height="100%" colorInterpolationFilters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.04 0.04" numOctaves="1" seed="2" result="turbulence" />
+            <feGaussianBlur in="turbulence" stdDeviation="1.5" result="blurredNoise" />
+            <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="50" xChannelSelector="R" yChannelSelector="B" result="displaced" />
+            <feGaussianBlur in="displaced" stdDeviation="3" result="finalBlur" />
+            <feComposite in="finalBlur" in2="finalBlur" operator="over" />
+          </filter>
+        </defs>
+      </svg>
+
       <div className="container navbar-inner">
 
         {/* Logo */}

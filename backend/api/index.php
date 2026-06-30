@@ -37,6 +37,10 @@ switch (true) {
         require_once './routes/notifications.php';
         break;
 
+    case strpos($request, '/api/voice') !== false:
+        require_once './voice/index.php';
+        break;
+
     default:
         echo json_encode([
             "message" => "Bienvenue sur l’API MiabeTrans 🚍",
