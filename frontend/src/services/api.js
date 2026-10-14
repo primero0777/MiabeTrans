@@ -1,7 +1,7 @@
 // src/services/api.js
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost/miabetrans/backend/api';
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost/miabetrans/backend/api';
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -48,7 +48,7 @@ export const horairesAPI = {
 
 // ===================== TRAJETS =====================
 export const trajetsAPI = {
-  getAll:  ()       => api.get('/trajets/index.php'),
+  getAll:  ()       => api.get('/trajets/crud.php'),
   search:  (params) => api.get('/trajets/index.php', { params }),
   create:  (data)   => api.post('/trajets/crud.php', data),
   update:  (id, data) => api.put(`/trajets/crud.php?id=${id}`, data),

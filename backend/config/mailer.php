@@ -11,15 +11,15 @@ if (file_exists($phpmailerPath . 'PHPMailer.php')) {
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// ── CONFIGURATION (à personnaliser) ──────────────────────
-define('SMTP_HOST',      'smtp.gmail.com');
-define('SMTP_PORT',      587);
-define('SMTP_USER',      'ephraimnato17@gmail.com');   // <- Votre Gmail
-define('SMTP_PASS',      'kctd slyw gjun otqc');      // <- Mot de passe d'application Google
-define('SMTP_FROM',      'ephraimnato17@gmail.com');
+// ── CONFIGURATION (valeurs lues depuis .env, voir config/database.php::loadEnv) ──
+define('SMTP_HOST',      $_ENV['SMTP_HOST'] ?? 'smtp.gmail.com');
+define('SMTP_PORT',      (int)($_ENV['SMTP_PORT'] ?? 587));
+define('SMTP_USER',      $_ENV['SMTP_USER'] ?? '');
+define('SMTP_PASS',      $_ENV['SMTP_PASS'] ?? '');
+define('SMTP_FROM',      $_ENV['SMTP_FROM'] ?? ($_ENV['SMTP_USER'] ?? ''));
 define('SMTP_FROM_NAME', 'MiabeTrans');
-define('APP_URL',        'http://localhost:5173');
-define('WHATSAPP_NUM',   '22890000001');
+define('APP_URL',        $_ENV['FRONTEND_URL'] ?? 'http://localhost:5173');
+define('WHATSAPP_NUM',   $_ENV['WHATSAPP_NUM'] ?? '22890000001');
 
 /**
  * Envoyer un email HTML

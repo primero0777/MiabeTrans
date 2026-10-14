@@ -12,6 +12,21 @@ $pdo    = getDB();
 $method = $_SERVER['REQUEST_METHOD'];
 $id     = $_GET['id'] ?? null;
 
+// GET - liste de tous les trajets (admin, sans filtre de date/horaire)
+if ($method === 'GET' && !$id) {
+    $stmt = $pdo->query('
+        SELECT t.id_trajet, t.distance_km, t.prix,
+               vd.nom_ville AS ville_depart,
+               va.nom_ville AS ville_arrivee
+        FROM trajets t
+        JOIN villes vd ON vd.id_ville = t.id_ville_depart
+        JOIN villes va ON va.id_ville = t.id_ville_arrivee
+        WHERE t.deleted_at IS NULL
+        ORDER BY t.id_trajet DESC
+    ');
+    sendSuccess($stmt->fetchAll());
+}
+
 // GET - détail d'un trajet
 if ($method === 'GET' && $id) {
     $stmt = $pdo->prepare('

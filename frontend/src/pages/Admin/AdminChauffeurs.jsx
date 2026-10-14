@@ -4,7 +4,7 @@ import api from '../../services/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIdCard, faUser, faTrash, faCircleCheck, faTriangleExclamation, faSpinner, faUpload } from '@fortawesome/free-solid-svg-icons';
 
-const BASE_URL = 'http://localhost/miabetrans/backend';
+const BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost/miabetrans/backend/api').replace(/\/api$/, '');
 
 export default function AdminChauffeurs() {
   const [data, setData]       = useState([]);

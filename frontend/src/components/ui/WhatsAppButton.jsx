@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import './WhatsAppButton.css';
 
 const WA_NUMBER  = '22897427597';
-const API_BASE   = 'http://localhost/miabetrans/backend/api';
+const API_BASE   = import.meta.env.VITE_API_URL || 'http://localhost/miabetrans/backend/api';
 
 const QA = [
   {

@@ -2,7 +2,8 @@
 // config/helpers.php
 
 function setCorsHeaders() {
-    header('Access-Control-Allow-Origin: http://localhost:5173');
+    $allowedOrigin = $_ENV['FRONTEND_URL'] ?? 'http://localhost:5173';
+    header("Access-Control-Allow-Origin: $allowedOrigin");
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
     header('Access-Control-Allow-Headers: Content-Type, Authorization');
     header('Content-Type: application/json; charset=UTF-8');
@@ -37,6 +38,13 @@ function sendError($message = 'Erreur', $code = 400) {
 function getBody() {
     $body = file_get_contents('php://input');
     return json_decode($body, true) ?? [];
+}
+
+function siteBaseUrl() {
+    $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+    $host   = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    $prefix = preg_replace('#/backend/.*$#', '', $_SERVER['SCRIPT_NAME'] ?? '');
+    return $scheme . '://' . $host . $prefix;
 }
 
 function sanitize($value) {

@@ -65,9 +65,7 @@ $destPath = $uploadDir . $filename;
 if (!move_uploaded_file($file['tmp_name'], $destPath)) sendError('Impossible de sauvegarder le fichier.', 500);
 
 // URL publique dynamique
-$scheme  = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-$host    = $_SERVER['HTTP_HOST'];
-$baseUrl = $scheme . '://' . $host . '/miabetrans/uploads/voice-messages/';
+$baseUrl = siteBaseUrl() . '/uploads/voice-messages/';
 
 sendSuccess([
     'url'      => $baseUrl . $filename,

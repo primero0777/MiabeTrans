@@ -119,7 +119,7 @@ if ($resource === 'chauffeurs') {
             ORDER BY u.nom ASC
         ');
         $rows = $stmt->fetchAll();
-        $base = 'http://localhost/miabetrans/uploads/chauffeurs/';
+        $base = siteBaseUrl() . '/uploads/chauffeurs/';
         foreach ($rows as &$row) {
             $row['photo_profil_url'] = $row['photo_profil'] ? $base . $row['photo_profil'] : null;
             $row['photo_cni_url']    = $row['photo_cni']    ? $base . $row['photo_cni']    : null;

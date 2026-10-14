@@ -37,5 +37,5 @@ $pdo->prepare("UPDATE utilisateurs SET {$field} = ? WHERE id_utilisateur = ?")
 
 sendSuccess([
     'filename' => $filename,
-    'url'      => "http://localhost/miabetrans/uploads/chauffeurs/{$filename}"
+    'url'      => siteBaseUrl() . "/uploads/chauffeurs/{$filename}"
 ], 'Fichier uploadé avec succès.');
