@@ -38,11 +38,12 @@ body::before {
   box-shadow: 0 4px 32px rgba(0, 0, 0, 0.12);
 }
 
-/* ── État scrollé — glass blanc ── */
+/* ── État scrollé — glass blanc ──
+   Assez opaque pour que les grands titres qui passent dessous ne transparaissent pas */
 .navbar-solid {
-  background: rgba(255, 255, 255, 0.80);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.60);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.9) inset,
