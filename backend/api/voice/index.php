@@ -50,7 +50,7 @@ $extMap = [
 $ext = $extMap[$mimeReal] ?? ($extMap[$file['type']] ?? 'webm');
 
 // Dossier de stockage
-$uploadDir = __DIR__ . '/../../../../uploads/voice-messages/';
+$uploadDir = __DIR__ . '/../../../uploads/voice-messages/';
 if (!is_dir($uploadDir)) mkdir($uploadDir, 0755, true);
 
 // Purge automatique des fichiers > 2h

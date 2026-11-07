@@ -1,40 +1,49 @@
 <?php
 // config/database.php
 
-function loadEnv($path) {
-    if (!file_exists($path)) return;
-    $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    foreach ($lines as $line) {
-        if (strpos(trim($line), '#') === 0) continue;
-        list($key, $value) = explode('=', $line, 2);
-        $_ENV[trim($key)] = trim($value);
-    }
-}
-
-loadEnv(__DIR__ . '/../.env');
+require_once __DIR__ . '/env.php';
 
 function getDB() {
     static $pdo = null;
     if ($pdo !== null) return $pdo;
 
-    $host = $_ENV['DB_HOST'] ?? 'localhost';
-    $name = $_ENV['DB_NAME'] ?? 'miabetrans_db';
-    $user = $_ENV['DB_USER'] ?? 'root';
-    $pass = $_ENV['DB_PASS'] ?? '';
+    $host = env('DB_HOST', 'localhost');
+    $port = env('DB_PORT', '3306');
+    $name = env('DB_NAME', 'miabetrans_db');
+    $user = env('DB_USER', 'root');
+    $pass = env('DB_PASS', '');
+
+    $options = [
+        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES   => false,
+    ];
+
+    // Connexion chiffrée (obligatoire chez Aiven).
+    // DB_SSL_CA : contenu du certificat ca.pem fourni par Aiven (texte complet).
+    $caPem = env('DB_SSL_CA');
+    if ($caPem) {
+        $caPem  = str_replace('\n', "\n", $caPem); // accepte aussi le PEM collé sur une ligne
+        $caFile = sys_get_temp_dir() . '/miabetrans-db-ca.pem';
+        if (!file_exists($caFile) || file_get_contents($caFile) !== $caPem) {
+            file_put_contents($caFile, $caPem);
+        }
+        $options[PDO::MYSQL_ATTR_SSL_CA] = $caFile;
+        $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = true;
+    }
 
     try {
         $pdo = new PDO(
-            "mysql:host=$host;dbname=$name;charset=utf8mb4",
+            "mysql:host=$host;port=$port;dbname=$name;charset=utf8mb4",
             $user,
             $pass,
-            [
-                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES   => false,
-            ]
+            $options
         );
+        // Lomé est en UTC+0 : on aligne MySQL sur PHP pour les délais d'expiration
+        $pdo->exec("SET time_zone = '+00:00'");
         return $pdo;
     } catch (PDOException $e) {
+        error_log('Connexion BDD impossible : ' . $e->getMessage());
         http_response_code(500);
         echo json_encode([
             'success' => false,

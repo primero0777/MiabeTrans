@@ -3,8 +3,7 @@ import { adminAPI } from '../../services/api';
 import api from '../../services/api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIdCard, faUser, faTrash, faCircleCheck, faTriangleExclamation, faSpinner, faUpload } from '@fortawesome/free-solid-svg-icons';
-
-const BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost/miabetrans/backend/api').replace(/\/api$/, '');
+import { BASE_URL as API_BASE } from '../../services/api';
 
 export default function AdminChauffeurs() {
   const [data, setData]       = useState([]);
@@ -49,7 +48,7 @@ export default function AdminChauffeurs() {
     try {
       const token = localStorage.getItem('miabetrans_token');
       const res = await fetch(
-        `${BASE_URL}/api/upload/index.php?type=${type}&chauffeur_id=${chauffeurId}`,
+        `${API_BASE}/upload/index.php?type=${type}&chauffeur_id=${chauffeurId}`,
         { method:'POST', headers:{ Authorization: `Bearer ${token}` }, body: formData }
       );
       const json = await res.json();

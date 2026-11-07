@@ -1,5 +1,13 @@
 <?php
-// config/mailer.php — Service email via Gmail SMTP (PHPMailer)
+// config/mailer.php — Envoi des emails MiabeTrans
+//
+// Deux modes, choisis automatiquement :
+//   • BREVO_API_KEY défini → API HTTP Brevo (en ligne : Render bloque le SMTP)
+//   • sinon               → SMTP via PHPMailer (développement local)
+// Aucun identifiant n'est écrit ici : tout vient de backend/.env ou des
+// variables d'environnement du serveur.
+
+require_once __DIR__ . '/env.php';
 
 $phpmailerPath = __DIR__ . '/../lib/PHPMailer/src/';
 if (file_exists($phpmailerPath . 'PHPMailer.php')) {
@@ -11,40 +19,89 @@ if (file_exists($phpmailerPath . 'PHPMailer.php')) {
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// ── CONFIGURATION (valeurs lues depuis .env, voir config/database.php::loadEnv) ──
-define('SMTP_HOST',      $_ENV['SMTP_HOST'] ?? 'smtp.gmail.com');
-define('SMTP_PORT',      (int)($_ENV['SMTP_PORT'] ?? 587));
-define('SMTP_USER',      $_ENV['SMTP_USER'] ?? '');
-define('SMTP_PASS',      $_ENV['SMTP_PASS'] ?? '');
-define('SMTP_FROM',      $_ENV['SMTP_FROM'] ?? ($_ENV['SMTP_USER'] ?? ''));
-define('SMTP_FROM_NAME', 'MiabeTrans');
-define('APP_URL',        $_ENV['FRONTEND_URL'] ?? 'http://localhost:5173');
-define('WHATSAPP_NUM',   $_ENV['WHATSAPP_NUM'] ?? '22890000001');
+// ── CONFIGURATION ────────────────────────────────────────
+define('MAIL_FROM',      env('MAIL_FROM', env('SMTP_FROM', env('SMTP_USER', 'no-reply@miabetrans.tg'))));
+define('MAIL_FROM_NAME', env('MAIL_FROM_NAME', 'MiabeTrans'));
+define('APP_URL',        rtrim(env('FRONTEND_URL', 'http://localhost:5173'), '/'));
+define('WHATSAPP_NUM',   env('WHATSAPP_NUM', '22890000001'));
 
 /**
  * Envoyer un email HTML
  */
 function sendEmail(string $toEmail, string $toName, string $subject, string $htmlBody, string $textBody = ''): bool {
+    $textBody = $textBody ?: strip_tags(str_replace(['<br>','<br/>','</p>','</li>'], "\n", $htmlBody));
+
+    if (env('BREVO_API_KEY')) {
+        return sendEmailBrevo($toEmail, $toName, $subject, $htmlBody, $textBody);
+    }
+    return sendEmailSmtp($toEmail, $toName, $subject, $htmlBody, $textBody);
+}
+
+/**
+ * Envoi via l'API transactionnelle Brevo (HTTPS, port 443)
+ */
+function sendEmailBrevo(string $toEmail, string $toName, string $subject, string $htmlBody, string $textBody): bool {
+    $to = ['email' => $toEmail];
+    if (trim($toName) !== '') $to['name'] = $toName;
+
+    $payload = json_encode([
+        'sender'      => ['email' => MAIL_FROM, 'name' => MAIL_FROM_NAME],
+        'to'          => [$to],
+        'subject'     => $subject,
+        'htmlContent' => $htmlBody,
+        'textContent' => $textBody,
+    ], JSON_UNESCAPED_UNICODE);
+
+    $ch = curl_init('https://api.brevo.com/v3/smtp/email');
+    curl_setopt_array($ch, [
+        CURLOPT_POST           => true,
+        CURLOPT_POSTFIELDS     => $payload,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT        => 15,
+        CURLOPT_HTTPHEADER     => [
+            'accept: application/json',
+            'content-type: application/json',
+            'api-key: ' . env('BREVO_API_KEY'),
+        ],
+    ]);
+    $response = curl_exec($ch);
+    $status   = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $error    = curl_error($ch);
+    curl_close($ch);
+
+    if ($status >= 200 && $status < 300) return true;
+    error_log("Erreur Brevo vers $toEmail (HTTP $status) : " . ($error ?: $response));
+    return false;
+}
+
+/**
+ * Envoi via SMTP (Gmail ou autre) — utilisé en local
+ */
+function sendEmailSmtp(string $toEmail, string $toName, string $subject, string $htmlBody, string $textBody): bool {
     if (!class_exists('PHPMailer\PHPMailer\PHPMailer')) {
         error_log("PHPMailer non installé — email non envoyé à $toEmail");
+        return false;
+    }
+    if (!env('SMTP_USER') || !env('SMTP_PASS')) {
+        error_log("SMTP_USER / SMTP_PASS absents du .env — email non envoyé à $toEmail");
         return false;
     }
     $mail = new PHPMailer(true);
     try {
         $mail->isSMTP();
-        $mail->Host       = SMTP_HOST;
+        $mail->Host       = env('SMTP_HOST', 'smtp.gmail.com');
         $mail->SMTPAuth   = true;
-        $mail->Username   = SMTP_USER;
-        $mail->Password   = SMTP_PASS;
+        $mail->Username   = env('SMTP_USER');
+        $mail->Password   = env('SMTP_PASS');
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = SMTP_PORT;
+        $mail->Port       = (int) env('SMTP_PORT', 587);
         $mail->CharSet    = 'UTF-8';
-        $mail->setFrom(SMTP_FROM, SMTP_FROM_NAME);
+        $mail->setFrom(MAIL_FROM, MAIL_FROM_NAME);
         $mail->addAddress($toEmail, $toName);
         $mail->isHTML(true);
         $mail->Subject = $subject;
         $mail->Body    = $htmlBody;
-        $mail->AltBody = $textBody ?: strip_tags(str_replace(['<br>','<br/>','</p>','</li>'], "\n", $htmlBody));
+        $mail->AltBody = $textBody;
         $mail->send();
         return true;
     } catch (Exception $e) {

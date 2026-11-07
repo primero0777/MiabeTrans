@@ -1,7 +1,8 @@
 // src/services/api.js
 import axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost/miabetrans/backend/api';
+// Adresse de l'API : VITE_API_URL dans .env.production (en ligne) ou valeur locale WampServer
+export const BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost/miabetrans/backend/api').replace(/\/$/, '');
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -22,7 +23,8 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       localStorage.removeItem('miabetrans_token');
       localStorage.removeItem('miabetrans_user');
-      window.location.href = '/login';
+      // BASE_URL de Vite = '/' en local, '/miabetrans/' sur GitHub Pages
+      window.location.href = `${import.meta.env.BASE_URL}login`;
     }
     return Promise.reject(error);
   }

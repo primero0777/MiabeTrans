@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import './WhatsAppButton.css';
+import { BASE_URL as API_BASE } from '../../services/api';
 
 const WA_NUMBER  = '22897427597';
-const API_BASE   = import.meta.env.VITE_API_URL || 'http://localhost/miabetrans/backend/api';
 
 const QA = [
   {

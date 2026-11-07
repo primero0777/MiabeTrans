@@ -155,7 +155,7 @@ $content = "
 </div>
 ";
 
-$urlRecu = "http://localhost:5173/confirmation/{$idResa}";
+$urlRecu = APP_URL . "/confirmation/{$idResa}";
 $html    = emailTemplate('Réservation confirmée — Votre reçu', $content, 'Voir et télécharger le reçu', $urlRecu);
 $subj    = "[MiabeTrans] Reçu de réservation {$numero} — {$trajet}";
 $sent    = sendEmail($resa['client_email'], $nomClient, $subj, $html);

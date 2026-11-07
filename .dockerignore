@@ -1,0 +1,16 @@
+# Seul le backend part sur Render
+.git
+frontend
+documentation
+scripts
+database
+*.docx
+generate_docx.js
+
+# Jamais de secrets ni de données dans l'image
+backend/.env
+backend/.env.*
+!backend/.env.example
+backend/database
+backend/uploads
+uploads

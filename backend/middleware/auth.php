@@ -4,10 +4,24 @@
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../config/helpers.php';
 
+// ---------- Secret JWT ----------
+function jwtSecret(): string {
+    $secret = env('JWT_SECRET');
+    if (!$secret || $secret === 'change_me_with_a_long_random_string') {
+        if (isProduction()) {
+            // En ligne, un secret absent ou par défaut permettrait de forger des jetons admin
+            error_log('JWT_SECRET manquant ou par défaut en production');
+            sendError('Configuration serveur incomplète.', 500);
+        }
+        return 'dev-secret-local-uniquement';
+    }
+    return $secret;
+}
+
 // ---------- Génération JWT ----------
 function generateJWT($payload) {
-    $secret = $_ENV['JWT_SECRET'] ?? 'secret';
-    $expiration = intval($_ENV['JWT_EXPIRATION'] ?? 86400);
+    $secret = jwtSecret();
+    $expiration = intval(env('JWT_EXPIRATION', 86400));
 
     $header = base64UrlEncode(json_encode([
         'alg' => 'HS256',
@@ -27,7 +41,7 @@ function generateJWT($payload) {
 
 // ---------- Vérification JWT ----------
 function verifyJWT($token) {
-    $secret = $_ENV['JWT_SECRET'] ?? 'secret';
+    $secret = jwtSecret();
     $parts = explode('.', $token);
 
     if (count($parts) !== 3) return false;
@@ -49,8 +63,9 @@ function verifyJWT($token) {
 
 // ---------- Récupérer l'utilisateur connecté ----------
 function getAuthUser() {
-    $headers = getallheaders();
-    $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? '';
+    $headers = function_exists('getallheaders') ? getallheaders() : [];
+    $authHeader = $headers['Authorization'] ?? $headers['authorization']
+        ?? $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
 
     if (!$authHeader || !str_starts_with($authHeader, 'Bearer ')) {
         sendError('Token manquant ou invalide.', 401);
